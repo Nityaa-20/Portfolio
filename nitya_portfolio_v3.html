@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nitya Mathur | AI & Data Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     window.tailwind = {
       config: {
@@ -575,6 +576,7 @@
 
     .hbs {
       display: flex;
+      justify-content: flex-start;
       gap: 14px;
       flex-wrap: wrap;
       animation: fu .6s .4s ease both
@@ -1679,48 +1681,237 @@
       color: var(--txt3)
     }
 
-    /* â”€â”€ EDUCATION â”€â”€ */
-    .eg {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 22px
+    /* ── EDUCATION ── */
+    .edu-card-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
     }
-
-    .ec {
-      padding: 30px;
+    
+    .edu-card {
+      position: relative;
+      background: rgba(11, 20, 30, 0.65);
+      border: 1px solid rgba(34, 211, 238, 0.15);
       border-radius: 20px;
-      cursor: none
+      padding: 36px;
+      max-width: 680px;
+      width: 100%;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(34, 211, 238, 0.03);
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+      text-align: left;
     }
 
-    .eb {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 50px;
-      font-size: .65rem;
-      font-weight: 800;
-      background: rgba(34, 211, 238, .08);
-      border: 1px solid rgba(34, 211, 238, .2);
-      color: var(--cy);
-      margin-bottom: 14px;
-      letter-spacing: .07em
+    .edu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(34, 211, 238, 0.15), inset 0 0 20px rgba(34, 211, 238, 0.05);
+      border-color: rgba(34, 211, 238, 0.35);
     }
 
-    .ed {
-      font-size: .97rem;
-      font-weight: 800;
-      margin-bottom: 5px
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.08), transparent);
+      transform: skewX(-20deg);
+      animation: scanShimmer 7s infinite;
+      pointer-events: none;
+      z-index: 1;
     }
 
-    .es {
-      color: var(--p);
-      font-size: .82rem;
+    @keyframes scanShimmer {
+      0% { left: -150%; }
+      15% { left: 200%; }
+      100% { left: 200%; }
+    }
+
+    .edu-content {
+      display: flex;
+      gap: 42px;
+      align-items: center;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .edu-ring-container {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .edu-ring {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.2));
+    }
+
+    .edu-ring circle {
+      fill: none;
+      stroke-width: 3.5;
+      stroke-linecap: round;
+    }
+
+    .edu-ring-bg {
+      stroke: rgba(255, 255, 255, 0.06);
+    }
+
+    .edu-ring-progress {
+      stroke: var(--cy);
+      stroke-dasharray: 283;
+      stroke-dashoffset: 283;
+      filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.4));
+      animation: fillRing 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.4s;
+    }
+
+    @keyframes fillRing {
+      to { stroke-dashoffset: 16.68; }
+    }
+
+    .edu-cgpa {
+      position: absolute;
+      text-align: center;
+    }
+
+    .edu-cgpa-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.65rem;
       font-weight: 700;
-      margin-bottom: 5px
+      color: var(--cy);
+      text-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+      line-height: 1;
     }
 
-    .et {
-      font-size: .72rem;
-      color: var(--txt3)
+    .edu-cgpa-label {
+      font-size: 0.65rem;
+      color: var(--txt3);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    .edu-details {
+      flex: 1;
+    }
+
+    .edu-degree {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .edu-college {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--cy);
+      font-weight: 400;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 16px;
+    }
+
+    .edu-grid-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .edu-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--txt3);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .edu-value {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .edu-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      z-index: 2;
+    }
+
+    .edu-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      padding: 6px 14px;
+      border-radius: 50px;
+      background: rgba(34, 211, 238, 0.04);
+      border: 1px solid rgba(34, 211, 238, 0.15);
+      color: rgba(255,255,255,0.8);
+      transition: all 0.3s ease;
+      cursor: none;
+    }
+
+    .edu-tag:hover {
+      background: rgba(34, 211, 238, 0.12);
+      border-color: var(--cy);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(34, 211, 238, 0.25);
+      transform: translateY(-2px);
+    }
+    
+    @media (max-width: 640px) {
+      .edu-card {
+        padding: 28px 24px;
+      }
+      .edu-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        text-align: center;
+      }
+      .edu-ring-container {
+        margin: 0 auto;
+      }
+      .edu-degree {
+        font-size: 1.3rem;
+        text-align: center;
+      }
+      .edu-college {
+        text-align: center;
+      }
+      .edu-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .edu-grid-item {
+        align-items: center;
+        text-align: center;
+      }
+      .edu-tags {
+        justify-content: center;
+      }
     }
 
     /* â”€â”€ CONTACT â”€â”€ */
@@ -2053,7 +2244,7 @@
 
       .hw {
         grid-template-columns: 1fr;
-        text-align: center
+        text-align: left
       }
 
       .hv {
@@ -2066,11 +2257,11 @@
       }
 
       .hbs {
-        justify-content: center
+        justify-content: flex-start
       }
 
       .hloc {
-        justify-content: center
+        justify-content: flex-start
       }
 
       .cw {
@@ -2136,6 +2327,24 @@
         grid-template-columns: repeat(2, 1fr)
       }
     }
+
+    /* NEURAL SKILLS CSS */
+    .neural-container { position: relative; width: 100%; height: 600px; background-color: #0b0f14; background-image: radial-gradient(circle at center, rgba(34, 211, 238, 0.05) 0%, transparent 65%), linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px); background-size: 100% 100%, 40px 40px, 40px 40px; background-position: center center, center center, center center; border-radius: 20px; border: 1px solid rgba(192, 132, 252, 0.15); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0,0,0,0.8); overflow: hidden; font-family: 'Inter', sans-serif; cursor: default; margin-top: 16px; margin-bottom: 24px; }
+    .neural-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    .node { position: absolute; left: 0; top: 0; width: 56px; height: 56px; border-radius: 50%; background: rgba(11, 20, 30, 0.85); border: 1px solid rgba(192, 132, 252, 0.35); color: #e2e8f0; display: flex; justify-content: center; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 0 12px rgba(192, 132, 252, 0.15), inset 0 0 10px rgba(192, 132, 252, 0.15); transition: background 0.3s, border-color 0.3s, box-shadow 0.3s, color 0.3s, opacity 0.3s, filter 0.3s; will-change: transform; z-index: 10; backdrop-filter: blur(4px); }
+    .node::after { content: ''; position: absolute; top: -7px; bottom: -7px; left: -7px; right: -7px; border-radius: 50%; border: 1px dashed rgba(34, 211, 238, 0.6); animation: rotateRing 6s linear infinite; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+    @keyframes rotateRing { 100% { transform: rotate(360deg); } }
+    .node:hover, .node.highlighted { border-color: #22d3ee; color: #ffffff; background: rgba(34, 211, 238, 0.12); box-shadow: 0 0 25px rgba(34, 211, 238, 0.4), inset 0 0 15px rgba(34, 211, 238, 0.25); z-index: 20; }
+    .node:hover::after { opacity: 1; }
+    .node.dimmed { opacity: 0.15; filter: blur(1.5px); }
+    .neural-tooltip { position: absolute; background: rgba(11, 20, 30, 0.9); border: 1px solid #22d3ee; padding: 12px 18px; border-radius: 12px; backdrop-filter: blur(10px); pointer-events: none; opacity: 0; left: 0; top: 0; transition: opacity 0.25s, transform 0.2s; box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(34, 211, 238, 0.2); z-index: 30; text-align: center; min-width: 140px; transform: translate(-50%, 15px) scale(0.95); }
+    .neural-tooltip.visible { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    .tooltip-title { font-weight: 700; font-size: 16px; margin-bottom: 4px; color: #ffffff; letter-spacing: 0.5px; }
+    .tooltip-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #22d3ee; font-weight: 600; }
+    .neural-hints { position: absolute; top: 24px; left: 30px; pointer-events: none; z-index: 5; }
+    .neural-hints h3 { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 6px; text-shadow: 0 0 15px rgba(255,255,255,0.2); text-align: left; }
+    .neural-hints p { font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; text-align: left; }
+    @media(max-width: 600px) { .neural-hints { display: none; } .neural-container { height: 450px; } }
 
     ::-webkit-scrollbar {
       width: 4px
@@ -2225,7 +2434,7 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="W">
-      <h2 class="sh rv"><span>About</span> Me</h2>
+      <h2 class="sh rv"><span>System</span> Identity</h2>
       <div class="sdv rv"></div>
       <div class="ag rv">
         <div class="gl ab about-shell">
@@ -2242,9 +2451,11 @@
                 <div class="flow-sequence">
                   <div class="flow-terminal">
                     <span class="about-caption">Profile Boot</span>
-                    <div class="term-line small" style="--chars:20; --dur:1.15s; --delay:3.35s">booting <span class="term-accent">nitya.ai</span>...</div>
+                    <div class="term-line small" style="--chars:20; --dur:1.15s; --delay:3.35s">booting <span
+                        class="term-accent">nitya.ai</span>...</div>
                     <div class="term-line small" style="--chars:18; --dur:1s; --delay:4.55s">loading profile...</div>
-                    <div class="term-line final small" style="--chars:16; --dur:.95s; --delay:5.65s">status: <span class="term-online">online</span></div>
+                    <div class="term-line final small" style="--chars:16; --dur:.95s; --delay:5.65s">status: <span
+                        class="term-online">online</span></div>
                   </div>
 
                   <div class="profile-reveal">
@@ -2256,8 +2467,11 @@
                       </div>
                     </div>
                     <div class="profile-copy">
-                      <p>Hey! I&apos;m Nitya Mathur - a B.Tech CSE (AI &amp; ML) student at SRM IST-Ghaziabad, driven by a love for turning complex data into meaningful stories. I build ML models, BI dashboards, and full-stack apps that solve real problems.</p>
-                      <p>From detecting Type 2 Diabetes with SVM to building interactive IPL dashboards and smart resume analyzers - I thrive at the intersection of AI, data analytics, and clean UI design.</p>
+                      <p>Hey! I&apos;m Nitya Mathur - a B.Tech CSE (AI &amp; ML) student at SRM IST-Ghaziabad, driven by
+                        a love for turning complex data into meaningful stories. I build ML models, BI dashboards, and
+                        full-stack apps that solve real problems.</p>
+                      <p>From detecting Type 2 Diabetes with SVM to building interactive IPL dashboards and smart resume
+                        analyzers - I thrive at the intersection of AI, data analytics, and clean UI design.</p>
                     </div>
                   </div>
                 </div>
@@ -2291,7 +2505,8 @@
 
               <div class="about-card">
                 <span class="about-caption">Notes</span>
-                <div class="about-note">When not coding: solving LeetCode, learning Japanese, or dreaming up the next ML idea.</div>
+                <div class="about-note">When not coding: solving LeetCode, learning Japanese, or dreaming up the next ML
+                  idea.</div>
               </div>
             </div>
           </div>
@@ -2305,7 +2520,19 @@
     <div class="W">
       <h2 class="sh rv"><span>Technical</span> Arsenal</h2>
       <div class="sdv rv"></div>
-      <div class="skg" id="sg"></div>
+      
+      <div id="neural-container" class="neural-container rv">
+        <div class="neural-hints">
+          <h3>Skill Network</h3>
+          <p>> Hover nodes to inspect neural paths</p>
+        </div>
+        <canvas id="neural-canvas" class="neural-canvas"></canvas>
+        <div id="neural-tooltip" class="neural-tooltip">
+          <div class="tooltip-title" id="tt-title">Python</div>
+          <div class="tooltip-subtitle" id="tt-perc">90%</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2430,27 +2657,52 @@
     <div class="W">
       <h2 class="sh rv"><span>Education</span></h2>
       <div class="sdv rv"></div>
-      <div class="eg">
-        <div class="gl ec rv">
-          <div class="sm"></div>
-          <div class="eb">PURSUING | 2027</div>
-          <div class="ed">B.Tech - CSE (AI & ML)</div>
-          <div class="es">SRM IST-Ghaziabad</div>
-          <div class="et">CGPA 9.41 / 10</div>
-        </div>
-        <div class="gl ec rv">
-          <div class="sm"></div>
-          <div class="eb">COMPLETED | 2023</div>
-          <div class="ed">Class XII - CBSE</div>
-          <div class="es">RSM International School, Jodhpur</div>
-          <div class="et">Percentage: 71%</div>
-        </div>
-        <div class="gl ec rv">
-          <div class="sm"></div>
-          <div class="eb">COMPLETED | 2021</div>
-          <div class="ed">Class X - CBSE</div>
-          <div class="es">Sri Aurobindo Centre, Jodhpur</div>
-          <div class="et">Percentage: 91%</div>
+      <div class="edu-card-wrapper rv">
+        <div class="edu-card">
+          <div class="edu-content">
+            <div class="edu-ring-container">
+              <svg class="edu-ring" viewBox="0 0 100 100">
+                <circle class="edu-ring-bg" cx="50" cy="50" r="45"></circle>
+                <circle class="edu-ring-progress" cx="50" cy="50" r="45"></circle>
+              </svg>
+              <div class="edu-cgpa">
+                <div class="edu-cgpa-val">9.41</div>
+                <div class="edu-cgpa-label">CGPA</div>
+              </div>
+            </div>
+            
+            <div class="edu-details">
+              <h2 class="edu-degree">B.Tech — CSE (AI & ML)</h2>
+              <div class="edu-college">SRM IST Ghaziabad</div>
+              
+              <div class="edu-grid">
+                <div class="edu-grid-item">
+                  <span class="edu-label">Specialization</span>
+                  <span class="edu-value">AI & ML</span>
+                </div>
+                <div class="edu-grid-item">
+                  <span class="edu-label">Semester</span>
+                  <span class="edu-value">VI (In Progress)</span>
+                </div>
+                <div class="edu-grid-item">
+                  <span class="edu-label">Location</span>
+                  <span class="edu-value">Delhi, India</span>
+                </div>
+                <div class="edu-grid-item">
+                  <span class="edu-label">Duration</span>
+                  <span class="edu-value">2023–2027</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="edu-tags">
+            <div class="edu-tag">Neural Networks</div>
+            <div class="edu-tag">Data Structures</div>
+            <div class="edu-tag">DBMS</div>
+            <div class="edu-tag">Statistical Analysis</div>
+            <div class="edu-tag">Computer Networks</div>
+          </div>
         </div>
       </div>
     </div>
@@ -2863,19 +3115,91 @@
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
        SKILLS
     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-    const skdata = [
-      { i: 'PY', n: 'Python', p: 90 }, { i: 'BI', n: 'Power BI', p: 88 }, { i: 'SQL', n: 'SQL', p: 85 },
-      { i: 'SK', n: 'Scikit-Learn', p: 84 }, { i: 'TF', n: 'TensorFlow', p: 80 }, { i: 'PD', n: 'Pandas', p: 92 },
-      { i: 'MP', n: 'Matplotlib', p: 83 }, { i: 'NP', n: 'NumPy', p: 88 }, { i: 'R', n: 'R', p: 72 },
-      { i: 'FL', n: 'Flask', p: 75 }, { i: 'PG', n: 'PostgreSQL', p: 80 }, { i: 'ST', n: 'Streamlit', p: 78 },
+    const skills = [
+      { id: 'PY', name: 'Python', p: 90, x: 0, y: -20 }, { id: 'PD', name: 'Pandas', p: 92, x: 130, y: -80 },
+      { id: 'NP', name: 'NumPy', p: 88, x: -120, y: -90 }, { id: 'SQL', name: 'SQL', p: 85, x: 0, y: 120 },
+      { id: 'TF', name: 'TensorFlow', p: 80, x: -160, y: 30 }, { id: 'SK', name: 'Scikit-Learn', p: 84, x: 150, y: 40 },
+      { id: 'BI', name: 'Power BI', p: 88, x: -80, y: 220 }, { id: 'PG', name: 'PostgreSQL', p: 80, x: 100, y: 210 },
+      { id: 'MP', name: 'Matplotlib', p: 83, x: 250, y: -40 }, { id: 'ST', name: 'Streamlit', p: 78, x: 220, y: 150 },
+      { id: 'R', name: 'R', p: 72, x: -250, y: -50 }, { id: 'FL', name: 'Flask', p: 75, x: -220, y: 160 }
     ];
-    const sg = document.getElementById('sg');
-    skdata.forEach((s, i) => {
-      const d = document.createElement('div'); d.className = 'skc rv';
-      d.style.transitionDelay = (i % 4) * .07 + 's';
-      d.innerHTML = `<span class="ski">${s.i}</span><div class="skn">${s.n}</div><div class="skb"><div class="skf" data-p="${s.p}"></div></div><div class="skp">${s.p}%</div>`;
-      sg.appendChild(d);
-    });
+    const edges = [
+      ['PY','PD'], ['PY','NP'], ['PY','SQL'], ['PY','SK'], ['PY','TF'], ['PD','MP'], ['PD','SK'],
+      ['NP','TF'], ['NP','R'], ['SQL','PG'], ['SQL','BI'], ['SK','ST'], ['TF','FL'], ['PG','FL'], ['BI','ST'], ['R','PD']
+    ];
+    const container = document.getElementById('neural-container');
+    const canvas = document.getElementById('neural-canvas');
+    if(container && canvas) {
+      const ctx = canvas.getContext('2d');
+      const tooltip = document.getElementById('neural-tooltip');
+      const ttTitle = document.getElementById('tt-title');
+      const ttPerc = document.getElementById('tt-perc');
+      let W, H, hoveredNode = null, time = 0;
+
+      skills.forEach(s => {
+        s.el = document.createElement('div');
+        s.el.className = 'node';
+        s.el.textContent = s.id;
+        s.phase = Math.random() * Math.PI * 2;
+        s.el.addEventListener('mouseenter', () => { hoveredNode = s; updateDimming(); showTooltip(s); });
+        s.el.addEventListener('mouseleave', () => { hoveredNode = null; updateDimming(); hideTooltip(); });
+        container.appendChild(s.el);
+      });
+
+      const edgeObjs = edges.map(eArr => ({
+        n1: skills.find(s => s.id === eArr[0]),
+        n2: skills.find(s => s.id === eArr[1]),
+        packets: [{ p: Math.random(), s: 0.002 + Math.random()*0.003 }, { p: Math.random()-0.5, s: 0.002 + Math.random()*0.003 }]
+      }));
+
+      function resize() { W = canvas.width = container.clientWidth; H = canvas.height = container.clientHeight; }
+      window.addEventListener('resize', resize); resize();
+
+      function updateDimming() {
+        if (!hoveredNode) { skills.forEach(s => s.el.classList.remove('dimmed', 'highlighted')); return; }
+        const nbrs = new Set([hoveredNode]);
+        edgeObjs.forEach(e => { if(e.n1===hoveredNode) nbrs.add(e.n2); if(e.n2===hoveredNode) nbrs.add(e.n1); });
+        skills.forEach(s => { if(nbrs.has(s)) { s.el.classList.remove('dimmed'); s.el.classList.add('highlighted'); } else { s.el.classList.add('dimmed'); s.el.classList.remove('highlighted'); } });
+      }
+
+      function showTooltip(s) { ttTitle.textContent = s.name; ttPerc.textContent = s.p + '% Mastery'; tooltip.classList.add('visible'); }
+      function hideTooltip() { tooltip.classList.remove('visible'); }
+
+      function animate() {
+        ctx.clearRect(0, 0, W, H); time += 0.015;
+        const scale = W < 500 ? 0.45 : (W < 800 ? 0.7 : 1);
+        const cx = W / 2, cy = H / 2;
+        skills.forEach(s => {
+          s.renderX = cx + s.x * scale + Math.sin(time * 0.8 + s.phase) * 12;
+          s.renderY = cy + s.y * scale + Math.cos(time * 0.9 + s.phase) * 12;
+          const nodeScale = (s === hoveredNode) ? 1.15 : (s.el.classList.contains('highlighted') ? 1.05 : 1);
+          s.el.style.transform = `translate(${s.renderX - 28}px, ${s.renderY - 28}px) scale(${nodeScale})`;
+        });
+        if (hoveredNode) { tooltip.style.left = hoveredNode.renderX + 'px'; tooltip.style.top = (hoveredNode.renderY - 70) + 'px'; }
+        
+        edgeObjs.forEach(e => {
+          const isAct = hoveredNode && (e.n1 === hoveredNode || e.n2 === hoveredNode);
+          const isDim = hoveredNode && !isAct;
+          ctx.beginPath(); ctx.moveTo(e.n1.renderX, e.n1.renderY); ctx.lineTo(e.n2.renderX, e.n2.renderY);
+          ctx.strokeStyle = isAct ? 'rgba(34, 211, 238, 0.7)' : (isDim ? 'rgba(192, 132, 252, 0.05)' : 'rgba(192, 132, 252, 0.3)');
+          ctx.lineWidth = isAct ? 2 : (isDim ? 1 : 1.2); ctx.stroke();
+          
+          if (!isDim) {
+            e.packets.forEach(p => {
+              p.p += p.s * (isAct ? 1.8 : 1); if (p.p > 1) p.p = -0.1 - Math.random() * 0.2;
+              if (p.p >= 0 && p.p <= 1) {
+                const px = e.n1.renderX + (e.n2.renderX - e.n1.renderX) * p.p, py = e.n1.renderY + (e.n2.renderY - e.n1.renderY) * p.p;
+                ctx.beginPath(); ctx.arc(px, py, isAct ? 3 : 2, 0, Math.PI * 2);
+                ctx.fillStyle = isAct ? '#22d3ee' : 'rgba(192, 132, 252, 0.7)';
+                if (isAct) { ctx.shadowBlur = 12; ctx.shadowColor = '#22d3ee'; ctx.fill(); ctx.shadowBlur = 0; } else ctx.fill();
+              }
+            });
+          }
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
        SCROLL REVEAL
