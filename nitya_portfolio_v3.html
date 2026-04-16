@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nitya Mathur | AI & Data Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <script>
     window.tailwind = {
       config: {
@@ -1687,7 +1689,7 @@
       justify-content: center;
       width: 100%;
     }
-    
+
     .edu-card {
       position: relative;
       background: rgba(11, 20, 30, 0.65);
@@ -1725,9 +1727,17 @@
     }
 
     @keyframes scanShimmer {
-      0% { left: -150%; }
-      15% { left: 200%; }
-      100% { left: 200%; }
+      0% {
+        left: -150%;
+      }
+
+      15% {
+        left: 200%;
+      }
+
+      100% {
+        left: 200%;
+      }
     }
 
     .edu-content {
@@ -1775,7 +1785,9 @@
     }
 
     @keyframes fillRing {
-      to { stroke-dashoffset: 16.68; }
+      to {
+        stroke-dashoffset: 16.68;
+      }
     }
 
     .edu-cgpa {
@@ -1868,7 +1880,7 @@
       border-radius: 50px;
       background: rgba(34, 211, 238, 0.04);
       border: 1px solid rgba(34, 211, 238, 0.15);
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       transition: all 0.3s ease;
       cursor: none;
     }
@@ -1880,35 +1892,42 @@
       box-shadow: 0 0 15px rgba(34, 211, 238, 0.25);
       transform: translateY(-2px);
     }
-    
+
     @media (max-width: 640px) {
       .edu-card {
         padding: 28px 24px;
       }
+
       .edu-content {
         flex-direction: column;
         align-items: center;
         gap: 28px;
         text-align: center;
       }
+
       .edu-ring-container {
         margin: 0 auto;
       }
+
       .edu-degree {
         font-size: 1.3rem;
         text-align: center;
       }
+
       .edu-college {
         text-align: center;
       }
+
       .edu-grid {
         grid-template-columns: 1fr;
         gap: 16px;
       }
+
       .edu-grid-item {
         align-items: center;
         text-align: center;
       }
+
       .edu-tags {
         justify-content: center;
       }
@@ -2328,23 +2347,59 @@
       }
     }
 
-    /* NEURAL SKILLS CSS */
-    .neural-container { position: relative; width: 100%; height: 600px; background-color: #0b0f14; background-image: radial-gradient(circle at center, rgba(34, 211, 238, 0.05) 0%, transparent 65%), linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px); background-size: 100% 100%, 40px 40px, 40px 40px; background-position: center center, center center, center center; border-radius: 20px; border: 1px solid rgba(192, 132, 252, 0.15); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0,0,0,0.8); overflow: hidden; font-family: 'Inter', sans-serif; cursor: default; margin-top: 16px; margin-bottom: 24px; }
-    .neural-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-    .node { position: absolute; left: 0; top: 0; width: 56px; height: 56px; border-radius: 50%; background: rgba(11, 20, 30, 0.85); border: 1px solid rgba(192, 132, 252, 0.35); color: #e2e8f0; display: flex; justify-content: center; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 0 12px rgba(192, 132, 252, 0.15), inset 0 0 10px rgba(192, 132, 252, 0.15); transition: background 0.3s, border-color 0.3s, box-shadow 0.3s, color 0.3s, opacity 0.3s, filter 0.3s; will-change: transform; z-index: 10; backdrop-filter: blur(4px); }
-    .node::after { content: ''; position: absolute; top: -7px; bottom: -7px; left: -7px; right: -7px; border-radius: 50%; border: 1px dashed rgba(34, 211, 238, 0.6); animation: rotateRing 6s linear infinite; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-    @keyframes rotateRing { 100% { transform: rotate(360deg); } }
-    .node:hover, .node.highlighted { border-color: #22d3ee; color: #ffffff; background: rgba(34, 211, 238, 0.12); box-shadow: 0 0 25px rgba(34, 211, 238, 0.4), inset 0 0 15px rgba(34, 211, 238, 0.25); z-index: 20; }
-    .node:hover::after { opacity: 1; }
-    .node.dimmed { opacity: 0.15; filter: blur(1.5px); }
-    .neural-tooltip { position: absolute; background: rgba(11, 20, 30, 0.9); border: 1px solid #22d3ee; padding: 12px 18px; border-radius: 12px; backdrop-filter: blur(10px); pointer-events: none; opacity: 0; left: 0; top: 0; transition: opacity 0.25s, transform 0.2s; box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(34, 211, 238, 0.2); z-index: 30; text-align: center; min-width: 140px; transform: translate(-50%, 15px) scale(0.95); }
-    .neural-tooltip.visible { opacity: 1; transform: translate(-50%, 0) scale(1); }
-    .tooltip-title { font-weight: 700; font-size: 16px; margin-bottom: 4px; color: #ffffff; letter-spacing: 0.5px; }
-    .tooltip-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #22d3ee; font-weight: 600; }
-    .neural-hints { position: absolute; top: 24px; left: 30px; pointer-events: none; z-index: 5; }
-    .neural-hints h3 { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 6px; text-shadow: 0 0 15px rgba(255,255,255,0.2); text-align: left; }
-    .neural-hints p { font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; text-align: left; }
-    @media(max-width: 600px) { .neural-hints { display: none; } .neural-container { height: 450px; } }
+            /* SKILLS FLOATING V3 CSS */
+    .tab-btn { transition: all 0.3s ease; }
+    .tab-btn.active { background: rgba(139,92,246,0.2); border-color: rgba(139,92,246,0.5); color: #fff; box-shadow: 0 0 15px rgba(139,92,246,0.2); }
+    
+    .view-container { display: none; animation: fadeIn 0.4s ease; }
+    .view-container.active-view { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Node Hover & Layout */
+    .neo-node { 
+      cursor: pointer; backdrop-filter: blur(8px); text-align: center;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s, background 0.3s;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translate(-50%, -50%); }
+      50% { transform: translate(-50%, calc(-50% - 10px)); }
+      100% { transform: translate(-50%, -50%); }
+    }
+    .neo-node.delay-1 { animation-delay: -1s; animation-duration: 5.5s; }
+    .neo-node.delay-2 { animation-delay: -2.5s; animation-duration: 7s; }
+    .neo-node.delay-3 { animation-delay: -4s; animation-duration: 6.5s; }
+
+    .neo-node:hover { z-index: 50; transform: translate(-50%, -50%) scale(1.08) !important; animation-play-state: paused; }
+    .neo-node.active-node { z-index: 60; transform: translate(-50%, -50%) scale(1.1) !important; animation-play-state: paused; }
+    
+    /* SVG LINE EFFECTS */
+    .net-line { transition: opacity 0.3s, filter 0.3s, stroke-width 0.3s; opacity: 0.25; stroke-dasharray: 6 6; animation: dashMove 3s linear infinite; }
+    .net-line.line-hover { opacity: 0.8 !important; filter: drop-shadow(0 0 8px currentColor); stroke-width: 2.5; animation-duration: 1.5s; }
+    .net-line.line-active { opacity: 1 !important; filter: drop-shadow(0 0 12px currentColor); stroke-width: 3; animation-duration: 1s; }
+    
+    @keyframes dashMove { to { stroke-dashoffset: -100; } }
+    
+    /* Category Glows */
+    .g-ml { box-shadow: 0 0 12px rgba(139,92,246,0.3); border-color: rgba(139,92,246,0.5); background: rgba(139,92,246,0.2); color: #c4b5fd; transition: all 0.3s ease; }
+    .g-ml:hover, .g-ml.active-node { box-shadow: 0 0 25px rgba(139,92,246,0.8); border-color: #8B5CF6; background: rgba(139,92,246,0.4); color: #fff; }
+    
+    .g-da { box-shadow: 0 0 12px rgba(59,130,246,0.3); border-color: rgba(59,130,246,0.5); background: rgba(59,130,246,0.2); color: #93c5fd; transition: all 0.3s ease; }
+    .g-da:hover, .g-da.active-node { box-shadow: 0 0 25px rgba(59,130,246,0.8); border-color: #3B82F6; background: rgba(59,130,246,0.4); color: #fff; }
+    
+    .g-wb { box-shadow: 0 0 12px rgba(34,211,238,0.3); border-color: rgba(34,211,238,0.5); background: rgba(34,211,238,0.2); color: #a5f3fc; transition: all 0.3s ease; }
+    .g-wb:hover, .g-wb.active-node { box-shadow: 0 0 25px rgba(34,211,238,0.8); border-color: #22D3EE; background: rgba(34,211,238,0.4); color: #fff; }
+    
+    .g-tp { box-shadow: 0 0 12px rgba(74,222,128,0.3); border-color: rgba(74,222,128,0.5); background: rgba(74,222,128,0.2); color: #bbf7d0; transition: all 0.3s ease; }
+    .g-tp:hover, .g-tp.active-node { box-shadow: 0 0 25px rgba(74,222,128,0.8); border-color: #4ADE80; background: rgba(74,222,128,0.4); color: #fff; }
+
+    .sk-group-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; transition: all 0.3s; }
+    .sk-group-card:hover { border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); }
+    .sk-item { display:flex; justify-content:space-between; align-items:center; padding: 12px 16px; border-radius: 8px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s; cursor: pointer; }
+    .sk-item:hover { transform: scale(1.02); }
+
+
 
     ::-webkit-scrollbar {
       width: 4px
@@ -2515,24 +2570,248 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
-  <section id="skills">
+  <!-- EDUCATION -->
+  <section id="education">
     <div class="W">
-      <h2 class="sh rv"><span>Technical</span> Arsenal</h2>
+      <h2 class="sh rv"><span>Education</span></h2>
       <div class="sdv rv"></div>
-      
-      <div id="neural-container" class="neural-container rv">
-        <div class="neural-hints">
-          <h3>Skill Network</h3>
-          <p>> Hover nodes to inspect neural paths</p>
-        </div>
-        <canvas id="neural-canvas" class="neural-canvas"></canvas>
-        <div id="neural-tooltip" class="neural-tooltip">
-          <div class="tooltip-title" id="tt-title">Python</div>
-          <div class="tooltip-subtitle" id="tt-perc">90%</div>
+      <div class="edu-card-wrapper rv">
+        <div class="edu-card">
+          <div class="edu-content">
+            <div class="edu-ring-container">
+              <svg class="edu-ring" viewBox="0 0 100 100">
+                <circle class="edu-ring-bg" cx="50" cy="50" r="45"></circle>
+                <circle class="edu-ring-progress" cx="50" cy="50" r="45"></circle>
+              </svg>
+              <div class="edu-cgpa">
+                <div class="edu-cgpa-val">9.41</div>
+                <div class="edu-cgpa-label">CGPA</div>
+              </div>
+            </div>
+
+            <div class="edu-details">
+              <h2 class="edu-degree">B.Tech — CSE (AI & ML)</h2>
+              <div class="edu-college">SRM IST Ghaziabad</div>
+
+              <div class="edu-grid">
+                <div class="edu-grid-item">
+                  <span class="edu-label">Specialization</span>
+                  <span class="edu-value">AI & ML</span>
+                </div>
+                <div class="edu-grid-item">
+                  <span class="edu-label">Semester</span>
+                  <span class="edu-value">VI (In Progress)</span>
+                </div>
+                <div class="edu-grid-item">
+                  <span class="edu-label">Location</span>
+                  <span class="edu-value">Delhi, India</span>
+                </div>
+                <div class="edu-grid-item">
+                  <span class="edu-label">Duration</span>
+                  <span class="edu-value">2023–2027</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="edu-tags">
+            <div class="edu-tag">Neural Networks</div>
+            <div class="edu-tag">Data Structures</div>
+            <div class="edu-tag">DBMS</div>
+            <div class="edu-tag">Statistical Analysis</div>
+            <div class="edu-tag">Computer Networks</div>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
 
+      <!-- SKILLS -->
+  <section id="skills">
+    <div class="W">
+      <div class="text-center mb-8">
+        <h2 class="sh rv"><span>Technical</span> Arsenal</h2>
+        <p class="text-gray-400 mt-2">Click any skill to explore</p>
+        <div class="sdv mx-auto"></div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex justify-center mb-10 space-x-2 md:space-x-4">
+        <button id="tab-network" class="tab-btn active px-6 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-white font-medium shadow-[0_0_15px_rgba(139,92,246,0.2)]">Network</button>
+        <button id="tab-grouped" class="tab-btn px-6 py-2 rounded-full border border-white/10 bg-black/20 text-gray-400 hover:text-white hover:bg-white/5 font-medium transition">Grouped View</button>
+      </div>
+
+      <div class="relative min-h-[600px] mb-20">
+        
+        <!-- ==============================================
+             VIEW 1: NETWORK VIEW (DEFAULT)
+        =============================================== -->
+        <div id="view-network" class="view-container active-view">
+          <div id="network-area" class="relative w-full max-w-5xl mx-auto h-[600px] rounded-2xl border border-white/10 bg-[#0b0f14] shadow-[0_0_50px_rgba(0,0,0,0.8)_inset] overflow-hidden" 
+               style="background-image: radial-gradient(circle at center, rgba(139,92,246,0.15) 0%, transparent 60%); background-size: 100% 100%;">
+            
+            <!-- Lines Background -->
+            <svg id="network-svg" class="absolute inset-0 w-full h-full pointer-events-none opacity-100" style="z-index: 0;">
+              <!-- Data -->
+              <line class="net-line" id="line-py-sql" stroke="#3B82F6" stroke-width="2" stroke-dasharray="4 4" />
+              <line class="net-line" id="line-py-ex" stroke="#3B82F6" stroke-width="2" stroke-dasharray="4 4" />
+              <line class="net-line" id="line-py-pbi" stroke="#3B82F6" stroke-width="2" stroke-dasharray="4 4" />
+              <!-- ML -->
+              <line class="net-line" id="line-py-ml" stroke="#8B5CF6" stroke-width="2" />
+              <line class="net-line" id="line-ml-tf" stroke="#8B5CF6" stroke-width="1.5" />
+              <line class="net-line" id="line-ml-skl" stroke="#8B5CF6" stroke-width="1.5" />
+              <line class="net-line" id="line-ml-svm" stroke="#8B5CF6" stroke-width="1.5" />
+              <line class="net-line" id="line-ml-xgb" stroke="#8B5CF6" stroke-width="1.5" />
+              <line class="net-line" id="line-py-fl" stroke="#8B5CF6" stroke-width="2" />
+              <!-- Web -->
+              <line class="net-line" id="line-py-html" stroke="#06B6D4" stroke-width="2" />
+              <line class="net-line" id="line-html-css" stroke="#06B6D4" stroke-width="1.5" />
+              <line class="net-line" id="line-html-js" stroke="#06B6D4" stroke-width="1.5" />
+              <line class="net-line" id="line-js-rea" stroke="#06B6D4" stroke-width="1.5" />
+              <!-- Tools -->
+              <line class="net-line" id="line-py-git" stroke="#22C55E" stroke-width="2" />
+              <line class="net-line" id="line-py-jup" stroke="#22C55E" stroke-width="2" />
+              <line class="net-line" id="line-jup-can" stroke="#22C55E" stroke-width="1.5" />
+              <line class="net-line" id="line-py-ga" stroke="#22C55E" stroke-width="2" />
+            </svg>
+
+            <!-- NODES (Hardcoded with absolute percentages to spread them out logically) -->
+            <!-- DA -->
+            <div id="node-py" class="neo-node absolute top-[50%] left-[50%] px-5 py-3 rounded-full border-2 g-da">
+              <div class="font-bold text-lg text-white">Python</div><div class="text-xs font-mono">90%</div>
+            </div>
+            <div id="node-sql" class="neo-node delay-1 absolute top-[25%] left-[50%] px-4 py-2 rounded-full border g-da">
+              <div class="font-bold text-white">SQL</div><div class="text-xs font-mono">85%</div>
+            </div>
+            <div id="node-ex" class="neo-node delay-2 absolute top-[35%] left-[38%] px-4 py-2 rounded-full border g-da">
+              <div class="font-bold text-white">Excel</div><div class="text-xs font-mono">90%</div>
+            </div>
+            <div id="node-pbi" class="neo-node delay-3 absolute top-[35%] left-[62%] px-4 py-2 rounded-full border g-da">
+              <div class="font-bold text-white">Power BI</div><div class="text-xs font-mono">92%</div>
+            </div>
+
+            <!-- ML -->
+            <div id="node-ml" class="neo-node absolute top-[50%] left-[75%] px-4 py-2 rounded-full border g-ml">
+              <div class="font-bold text-white">Machine Learning</div><div class="text-xs font-mono">85%</div>
+            </div>
+            <div id="node-tf" class="neo-node delay-1 absolute top-[30%] left-[80%] px-4 py-2 rounded-full border g-ml">
+              <div class="font-bold text-white">TensorFlow</div><div class="text-xs font-mono">85%</div>
+            </div>
+            <div id="node-skl" class="neo-node delay-2 absolute top-[45%] left-[90%] px-4 py-2 rounded-full border g-ml">
+              <div class="font-bold text-white">Scikit-learn</div><div class="text-xs font-mono">88%</div>
+            </div>
+            <div id="node-svm" class="neo-node delay-3 absolute top-[65%] left-[85%] px-4 py-2 rounded-full border g-ml">
+              <div class="font-bold text-white">SVM</div><div class="text-xs font-mono">80%</div>
+            </div>
+            <div id="node-xgb" class="neo-node delay-1 absolute top-[75%] left-[75%] px-4 py-2 rounded-full border g-ml">
+              <div class="font-bold text-white">XGBoost</div><div class="text-xs font-mono">82%</div>
+            </div>
+            <div id="node-fl" class="neo-node delay-2 absolute top-[60%] left-[60%] px-4 py-2 rounded-full border g-ml">
+              <div class="font-bold text-white">Flask</div><div class="text-xs font-mono">75%</div>
+            </div>
+
+            <!-- Web Dev -->
+            <div id="node-html" class="neo-node absolute top-[50%] left-[25%] px-4 py-2 rounded-full border g-wb">
+              <div class="font-bold text-white">HTML</div><div class="text-xs font-mono">95%</div>
+            </div>
+            <div id="node-css" class="neo-node delay-1 absolute top-[35%] left-[18%] px-4 py-2 rounded-full border g-wb">
+              <div class="font-bold text-white">CSS</div><div class="text-xs font-mono">90%</div>
+            </div>
+            <div id="node-js" class="neo-node delay-3 absolute top-[65%] left-[20%] px-4 py-2 rounded-full border g-wb">
+              <div class="font-bold text-white">JavaScript</div><div class="text-xs font-mono">85%</div>
+            </div>
+            <div id="node-rea" class="neo-node delay-2 absolute top-[80%] left-[25%] px-4 py-2 rounded-full border g-wb">
+              <div class="font-bold text-white">React</div><div class="text-xs font-mono">80%</div>
+            </div>
+
+            <!-- Tools -->
+            <div id="node-git" class="neo-node delay-1 absolute top-[75%] left-[40%] px-4 py-2 rounded-full border g-tp">
+              <div class="font-bold text-white">Git & GitHub</div><div class="text-xs font-mono">90%</div>
+            </div>
+            <div id="node-jup" class="neo-node absolute top-[80%] left-[55%] px-4 py-2 rounded-full border g-tp">
+              <div class="font-bold text-white">Jupyter / Colab</div><div class="text-xs font-mono">92%</div>
+            </div>
+            <div id="node-can" class="neo-node delay-3 absolute top-[90%] left-[65%] px-4 py-2 rounded-full border g-tp">
+              <div class="font-bold text-white">Canva</div><div class="text-xs font-mono">85%</div>
+            </div>
+            <div id="node-ga" class="neo-node delay-2 absolute top-[20%] left-[20%] px-4 py-2 rounded-full border g-tp">
+              <div class="font-bold text-white">Google Antigravity</div><div class="text-xs font-mono">95%</div>
+            </div>
+
+            <!-- Legend Overlay -->
+            <div class="absolute bottom-4 left-4 p-4 rounded-xl bg-black/50 border border-white/5 backdrop-blur-md z-10 pointer-events-none">
+              <h4 class="text-gray-400 text-xs font-semibold uppercase mb-2">Network Legend</h4>
+              <div class="flex items-center text-xs text-gray-300 mb-1"><span class="w-2 h-2 rounded-full mr-2 bg-[#8B5CF6] shadow-[0_0_6px_#8B5CF6]"></span>Machine Learning</div>
+              <div class="flex items-center text-xs text-gray-300 mb-1"><span class="w-2 h-2 rounded-full mr-2 bg-[#3B82F6] shadow-[0_0_6px_#3B82F6]"></span>Data Analytics</div>
+              <div class="flex items-center text-xs text-gray-300 mb-1"><span class="w-2 h-2 rounded-full mr-2 bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]"></span>Web Dev</div>
+              <div class="flex items-center text-xs text-gray-300 mb-1"><span class="w-2 h-2 rounded-full mr-2 bg-[#22C55E] shadow-[0_0_6px_#22C55E]"></span>Tools & Platforms</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==============================================
+             VIEW 2: GROUPED VIEW
+        =============================================== -->
+        <div id="view-grouped" class="view-container">
+          <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+            
+            <!-- Category: ML -->
+            <div class="sk-group-card">
+              <h3 class="text-lg font-bold mb-4 flex items-center text-gray-200">
+                <span class="w-3 h-3 rounded-full mr-3 bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6]"></span>Machine Learning
+              </h3>
+              <div class="flex flex-col space-y-3">
+                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span class="font-medium text-white group-hover:text-[#8B5CF6] transition">Machine Learning</span><span class="text-gray-400 font-mono text-sm">85%</span></div>
+                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span class="font-medium text-white group-hover:text-[#8B5CF6] transition">SVM</span><span class="text-gray-400 font-mono text-sm">80%</span></div>
+                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span class="font-medium text-white group-hover:text-[#8B5CF6] transition">XGBoost</span><span class="text-gray-400 font-mono text-sm">82%</span></div>
+                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span class="font-medium text-white group-hover:text-[#8B5CF6] transition">TensorFlow</span><span class="text-gray-400 font-mono text-sm">85%</span></div>
+                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span class="font-medium text-white group-hover:text-[#8B5CF6] transition">Scikit-learn</span><span class="text-gray-400 font-mono text-sm">88%</span></div>
+                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span class="font-medium text-white group-hover:text-[#8B5CF6] transition">Flask</span><span class="text-gray-400 font-mono text-sm">75%</span></div>
+              </div>
+            </div>
+
+            <!-- Category: Data -->
+            <div class="sk-group-card">
+              <h3 class="text-lg font-bold mb-4 flex items-center text-gray-200">
+                <span class="w-3 h-3 rounded-full mr-3 bg-[#3B82F6] shadow-[0_0_10px_#3B82F6]"></span>Data Analytics
+              </h3>
+              <div class="flex flex-col space-y-3">
+                <div class="sk-item hover:border-[#3B82F6]/50 group"><span class="font-medium text-white group-hover:text-[#3B82F6] transition">Python</span><span class="text-gray-400 font-mono text-sm">90%</span></div>
+                <div class="sk-item hover:border-[#3B82F6]/50 group"><span class="font-medium text-white group-hover:text-[#3B82F6] transition">SQL</span><span class="text-gray-400 font-mono text-sm">85%</span></div>
+                <div class="sk-item hover:border-[#3B82F6]/50 group"><span class="font-medium text-white group-hover:text-[#3B82F6] transition">Excel</span><span class="text-gray-400 font-mono text-sm">90%</span></div>
+                <div class="sk-item hover:border-[#3B82F6]/50 group"><span class="font-medium text-white group-hover:text-[#3B82F6] transition">Power BI</span><span class="text-gray-400 font-mono text-sm">92%</span></div>
+              </div>
+            </div>
+
+            <!-- Category: Web Dev -->
+            <div class="sk-group-card">
+              <h3 class="text-lg font-bold mb-4 flex items-center text-gray-200">
+                <span class="w-3 h-3 rounded-full mr-3 bg-[#06B6D4] shadow-[0_0_10px_#06B6D4]"></span>Web Development
+              </h3>
+              <div class="flex flex-col space-y-3">
+                <div class="sk-item hover:border-[#06B6D4]/50 group"><span class="font-medium text-white group-hover:text-[#06B6D4] transition">HTML</span><span class="text-gray-400 font-mono text-sm">95%</span></div>
+                <div class="sk-item hover:border-[#06B6D4]/50 group"><span class="font-medium text-white group-hover:text-[#06B6D4] transition">CSS</span><span class="text-gray-400 font-mono text-sm">90%</span></div>
+                <div class="sk-item hover:border-[#06B6D4]/50 group"><span class="font-medium text-white group-hover:text-[#06B6D4] transition">JavaScript</span><span class="text-gray-400 font-mono text-sm">85%</span></div>
+                <div class="sk-item hover:border-[#06B6D4]/50 group"><span class="font-medium text-white group-hover:text-[#06B6D4] transition">React</span><span class="text-gray-400 font-mono text-sm">80%</span></div>
+              </div>
+            </div>
+
+            <!-- Category: Tools -->
+            <div class="sk-group-card">
+              <h3 class="text-lg font-bold mb-4 flex items-center text-gray-200">
+                <span class="w-3 h-3 rounded-full mr-3 bg-[#22C55E] shadow-[0_0_10px_#22C55E]"></span>Tools & Platforms
+              </h3>
+              <div class="flex flex-col space-y-3">
+                <div class="sk-item hover:border-[#22C55E]/50 group"><span class="font-medium text-white group-hover:text-[#22C55E] transition">Git & GitHub</span><span class="text-gray-400 font-mono text-sm">90%</span></div>
+                <div class="sk-item hover:border-[#22C55E]/50 group"><span class="font-medium text-white group-hover:text-[#22C55E] transition">Canva</span><span class="text-gray-400 font-mono text-sm">85%</span></div>
+                <div class="sk-item hover:border-[#22C55E]/50 group"><span class="font-medium text-white group-hover:text-[#22C55E] transition">Jupyter / Colab</span><span class="text-gray-400 font-mono text-sm">92%</span></div>
+                <div class="sk-item hover:border-[#22C55E]/50 group"><span class="font-medium text-white group-hover:text-[#22C55E] transition">Google Antigravity</span><span class="text-gray-400 font-mono text-sm">95%</span></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2647,62 +2926,6 @@
           <div class="cn">Java</div>
           <div class="cb2">HackerRank</div>
           <div class="cd">October 2024</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="W">
-      <h2 class="sh rv"><span>Education</span></h2>
-      <div class="sdv rv"></div>
-      <div class="edu-card-wrapper rv">
-        <div class="edu-card">
-          <div class="edu-content">
-            <div class="edu-ring-container">
-              <svg class="edu-ring" viewBox="0 0 100 100">
-                <circle class="edu-ring-bg" cx="50" cy="50" r="45"></circle>
-                <circle class="edu-ring-progress" cx="50" cy="50" r="45"></circle>
-              </svg>
-              <div class="edu-cgpa">
-                <div class="edu-cgpa-val">9.41</div>
-                <div class="edu-cgpa-label">CGPA</div>
-              </div>
-            </div>
-            
-            <div class="edu-details">
-              <h2 class="edu-degree">B.Tech — CSE (AI & ML)</h2>
-              <div class="edu-college">SRM IST Ghaziabad</div>
-              
-              <div class="edu-grid">
-                <div class="edu-grid-item">
-                  <span class="edu-label">Specialization</span>
-                  <span class="edu-value">AI & ML</span>
-                </div>
-                <div class="edu-grid-item">
-                  <span class="edu-label">Semester</span>
-                  <span class="edu-value">VI (In Progress)</span>
-                </div>
-                <div class="edu-grid-item">
-                  <span class="edu-label">Location</span>
-                  <span class="edu-value">Delhi, India</span>
-                </div>
-                <div class="edu-grid-item">
-                  <span class="edu-label">Duration</span>
-                  <span class="edu-value">2023–2027</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="edu-tags">
-            <div class="edu-tag">Neural Networks</div>
-            <div class="edu-tag">Data Structures</div>
-            <div class="edu-tag">DBMS</div>
-            <div class="edu-tag">Statistical Analysis</div>
-            <div class="edu-tag">Computer Networks</div>
-          </div>
         </div>
       </div>
     </div>
@@ -3124,12 +3347,12 @@
       { id: 'R', name: 'R', p: 72, x: -250, y: -50 }, { id: 'FL', name: 'Flask', p: 75, x: -220, y: 160 }
     ];
     const edges = [
-      ['PY','PD'], ['PY','NP'], ['PY','SQL'], ['PY','SK'], ['PY','TF'], ['PD','MP'], ['PD','SK'],
-      ['NP','TF'], ['NP','R'], ['SQL','PG'], ['SQL','BI'], ['SK','ST'], ['TF','FL'], ['PG','FL'], ['BI','ST'], ['R','PD']
+      ['PY', 'PD'], ['PY', 'NP'], ['PY', 'SQL'], ['PY', 'SK'], ['PY', 'TF'], ['PD', 'MP'], ['PD', 'SK'],
+      ['NP', 'TF'], ['NP', 'R'], ['SQL', 'PG'], ['SQL', 'BI'], ['SK', 'ST'], ['TF', 'FL'], ['PG', 'FL'], ['BI', 'ST'], ['R', 'PD']
     ];
     const container = document.getElementById('neural-container');
     const canvas = document.getElementById('neural-canvas');
-    if(container && canvas) {
+    if (container && canvas) {
       const ctx = canvas.getContext('2d');
       const tooltip = document.getElementById('neural-tooltip');
       const ttTitle = document.getElementById('tt-title');
@@ -3149,7 +3372,7 @@
       const edgeObjs = edges.map(eArr => ({
         n1: skills.find(s => s.id === eArr[0]),
         n2: skills.find(s => s.id === eArr[1]),
-        packets: [{ p: Math.random(), s: 0.002 + Math.random()*0.003 }, { p: Math.random()-0.5, s: 0.002 + Math.random()*0.003 }]
+        packets: [{ p: Math.random(), s: 0.002 + Math.random() * 0.003 }, { p: Math.random() - 0.5, s: 0.002 + Math.random() * 0.003 }]
       }));
 
       function resize() { W = canvas.width = container.clientWidth; H = canvas.height = container.clientHeight; }
@@ -3158,8 +3381,8 @@
       function updateDimming() {
         if (!hoveredNode) { skills.forEach(s => s.el.classList.remove('dimmed', 'highlighted')); return; }
         const nbrs = new Set([hoveredNode]);
-        edgeObjs.forEach(e => { if(e.n1===hoveredNode) nbrs.add(e.n2); if(e.n2===hoveredNode) nbrs.add(e.n1); });
-        skills.forEach(s => { if(nbrs.has(s)) { s.el.classList.remove('dimmed'); s.el.classList.add('highlighted'); } else { s.el.classList.add('dimmed'); s.el.classList.remove('highlighted'); } });
+        edgeObjs.forEach(e => { if (e.n1 === hoveredNode) nbrs.add(e.n2); if (e.n2 === hoveredNode) nbrs.add(e.n1); });
+        skills.forEach(s => { if (nbrs.has(s)) { s.el.classList.remove('dimmed'); s.el.classList.add('highlighted'); } else { s.el.classList.add('dimmed'); s.el.classList.remove('highlighted'); } });
       }
 
       function showTooltip(s) { ttTitle.textContent = s.name; ttPerc.textContent = s.p + '% Mastery'; tooltip.classList.add('visible'); }
@@ -3176,14 +3399,14 @@
           s.el.style.transform = `translate(${s.renderX - 28}px, ${s.renderY - 28}px) scale(${nodeScale})`;
         });
         if (hoveredNode) { tooltip.style.left = hoveredNode.renderX + 'px'; tooltip.style.top = (hoveredNode.renderY - 70) + 'px'; }
-        
+
         edgeObjs.forEach(e => {
           const isAct = hoveredNode && (e.n1 === hoveredNode || e.n2 === hoveredNode);
           const isDim = hoveredNode && !isAct;
           ctx.beginPath(); ctx.moveTo(e.n1.renderX, e.n1.renderY); ctx.lineTo(e.n2.renderX, e.n2.renderY);
           ctx.strokeStyle = isAct ? 'rgba(34, 211, 238, 0.7)' : (isDim ? 'rgba(192, 132, 252, 0.05)' : 'rgba(192, 132, 252, 0.3)');
           ctx.lineWidth = isAct ? 2 : (isDim ? 1 : 1.2); ctx.stroke();
-          
+
           if (!isDim) {
             e.packets.forEach(p => {
               p.p += p.s * (isAct ? 1.8 : 1); if (p.p > 1) p.p = -0.1 - Math.random() * 0.2;
