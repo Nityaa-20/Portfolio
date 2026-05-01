@@ -1540,15 +1540,75 @@
       pointer-events: none
     }
 
+    .project-card {
+      isolation: isolate
+    }
+
+    .project-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      opacity: var(--ai-img-opacity, 0);
+      transform: scale(var(--ai-scale, 1));
+      filter:
+        blur(var(--ai-blur, 0px)) saturate(calc(0.9 + var(--ai-progress, 0) * .45)) contrast(calc(1 + var(--ai-progress, 0) * .2));
+      box-shadow: 0 0 calc(var(--ai-glow, 0) * 34px) rgba(0, 240, 255, var(--ai-glow, 0));
+      transition: opacity .14s linear, transform .2s ease, filter .2s ease;
+      image-rendering: auto
+    }
+
+    .project-glass {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: var(--ai-glass, .14);
+      background:
+        linear-gradient(140deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, 0) 40%),
+        radial-gradient(circle at 78% 24%, rgba(0, 240, 255, .18), transparent 36%);
+      mix-blend-mode: screen;
+      transition: opacity .18s linear
+    }
+
+    .noise-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      pointer-events: none;
+      opacity: var(--ai-noise-opacity, 0)
+    }
+
+    .project-card::before {
+      z-index: 0
+    }
+
+    .project-card::after {
+      z-index: 4;
+      opacity: calc(.22 + var(--ai-progress, 0) * .1)
+    }
+
     .pe {
       position: relative;
-      z-index: 1;
+      z-index: 5;
       filter: drop-shadow(0 0 22px rgba(192, 132, 252, .8));
-      transition: transform .4s cubic-bezier(.34, 1.56, .64, 1)
+      transition: transform .4s cubic-bezier(.34, 1.56, .64, 1), opacity .22s ease
     }
 
     .pjc:hover .pe {
       transform: scale(1.18) rotate(5deg)
+    }
+
+    .pjc.ai-active .pe {
+      opacity: .15
+    }
+
+    .pjc.ai-final .project-img {
+      box-shadow: 0 0 25px rgba(0, 240, 255, .3), 0 0 50px rgba(0, 240, 255, .18)
     }
 
     .pb {
@@ -2347,180 +2407,201 @@
       }
     }
 
-    /* SKILLS FLOATING V3 CSS */
+    /* SKILLS: TABS + NEURAL GRAPH */
     .tab-btn {
-      transition: all 0.3s ease;
+      transition: all .3s ease
     }
 
     .tab-btn.active {
-      background: rgba(139, 92, 246, 0.2);
-      border-color: rgba(139, 92, 246, 0.5);
+      background: rgba(168, 85, 247, .16);
+      border-color: rgba(168, 85, 247, .45);
       color: #fff;
-      box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+      box-shadow: 0 0 18px rgba(168, 85, 247, .22)
     }
 
     .view-container {
       display: none;
-      animation: fadeIn 0.4s ease;
+      animation: fadeIn .4s ease
     }
 
     .view-container.active-view {
-      display: block;
+      display: block
     }
 
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(10px)
       }
 
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0)
       }
     }
 
-    /* Node Hover & Layout */
-    .neo-node {
-      cursor: pointer;
+    .nsg-shell {
+      width: 100%;
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      gap: 16px
+    }
+
+    .nsg-stage {
+      position: relative;
+      height: clamp(440px, 70vh, 640px);
+      border-radius: 22px;
+      border: 1px solid rgba(168, 85, 247, .24);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 10% 22%, rgba(0, 240, 255, .08), transparent 32%),
+        radial-gradient(circle at 45% 45%, rgba(247, 255, 0, .08), transparent 36%),
+        radial-gradient(circle at 78% 34%, rgba(255, 46, 166, .08), transparent 32%),
+        radial-gradient(circle at 78% 80%, rgba(168, 85, 247, .1), transparent 35%),
+        linear-gradient(160deg, rgba(6, 8, 22, .96), rgba(2, 4, 14, .93) 55%, rgba(1, 2, 8, .96));
+      box-shadow: inset 0 0 80px rgba(0, 0, 0, .58), 0 22px 65px rgba(2, 6, 23, .4)
+    }
+
+    .nsg-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0, 240, 255, .06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, .06) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: .26
+    }
+
+    .nsg-stage::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .032), rgba(255, 255, 255, .032) 1px, transparent 1px, transparent 4px);
+      mix-blend-mode: soft-light;
+      opacity: .18
+    }
+
+    #nsg-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2
+    }
+
+    .nsg-zone-tags {
+      position: absolute;
+      inset: 14px 16px auto 16px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      pointer-events: none;
+      z-index: 3
+    }
+
+    .nsg-zone-tags span {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .2);
+      font-size: .62rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
       backdrop-filter: blur(8px);
-      text-align: center;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s, background 0.3s;
-      animation: float 6s ease-in-out infinite;
+      background: rgba(0, 0, 0, .3)
     }
 
-    @keyframes float {
-      0% {
-        transform: translate(-50%, -50%);
+    .nsg-zone-data {
+      color: #00f0ff;
+      border-color: rgba(0, 240, 255, .44)
+    }
+
+    .nsg-zone-ml {
+      color: #f7ff00;
+      border-color: rgba(247, 255, 0, .44)
+    }
+
+    .nsg-zone-web {
+      color: #ff2ea6;
+      border-color: rgba(255, 46, 166, .44)
+    }
+
+    .nsg-zone-tools {
+      color: #a855f7;
+      border-color: rgba(168, 85, 247, .44)
+    }
+
+    .nsg-controls {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center
+    }
+
+    .nsg-fire {
+      border: 1px solid rgba(0, 240, 255, .4);
+      background: linear-gradient(135deg, rgba(0, 240, 255, .16), rgba(168, 85, 247, .16));
+      color: #d1faff;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      font-size: .68rem;
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease
+    }
+
+    .nsg-fire:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 240, 255, .7);
+      box-shadow: 0 0 25px rgba(0, 240, 255, .26), 0 0 40px rgba(168, 85, 247, .18)
+    }
+
+    .nsg-hud {
+      border: 1px solid rgba(168, 85, 247, .28);
+      border-radius: 16px;
+      background: rgba(2, 6, 20, .68);
+      backdrop-filter: blur(14px);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      padding: 14px
+    }
+
+    .nsg-hud-item {
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, .02)
+    }
+
+    .nsg-hud-label {
+      display: block;
+      font-size: .6rem;
+      color: var(--txt3);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-bottom: 6px
+    }
+
+    .nsg-hud-value {
+      font-size: .82rem;
+      color: #e6ebff;
+      font-weight: 700;
+      line-height: 1.2
+    }
+
+    @media(max-width:760px) {
+      .nsg-hud {
+        grid-template-columns: 1fr
       }
 
-      50% {
-        transform: translate(-50%, calc(-50% - 10px));
+      .nsg-stage {
+        height: clamp(420px, 74vh, 560px)
       }
-
-      100% {
-        transform: translate(-50%, -50%);
-      }
-    }
-
-    .neo-node.delay-1 {
-      animation-delay: -1s;
-      animation-duration: 5.5s;
-    }
-
-    .neo-node.delay-2 {
-      animation-delay: -2.5s;
-      animation-duration: 7s;
-    }
-
-    .neo-node.delay-3 {
-      animation-delay: -4s;
-      animation-duration: 6.5s;
-    }
-
-    .neo-node:hover {
-      z-index: 50;
-      transform: translate(-50%, -50%) scale(1.08) !important;
-      animation-play-state: paused;
-    }
-
-    .neo-node.active-node {
-      z-index: 60;
-      transform: translate(-50%, -50%) scale(1.1) !important;
-      animation-play-state: paused;
-    }
-
-    /* SVG LINE EFFECTS */
-    .net-line {
-      transition: opacity 0.3s, filter 0.3s, stroke-width 0.3s;
-      opacity: 0.25;
-      stroke-dasharray: 6 6;
-      animation: dashMove 3s linear infinite;
-    }
-
-    .net-line.line-hover {
-      opacity: 0.8 !important;
-      filter: drop-shadow(0 0 8px currentColor);
-      stroke-width: 2.5;
-      animation-duration: 1.5s;
-    }
-
-    .net-line.line-active {
-      opacity: 1 !important;
-      filter: drop-shadow(0 0 12px currentColor);
-      stroke-width: 3;
-      animation-duration: 1s;
-    }
-
-    @keyframes dashMove {
-      to {
-        stroke-dashoffset: -100;
-      }
-    }
-
-    /* Category Glows */
-    .g-ml {
-      box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
-      border-color: rgba(139, 92, 246, 0.5);
-      background: rgba(139, 92, 246, 0.2);
-      color: #c4b5fd;
-      transition: all 0.3s ease;
-    }
-
-    .g-ml:hover,
-    .g-ml.active-node {
-      box-shadow: 0 0 25px rgba(139, 92, 246, 0.8);
-      border-color: #8B5CF6;
-      background: rgba(139, 92, 246, 0.4);
-      color: #fff;
-    }
-
-    .g-da {
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
-      border-color: rgba(59, 130, 246, 0.5);
-      background: rgba(59, 130, 246, 0.2);
-      color: #93c5fd;
-      transition: all 0.3s ease;
-    }
-
-    .g-da:hover,
-    .g-da.active-node {
-      box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
-      border-color: #3B82F6;
-      background: rgba(59, 130, 246, 0.4);
-      color: #fff;
-    }
-
-    .g-wb {
-      box-shadow: 0 0 12px rgba(34, 211, 238, 0.3);
-      border-color: rgba(34, 211, 238, 0.5);
-      background: rgba(34, 211, 238, 0.2);
-      color: #a5f3fc;
-      transition: all 0.3s ease;
-    }
-
-    .g-wb:hover,
-    .g-wb.active-node {
-      box-shadow: 0 0 25px rgba(34, 211, 238, 0.8);
-      border-color: #22D3EE;
-      background: rgba(34, 211, 238, 0.4);
-      color: #fff;
-    }
-
-    .g-tp {
-      box-shadow: 0 0 12px rgba(74, 222, 128, 0.3);
-      border-color: rgba(74, 222, 128, 0.5);
-      background: rgba(74, 222, 128, 0.2);
-      color: #bbf7d0;
-      transition: all 0.3s ease;
-    }
-
-    .g-tp:hover,
-    .g-tp.active-node {
-      box-shadow: 0 0 25px rgba(74, 222, 128, 0.8);
-      border-color: #4ADE80;
-      background: rgba(74, 222, 128, 0.4);
-      color: #fff;
     }
 
     .sk-group-card {
@@ -2803,138 +2884,32 @@
              VIEW 1: NETWORK VIEW (DEFAULT)
         =============================================== -->
         <div id="view-network" class="view-container active-view">
-          <div id="network-area"
-            class="relative w-full max-w-5xl mx-auto h-[600px] rounded-2xl border border-white/10 bg-[#0b0f14] shadow-[0_0_50px_rgba(0,0,0,0.8)_inset] overflow-hidden"
-            style="background-image: radial-gradient(circle at center, rgba(139,92,246,0.15) 0%, transparent 60%); background-size: 100% 100%;">
-
-            <!-- Lines Background -->
-            <svg id="network-svg" class="absolute inset-0 w-full h-full pointer-events-none opacity-100"
-              style="z-index: 0;">
-              <!-- Data -->
-              <line class="net-line" id="line-py-sql" stroke="#3B82F6" stroke-width="2" stroke-dasharray="4 4" />
-              <line class="net-line" id="line-py-ex" stroke="#3B82F6" stroke-width="2" stroke-dasharray="4 4" />
-              <line class="net-line" id="line-py-pbi" stroke="#3B82F6" stroke-width="2" stroke-dasharray="4 4" />
-              <!-- ML -->
-              <line class="net-line" id="line-py-ml" stroke="#8B5CF6" stroke-width="2" />
-              <line class="net-line" id="line-ml-tf" stroke="#8B5CF6" stroke-width="1.5" />
-              <line class="net-line" id="line-ml-skl" stroke="#8B5CF6" stroke-width="1.5" />
-              <line class="net-line" id="line-ml-svm" stroke="#8B5CF6" stroke-width="1.5" />
-              <line class="net-line" id="line-ml-xgb" stroke="#8B5CF6" stroke-width="1.5" />
-              <line class="net-line" id="line-py-fl" stroke="#8B5CF6" stroke-width="2" />
-              <!-- Web -->
-              <line class="net-line" id="line-py-html" stroke="#06B6D4" stroke-width="2" />
-              <line class="net-line" id="line-html-css" stroke="#06B6D4" stroke-width="1.5" />
-              <line class="net-line" id="line-html-js" stroke="#06B6D4" stroke-width="1.5" />
-              <line class="net-line" id="line-js-rea" stroke="#06B6D4" stroke-width="1.5" />
-              <!-- Tools -->
-              <line class="net-line" id="line-py-git" stroke="#22C55E" stroke-width="2" />
-              <line class="net-line" id="line-py-jup" stroke="#22C55E" stroke-width="2" />
-              <line class="net-line" id="line-jup-can" stroke="#22C55E" stroke-width="1.5" />
-              <line class="net-line" id="line-py-ga" stroke="#22C55E" stroke-width="2" />
-            </svg>
-
-            <!-- NODES (Hardcoded with absolute percentages to spread them out logically) -->
-            <!-- DA -->
-            <div id="node-py" class="neo-node absolute top-[50%] left-[50%] px-5 py-3 rounded-full border-2 g-da">
-              <div class="font-bold text-lg text-white">Python</div>
-              <div class="text-xs font-mono">90%</div>
+          <div class="nsg-shell">
+            <div id="nsg-stage" class="nsg-stage">
+              <canvas id="nsg-canvas"></canvas>
+              <div class="nsg-zone-tags">
+                <span class="nsg-zone-data">Data</span>
+                <span class="nsg-zone-ml">Machine Learning</span>
+                <span class="nsg-zone-web">Web</span>
+                <span class="nsg-zone-tools">Tools</span>
+              </div>
             </div>
-            <div id="node-sql"
-              class="neo-node delay-1 absolute top-[25%] left-[50%] px-4 py-2 rounded-full border g-da">
-              <div class="font-bold text-white">SQL</div>
-              <div class="text-xs font-mono">85%</div>
+            <div class="nsg-controls">
+              <button id="nsg-fire-all" class="nsg-fire">FIRE ALL</button>
             </div>
-            <div id="node-ex" class="neo-node delay-2 absolute top-[35%] left-[38%] px-4 py-2 rounded-full border g-da">
-              <div class="font-bold text-white">Excel</div>
-              <div class="text-xs font-mono">90%</div>
-            </div>
-            <div id="node-pbi"
-              class="neo-node delay-3 absolute top-[35%] left-[62%] px-4 py-2 rounded-full border g-da">
-              <div class="font-bold text-white">Power BI</div>
-              <div class="text-xs font-mono">92%</div>
-            </div>
-
-            <!-- ML -->
-            <div id="node-ml" class="neo-node absolute top-[50%] left-[75%] px-4 py-2 rounded-full border g-ml">
-              <div class="font-bold text-white">Machine Learning</div>
-              <div class="text-xs font-mono">85%</div>
-            </div>
-            <div id="node-tf" class="neo-node delay-1 absolute top-[30%] left-[80%] px-4 py-2 rounded-full border g-ml">
-              <div class="font-bold text-white">TensorFlow</div>
-              <div class="text-xs font-mono">85%</div>
-            </div>
-            <div id="node-skl"
-              class="neo-node delay-2 absolute top-[45%] left-[90%] px-4 py-2 rounded-full border g-ml">
-              <div class="font-bold text-white">Scikit-learn</div>
-              <div class="text-xs font-mono">88%</div>
-            </div>
-            <div id="node-svm"
-              class="neo-node delay-3 absolute top-[65%] left-[85%] px-4 py-2 rounded-full border g-ml">
-              <div class="font-bold text-white">SVM</div>
-              <div class="text-xs font-mono">80%</div>
-            </div>
-            <div id="node-xgb"
-              class="neo-node delay-1 absolute top-[75%] left-[75%] px-4 py-2 rounded-full border g-ml">
-              <div class="font-bold text-white">XGBoost</div>
-              <div class="text-xs font-mono">82%</div>
-            </div>
-            <div id="node-fl" class="neo-node delay-2 absolute top-[60%] left-[60%] px-4 py-2 rounded-full border g-ml">
-              <div class="font-bold text-white">Flask</div>
-              <div class="text-xs font-mono">75%</div>
-            </div>
-
-            <!-- Web Dev -->
-            <div id="node-html" class="neo-node absolute top-[50%] left-[25%] px-4 py-2 rounded-full border g-wb">
-              <div class="font-bold text-white">HTML</div>
-              <div class="text-xs font-mono">95%</div>
-            </div>
-            <div id="node-css"
-              class="neo-node delay-1 absolute top-[35%] left-[18%] px-4 py-2 rounded-full border g-wb">
-              <div class="font-bold text-white">CSS</div>
-              <div class="text-xs font-mono">90%</div>
-            </div>
-            <div id="node-js" class="neo-node delay-3 absolute top-[65%] left-[20%] px-4 py-2 rounded-full border g-wb">
-              <div class="font-bold text-white">JavaScript</div>
-              <div class="text-xs font-mono">85%</div>
-            </div>
-            <div id="node-rea"
-              class="neo-node delay-2 absolute top-[80%] left-[25%] px-4 py-2 rounded-full border g-wb">
-              <div class="font-bold text-white">React</div>
-              <div class="text-xs font-mono">80%</div>
-            </div>
-
-            <!-- Tools -->
-            <div id="node-git"
-              class="neo-node delay-1 absolute top-[75%] left-[40%] px-4 py-2 rounded-full border g-tp">
-              <div class="font-bold text-white">Git & GitHub</div>
-              <div class="text-xs font-mono">90%</div>
-            </div>
-            <div id="node-jup" class="neo-node absolute top-[80%] left-[55%] px-4 py-2 rounded-full border g-tp">
-              <div class="font-bold text-white">Jupyter / Colab</div>
-              <div class="text-xs font-mono">92%</div>
-            </div>
-            <div id="node-can"
-              class="neo-node delay-3 absolute top-[90%] left-[65%] px-4 py-2 rounded-full border g-tp">
-              <div class="font-bold text-white">Canva</div>
-              <div class="text-xs font-mono">85%</div>
-            </div>
-            <div id="node-ga" class="neo-node delay-2 absolute top-[20%] left-[20%] px-4 py-2 rounded-full border g-tp">
-              <div class="font-bold text-white">Google Antigravity</div>
-              <div class="text-xs font-mono">95%</div>
-            </div>
-
-            <!-- Legend Overlay -->
-            <div
-              class="absolute bottom-4 left-4 p-4 rounded-xl bg-black/50 border border-white/5 backdrop-blur-md z-10 pointer-events-none">
-              <h4 class="text-gray-400 text-xs font-semibold uppercase mb-2">Network Legend</h4>
-              <div class="flex items-center text-xs text-gray-300 mb-1"><span
-                  class="w-2 h-2 rounded-full mr-2 bg-[#8B5CF6] shadow-[0_0_6px_#8B5CF6]"></span>Machine Learning</div>
-              <div class="flex items-center text-xs text-gray-300 mb-1"><span
-                  class="w-2 h-2 rounded-full mr-2 bg-[#3B82F6] shadow-[0_0_6px_#3B82F6]"></span>Data Analytics</div>
-              <div class="flex items-center text-xs text-gray-300 mb-1"><span
-                  class="w-2 h-2 rounded-full mr-2 bg-[#06B6D4] shadow-[0_0_6px_#06B6D4]"></span>Web Dev</div>
-              <div class="flex items-center text-xs text-gray-300 mb-1"><span
-                  class="w-2 h-2 rounded-full mr-2 bg-[#22C55E] shadow-[0_0_6px_#22C55E]"></span>Tools & Platforms</div>
+            <div id="nsg-hud" class="nsg-hud">
+              <div class="nsg-hud-item">
+                <span class="nsg-hud-label">Skill</span>
+                <div id="nsg-hud-skill" class="nsg-hud-value">Hover a node</div>
+              </div>
+              <div class="nsg-hud-item">
+                <span class="nsg-hud-label">Percentage</span>
+                <div id="nsg-hud-score" class="nsg-hud-value">--%</div>
+              </div>
+              <div class="nsg-hud-item">
+                <span class="nsg-hud-label">Category</span>
+                <div id="nsg-hud-category" class="nsg-hud-value">Neural Skill Graph</div>
+              </div>
             </div>
           </div>
         </div>
@@ -2948,90 +2923,87 @@
             <!-- Category: ML -->
             <div class="sk-group-card">
               <h3 class="text-lg font-bold mb-4 flex items-center text-gray-200">
-                <span class="w-3 h-3 rounded-full mr-3 bg-[#8B5CF6] shadow-[0_0_10px_#8B5CF6]"></span>Machine Learning
+                <span class="w-3 h-3 rounded-full mr-3 bg-[#f7ff00] shadow-[0_0_10px_#f7ff00]"></span>Machine Learning
               </h3>
               <div class="flex flex-col space-y-3">
-                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#8B5CF6] transition">Machine Learning</span><span
+                <div class="sk-item hover:border-[#f7ff00]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#f7ff00] transition">Machine Learning</span><span
+                    class="text-gray-400 font-mono text-sm">78%</span></div>
+                <div class="sk-item hover:border-[#f7ff00]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#f7ff00] transition">SVM</span><span
+                    class="text-gray-400 font-mono text-sm">70%</span></div>
+                <div class="sk-item hover:border-[#f7ff00]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#f7ff00] transition">XGBoost</span><span
+                    class="text-gray-400 font-mono text-sm">69%</span></div>
+                <div class="sk-item hover:border-[#f7ff00]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#f7ff00] transition">TensorFlow</span><span
                     class="text-gray-400 font-mono text-sm">85%</span></div>
-                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#8B5CF6] transition">SVM</span><span
+                <div class="sk-item hover:border-[#f7ff00]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#f7ff00] transition">Flask</span><span
                     class="text-gray-400 font-mono text-sm">80%</span></div>
-                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#8B5CF6] transition">XGBoost</span><span
-                    class="text-gray-400 font-mono text-sm">82%</span></div>
-                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#8B5CF6] transition">TensorFlow</span><span
-                    class="text-gray-400 font-mono text-sm">85%</span></div>
-                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#8B5CF6] transition">Scikit-learn</span><span
-                    class="text-gray-400 font-mono text-sm">88%</span></div>
-                <div class="sk-item hover:border-[#8B5CF6]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#8B5CF6] transition">Flask</span><span
-                    class="text-gray-400 font-mono text-sm">75%</span></div>
               </div>
             </div>
 
             <!-- Category: Data -->
             <div class="sk-group-card">
               <h3 class="text-lg font-bold mb-4 flex items-center text-gray-200">
-                <span class="w-3 h-3 rounded-full mr-3 bg-[#3B82F6] shadow-[0_0_10px_#3B82F6]"></span>Data Analytics
+                <span class="w-3 h-3 rounded-full mr-3 bg-[#00f0ff] shadow-[0_0_10px_#00f0ff]"></span>Data Analytics
               </h3>
               <div class="flex flex-col space-y-3">
-                <div class="sk-item hover:border-[#3B82F6]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#3B82F6] transition">Python</span><span
+                <div class="sk-item hover:border-[#00f0ff]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#00f0ff] transition">Python</span><span
                     class="text-gray-400 font-mono text-sm">90%</span></div>
-                <div class="sk-item hover:border-[#3B82F6]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#3B82F6] transition">SQL</span><span
-                    class="text-gray-400 font-mono text-sm">85%</span></div>
-                <div class="sk-item hover:border-[#3B82F6]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#3B82F6] transition">Excel</span><span
-                    class="text-gray-400 font-mono text-sm">90%</span></div>
-                <div class="sk-item hover:border-[#3B82F6]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#3B82F6] transition">Power BI</span><span
-                    class="text-gray-400 font-mono text-sm">92%</span></div>
+                <div class="sk-item hover:border-[#00f0ff]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#00f0ff] transition">SQL</span><span
+                    class="text-gray-400 font-mono text-sm">65%</span></div>
+                <div class="sk-item hover:border-[#00f0ff]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#00f0ff] transition">Excel</span><span
+                    class="text-gray-400 font-mono text-sm">75%</span></div>
+                <div class="sk-item hover:border-[#00f0ff]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#00f0ff] transition">Power BI</span><span
+                    class="text-gray-400 font-mono text-sm">82%</span></div>
               </div>
             </div>
 
             <!-- Category: Web Dev -->
             <div class="sk-group-card">
               <h3 class="text-lg font-bold mb-4 flex items-center text-gray-200">
-                <span class="w-3 h-3 rounded-full mr-3 bg-[#06B6D4] shadow-[0_0_10px_#06B6D4]"></span>Web Development
+                <span class="w-3 h-3 rounded-full mr-3 bg-[#ff2ea6] shadow-[0_0_10px_#ff2ea6]"></span>Web Development
               </h3>
               <div class="flex flex-col space-y-3">
-                <div class="sk-item hover:border-[#06B6D4]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#06B6D4] transition">HTML</span><span
-                    class="text-gray-400 font-mono text-sm">95%</span></div>
-                <div class="sk-item hover:border-[#06B6D4]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#06B6D4] transition">CSS</span><span
-                    class="text-gray-400 font-mono text-sm">90%</span></div>
-                <div class="sk-item hover:border-[#06B6D4]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#06B6D4] transition">JavaScript</span><span
+                <div class="sk-item hover:border-[#ff2ea6]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#ff2ea6] transition">HTML</span><span
+                    class="text-gray-400 font-mono text-sm">88%</span></div>
+                <div class="sk-item hover:border-[#ff2ea6]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#ff2ea6] transition">CSS</span><span
                     class="text-gray-400 font-mono text-sm">85%</span></div>
-                <div class="sk-item hover:border-[#06B6D4]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#06B6D4] transition">React</span><span
-                    class="text-gray-400 font-mono text-sm">80%</span></div>
+                <div class="sk-item hover:border-[#ff2ea6]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#ff2ea6] transition">JavaScript</span><span
+                    class="text-gray-400 font-mono text-sm">75%</span></div>
+                <div class="sk-item hover:border-[#ff2ea6]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#ff2ea6] transition">React</span><span
+                    class="text-gray-400 font-mono text-sm">76%</span></div>
               </div>
             </div>
 
             <!-- Category: Tools -->
             <div class="sk-group-card">
               <h3 class="text-lg font-bold mb-4 flex items-center text-gray-200">
-                <span class="w-3 h-3 rounded-full mr-3 bg-[#22C55E] shadow-[0_0_10px_#22C55E]"></span>Tools & Platforms
+                <span class="w-3 h-3 rounded-full mr-3 bg-[#a855f7] shadow-[0_0_10px_#a855f7]"></span>Tools & Platforms
               </h3>
               <div class="flex flex-col space-y-3">
-                <div class="sk-item hover:border-[#22C55E]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#22C55E] transition">Git & GitHub</span><span
+                <div class="sk-item hover:border-[#a855f7]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#a855f7] transition">Git & GitHub</span><span
                     class="text-gray-400 font-mono text-sm">90%</span></div>
-                <div class="sk-item hover:border-[#22C55E]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#22C55E] transition">Canva</span><span
+                <div class="sk-item hover:border-[#a855f7]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#a855f7] transition">Canva</span><span
                     class="text-gray-400 font-mono text-sm">85%</span></div>
-                <div class="sk-item hover:border-[#22C55E]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#22C55E] transition">Jupyter / Colab</span><span
+                <div class="sk-item hover:border-[#a855f7]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#a855f7] transition">Jupyter / Colab</span><span
                     class="text-gray-400 font-mono text-sm">92%</span></div>
-                <div class="sk-item hover:border-[#22C55E]/50 group"><span
-                    class="font-medium text-white group-hover:text-[#22C55E] transition">Google Antigravity</span><span
-                    class="text-gray-400 font-mono text-sm">95%</span></div>
+                <div class="sk-item hover:border-[#a855f7]/50 group"><span
+                    class="font-medium text-white group-hover:text-[#a855f7] transition">Google Antigravity</span><span
+                    class="text-gray-400 font-mono text-sm">70%</span></div>
               </div>
             </div>
 
@@ -3048,7 +3020,7 @@
       <div class="sdv rv"></div>
       <div class="pjg">
         <div class="pjc rv">
-          <div class="pt" style="--c1:rgba(168,85,247,.38);--c2:rgba(244,114,182,.22)"><span class="pe">IPL</span></div>
+          <div class="pt project-card" style="--c1:rgba(168,85,247,.38);--c2:rgba(244,114,182,.22)"><span class="pe">IPL</span></div>
           <div class="pb">
             <div class="tgs"><span class="tg k">Power BI</span><span class="tg">DAX</span><span
                 class="tg c">Excel</span></div>
@@ -3060,7 +3032,7 @@
           </div>
         </div>
         <div class="pjc rv">
-          <div class="pt" style="--c1:rgba(34,211,238,.28);--c2:rgba(129,140,248,.2)"><span class="pe">CBA</span></div>
+          <div class="pt project-card" style="--c1:rgba(34,211,238,.28);--c2:rgba(129,140,248,.2)"><span class="pe">CBA</span></div>
           <div class="pb">
             <div class="tgs"><span class="tg c">Python</span><span class="tg b">PostgreSQL</span><span
                 class="tg k">Power BI</span></div>
@@ -3072,7 +3044,7 @@
           </div>
         </div>
         <div class="pjc rv">
-          <div class="pt" style="--c1:rgba(244,114,182,.32);--c2:rgba(168,85,247,.22)"><span class="pe">T2D</span></div>
+          <div class="pt project-card" style="--c1:rgba(244,114,182,.32);--c2:rgba(168,85,247,.22)"><span class="pe">T2D</span></div>
           <div class="pb">
             <div class="tgs"><span class="tg c">Python</span><span class="tg">Scikit-Learn</span><span
                 class="tg k">SVM</span></div>
@@ -3084,7 +3056,7 @@
           </div>
         </div>
         <div class="pjc rv">
-          <div class="pt" style="--c1:rgba(129,140,248,.32);--c2:rgba(34,211,238,.2)"><span class="pe">SRA</span></div>
+          <div class="pt project-card" style="--c1:rgba(129,140,248,.32);--c2:rgba(34,211,238,.2)"><span class="pe">SRA</span></div>
           <div class="pb">
             <div class="tgs"><span class="tg b">Streamlit</span><span class="tg c">Python</span><span
                 class="tg k">NLP</span></div>
@@ -3096,7 +3068,7 @@
           </div>
         </div>
         <div class="pjc rv">
-          <div class="pt" style="--c1:rgba(34,211,238,.28);--c2:rgba(168,85,247,.2)"><span class="pe">ET</span></div>
+          <div class="pt project-card" style="--c1:rgba(34,211,238,.28);--c2:rgba(168,85,247,.2)"><span class="pe">ET</span></div>
           <div class="pb">
             <div class="tgs"><span class="tg c">Flask</span><span class="tg">JavaScript</span><span
                 class="tg b">PostgreSQL</span></div>
@@ -3564,91 +3536,717 @@
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
        SKILLS
     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-    const skills = [
-      { id: 'PY', name: 'Python', p: 90, x: 0, y: -20 }, { id: 'PD', name: 'Pandas', p: 92, x: 130, y: -80 },
-      { id: 'NP', name: 'NumPy', p: 88, x: -120, y: -90 }, { id: 'SQL', name: 'SQL', p: 85, x: 0, y: 120 },
-      { id: 'TF', name: 'TensorFlow', p: 80, x: -160, y: 30 }, { id: 'SK', name: 'Scikit-Learn', p: 84, x: 150, y: 40 },
-      { id: 'BI', name: 'Power BI', p: 88, x: -80, y: 220 }, { id: 'PG', name: 'PostgreSQL', p: 80, x: 100, y: 210 },
-      { id: 'MP', name: 'Matplotlib', p: 83, x: 250, y: -40 }, { id: 'ST', name: 'Streamlit', p: 78, x: 220, y: 150 },
-      { id: 'R', name: 'R', p: 72, x: -250, y: -50 }, { id: 'FL', name: 'Flask', p: 75, x: -220, y: 160 }
-    ];
-    const edges = [
-      ['PY', 'PD'], ['PY', 'NP'], ['PY', 'SQL'], ['PY', 'SK'], ['PY', 'TF'], ['PD', 'MP'], ['PD', 'SK'],
-      ['NP', 'TF'], ['NP', 'R'], ['SQL', 'PG'], ['SQL', 'BI'], ['SK', 'ST'], ['TF', 'FL'], ['PG', 'FL'], ['BI', 'ST'], ['R', 'PD']
-    ];
-    const container = document.getElementById('neural-container');
-    const canvas = document.getElementById('neural-canvas');
-    if (container && canvas) {
+    (() => {
+      const tabNetwork = document.getElementById('tab-network');
+      const tabGrouped = document.getElementById('tab-grouped');
+      const viewNetwork = document.getElementById('view-network');
+      const viewGrouped = document.getElementById('view-grouped');
+
+      function setSkillsView(mode) {
+        const isNetwork = mode === 'network';
+        tabNetwork?.classList.toggle('active', isNetwork);
+        tabGrouped?.classList.toggle('active', !isNetwork);
+        viewNetwork?.classList.toggle('active-view', isNetwork);
+        viewGrouped?.classList.toggle('active-view', !isNetwork);
+      }
+
+      tabNetwork?.addEventListener('click', () => setSkillsView('network'));
+      tabGrouped?.addEventListener('click', () => setSkillsView('grouped'));
+      setSkillsView('network');
+
+      const stage = document.getElementById('nsg-stage');
+      const canvas = document.getElementById('nsg-canvas');
+      const fireAllBtn = document.getElementById('nsg-fire-all');
+      const hudSkill = document.getElementById('nsg-hud-skill');
+      const hudScore = document.getElementById('nsg-hud-score');
+      const hudCategory = document.getElementById('nsg-hud-category');
+      if (!stage || !canvas) return;
+
       const ctx = canvas.getContext('2d');
-      const tooltip = document.getElementById('neural-tooltip');
-      const ttTitle = document.getElementById('tt-title');
-      const ttPerc = document.getElementById('tt-perc');
-      let W, H, hoveredNode = null, time = 0;
+      const categoryMeta = {
+        data: { name: 'Data / Analytics', color: '#00f0ff' },
+        ml: { name: 'Machine Learning', color: '#f7ff00' },
+        web: { name: 'Web Development', color: '#ff2ea6' },
+        tools: { name: 'Tools / Platforms', color: '#a855f7' }
+      };
 
-      skills.forEach(s => {
-        s.el = document.createElement('div');
-        s.el.className = 'node';
-        s.el.textContent = s.id;
-        s.phase = Math.random() * Math.PI * 2;
-        s.el.addEventListener('mouseenter', () => { hoveredNode = s; updateDimming(); showTooltip(s); });
-        s.el.addEventListener('mouseleave', () => { hoveredNode = null; updateDimming(); hideTooltip(); });
-        container.appendChild(s.el);
-      });
+      const nodes = [
+        { id: 'python', label: 'Python', short: 'Python', score: 90, category: 'data', nx: 0.19, ny: 0.48 },
+        { id: 'sql', label: 'SQL', short: 'SQL', score: 65, category: 'data', nx: 0.1, ny: 0.28 },
+        { id: 'powerbi', label: 'Power BI', short: 'Power BI', score: 82, category: 'data', nx: 0.1, ny: 0.65 },
+        { id: 'excel', label: 'Excel', short: 'Excel', score: 75, category: 'data', nx: 0.25, ny: 0.72 },
 
-      const edgeObjs = edges.map(eArr => ({
-        n1: skills.find(s => s.id === eArr[0]),
-        n2: skills.find(s => s.id === eArr[1]),
-        packets: [{ p: Math.random(), s: 0.002 + Math.random() * 0.003 }, { p: Math.random() - 0.5, s: 0.002 + Math.random() * 0.003 }]
+        { id: 'ml', label: 'Machine Learning', short: 'ML', score: 78, category: 'ml', nx: 0.48, ny: 0.5 },
+        { id: 'svm', label: 'SVM', short: 'SVM', score: 70, category: 'ml', nx: 0.57, ny: 0.67 },
+        { id: 'xgboost', label: 'XGBoost', short: 'XGBoost', score: 69, category: 'ml', nx: 0.42, ny: 0.74 },
+        { id: 'tensorflow', label: 'TensorFlow', short: 'Tensor', score: 85, category: 'ml', nx: 0.57, ny: 0.27 },
+        { id: 'flask', label: 'Flask', short: 'Flask', score: 80, category: 'ml', nx: 0.39, ny: 0.36 },
+
+        { id: 'html', label: 'HTML', short: 'HTML', score: 88, category: 'web', nx: 0.76, ny: 0.44 },
+        { id: 'css', label: 'CSS', short: 'CSS', score: 85, category: 'web', nx: 0.71, ny: 0.25 },
+        { id: 'javascript', label: 'JavaScript', short: 'JS', score: 75, category: 'web', nx: 0.84, ny: 0.6 },
+        { id: 'react', label: 'React', short: 'React', score: 76, category: 'web', nx: 0.92, ny: 0.75 },
+
+        { id: 'git', label: 'Git & GitHub', short: 'Git', score: 90, category: 'tools', nx: 0.72, ny: 0.87 },
+        { id: 'canva', label: 'Canva', short: 'Canva', score: 85, category: 'tools', nx: 0.87, ny: 0.9 },
+        { id: 'ga', label: 'Google Antigravity', short: 'G-AG', score: 70, category: 'tools', nx: 0.93, ny: 0.16 },
+        { id: 'jupyter', label: 'Jupyter / Colab', short: 'Jupyter', score: 92, category: 'tools', nx: 0.62, ny: 0.86 }
+      ].map((node, i) => ({
+        ...node,
+        phase: (i / 17) * Math.PI * 2,
+        pulsePhase: Math.random() * Math.PI * 2,
+        x: 0,
+        y: 0,
+        r: 0
       }));
 
-      function resize() { W = canvas.width = container.clientWidth; H = canvas.height = container.clientHeight; }
-      window.addEventListener('resize', resize); resize();
+      const edgePairs = [
+        ['python', 'sql'],
+        ['python', 'powerbi'],
+        ['python', 'excel'],
+        ['python', 'ml'],
+        ['python', 'tensorflow'],
+        ['python', 'jupyter'],
+        ['ml', 'svm'],
+        ['ml', 'xgboost'],
+        ['ml', 'tensorflow'],
+        ['ml', 'flask'],
+        ['tensorflow', 'svm'],
+        ['tensorflow', 'xgboost'],
+        ['html', 'css'],
+        ['css', 'javascript'],
+        ['javascript', 'react'],
+        ['flask', 'javascript'],
+        ['flask', 'html'],
+        ['jupyter', 'ml'],
+        ['jupyter', 'tensorflow'],
+        ['jupyter', 'python'],
+        ['git', 'react'],
+        ['git', 'flask'],
+        ['canva', 'react'],
+        ['ga', 'javascript']
+      ];
 
-      function updateDimming() {
-        if (!hoveredNode) { skills.forEach(s => s.el.classList.remove('dimmed', 'highlighted')); return; }
-        const nbrs = new Set([hoveredNode]);
-        edgeObjs.forEach(e => { if (e.n1 === hoveredNode) nbrs.add(e.n2); if (e.n2 === hoveredNode) nbrs.add(e.n1); });
-        skills.forEach(s => { if (nbrs.has(s)) { s.el.classList.remove('dimmed'); s.el.classList.add('highlighted'); } else { s.el.classList.add('dimmed'); s.el.classList.remove('highlighted'); } });
+      const nodeById = new Map(nodes.map((node, idx) => [node.id, { node, idx }]));
+      const edges = edgePairs.map((pair) => {
+        const a = nodeById.get(pair[0]);
+        const b = nodeById.get(pair[1]);
+        return {
+          from: a.idx,
+          to: b.idx,
+          ambient: [
+            { t: Math.random(), speed: 0.16 + Math.random() * 0.18 },
+            { t: Math.random(), speed: 0.14 + Math.random() * 0.16 }
+          ]
+        };
+      });
+
+      const neighbors = nodes.map(() => []);
+      edges.forEach((edge, i) => {
+        neighbors[edge.from].push({ edgeIndex: i, nodeIndex: edge.to });
+        neighbors[edge.to].push({ edgeIndex: i, nodeIndex: edge.from });
+      });
+
+      const burstPulses = [];
+      const ripples = [];
+      let hoveredIndex = -1;
+      let pointerX = 0;
+      let pointerY = 0;
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+      let lastTs = 0;
+      let elapsed = 0;
+
+      function hexToRgb(hex) {
+        const value = hex.replace('#', '');
+        return {
+          r: parseInt(value.slice(0, 2), 16),
+          g: parseInt(value.slice(2, 4), 16),
+          b: parseInt(value.slice(4, 6), 16)
+        };
       }
 
-      function showTooltip(s) { ttTitle.textContent = s.name; ttPerc.textContent = s.p + '% Mastery'; tooltip.classList.add('visible'); }
-      function hideTooltip() { tooltip.classList.remove('visible'); }
+      function rgba(hex, alpha) {
+        const c = hexToRgb(hex);
+        return `rgba(${c.r},${c.g},${c.b},${alpha})`;
+      }
 
-      function animate() {
-        ctx.clearRect(0, 0, W, H); time += 0.015;
-        const scale = W < 500 ? 0.45 : (W < 800 ? 0.7 : 1);
-        const cx = W / 2, cy = H / 2;
-        skills.forEach(s => {
-          s.renderX = cx + s.x * scale + Math.sin(time * 0.8 + s.phase) * 12;
-          s.renderY = cy + s.y * scale + Math.cos(time * 0.9 + s.phase) * 12;
-          const nodeScale = (s === hoveredNode) ? 1.15 : (s.el.classList.contains('highlighted') ? 1.05 : 1);
-          s.el.style.transform = `translate(${s.renderX - 28}px, ${s.renderY - 28}px) scale(${nodeScale})`;
+      function updateHud(index) {
+        if (index < 0) {
+          hudSkill.textContent = 'Hover a node';
+          hudScore.textContent = '--%';
+          hudCategory.textContent = 'Neural Skill Graph';
+          return;
+        }
+        const node = nodes[index];
+        hudSkill.textContent = node.label;
+        hudScore.textContent = `${node.score}%`;
+        hudCategory.textContent = categoryMeta[node.category].name;
+      }
+
+      function setCanvasSize() {
+        const rect = stage.getBoundingClientRect();
+        width = rect.width;
+        height = rect.height;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function syncNodePositions(timeValue) {
+        const padX = Math.max(36, width * 0.04);
+        const padY = Math.max(30, height * 0.06);
+        const spanX = width - padX * 2;
+        const spanY = height - padY * 2;
+        const minScore = 65;
+        const maxScore = 92;
+        nodes.forEach((node, i) => {
+          const ratio = (node.score - minScore) / (maxScore - minScore);
+          const baseR = 18 + ratio * 16;
+          const fx = Math.sin(timeValue * 0.72 + node.phase) * 8;
+          const fy = Math.cos(timeValue * 0.63 + node.phase * 1.14) * 8;
+          node.x = padX + node.nx * spanX + fx;
+          node.y = padY + node.ny * spanY + fy;
+          node.r = hoveredIndex === i ? baseR * 1.07 : baseR;
         });
-        if (hoveredNode) { tooltip.style.left = hoveredNode.renderX + 'px'; tooltip.style.top = (hoveredNode.renderY - 70) + 'px'; }
+      }
 
-        edgeObjs.forEach(e => {
-          const isAct = hoveredNode && (e.n1 === hoveredNode || e.n2 === hoveredNode);
-          const isDim = hoveredNode && !isAct;
-          ctx.beginPath(); ctx.moveTo(e.n1.renderX, e.n1.renderY); ctx.lineTo(e.n2.renderX, e.n2.renderY);
-          ctx.strokeStyle = isAct ? 'rgba(34, 211, 238, 0.7)' : (isDim ? 'rgba(192, 132, 252, 0.05)' : 'rgba(192, 132, 252, 0.3)');
-          ctx.lineWidth = isAct ? 2 : (isDim ? 1 : 1.2); ctx.stroke();
+      function edgePoint(edge, t) {
+        const a = nodes[edge.from];
+        const b = nodes[edge.to];
+        return {
+          x: a.x + (b.x - a.x) * t,
+          y: a.y + (b.y - a.y) * t
+        };
+      }
 
-          if (!isDim) {
-            e.packets.forEach(p => {
-              p.p += p.s * (isAct ? 1.8 : 1); if (p.p > 1) p.p = -0.1 - Math.random() * 0.2;
-              if (p.p >= 0 && p.p <= 1) {
-                const px = e.n1.renderX + (e.n2.renderX - e.n1.renderX) * p.p, py = e.n1.renderY + (e.n2.renderY - e.n1.renderY) * p.p;
-                ctx.beginPath(); ctx.arc(px, py, isAct ? 3 : 2, 0, Math.PI * 2);
-                ctx.fillStyle = isAct ? '#22d3ee' : 'rgba(192, 132, 252, 0.7)';
-                if (isAct) { ctx.shadowBlur = 12; ctx.shadowColor = '#22d3ee'; ctx.fill(); ctx.shadowBlur = 0; } else ctx.fill();
-              }
+      function drawNodes(timeValue) {
+        nodes.forEach((node, i) => {
+          const color = categoryMeta[node.category].color;
+          const hover = hoveredIndex === i;
+          const coreAlpha = hover ? 0.18 : 0.1;
+
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.r * 1.45, 0, Math.PI * 2);
+          ctx.fillStyle = rgba(color, hover ? 0.23 : 0.14);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(6, 10, 24,${0.88 + coreAlpha})`;
+          ctx.fill();
+
+          const start = -Math.PI / 2;
+          const end = start + (Math.PI * 2) * (node.score / 100);
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.r + 2.5, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.r + 2.5, start, end);
+          ctx.strokeStyle = color;
+          ctx.shadowColor = color;
+          ctx.shadowBlur = hover ? 18 : 11;
+          ctx.lineWidth = hover ? 3.8 : 3;
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+
+          ctx.fillStyle = hover ? '#ffffff' : 'rgba(238,240,255,0.9)';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.font = `700 ${Math.max(10, Math.round(node.r * 0.33))}px "JetBrains Mono", monospace`;
+          ctx.fillText(`${node.score}%`, node.x, node.y - 1);
+          const nameText = node.label.length > 12 ? node.short : node.label;
+          ctx.font = `600 ${Math.max(8, Math.round(node.r * 0.2))}px "JetBrains Mono", monospace`;
+          ctx.fillText(nameText, node.x, node.y + Math.max(11, Math.round(node.r * 0.42)));
+        });
+      }
+
+      function drawEdges(deltaSec) {
+        edges.forEach((edge) => {
+          const from = nodes[edge.from];
+          const to = nodes[edge.to];
+          const fromColor = categoryMeta[from.category].color;
+          const toColor = categoryMeta[to.category].color;
+          const hoverEdge = hoveredIndex >= 0 && (edge.from === hoveredIndex || edge.to === hoveredIndex);
+
+          const grad = ctx.createLinearGradient(from.x, from.y, to.x, to.y);
+          grad.addColorStop(0, rgba(fromColor, hoverEdge ? 0.62 : 0.28));
+          grad.addColorStop(1, rgba(toColor, hoverEdge ? 0.62 : 0.28));
+          ctx.beginPath();
+          ctx.moveTo(from.x, from.y);
+          ctx.lineTo(to.x, to.y);
+          ctx.strokeStyle = grad;
+          ctx.shadowColor = hoverEdge ? '#00f0ff' : 'rgba(168,85,247,0.45)';
+          ctx.shadowBlur = hoverEdge ? 13 : 6;
+          ctx.lineWidth = hoverEdge ? 2.25 : 1.4;
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+
+          edge.ambient.forEach((pulse, i) => {
+            pulse.t += pulse.speed * deltaSec;
+            if (pulse.t > 1) pulse.t -= 1;
+            const p = i === 0 ? pulse.t : 1 - pulse.t;
+            const pos = edgePoint(edge, p);
+            const pulseColor = i === 0 ? fromColor : toColor;
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, hoverEdge ? 3.2 : 2.4, 0, Math.PI * 2);
+            ctx.fillStyle = rgba(pulseColor, hoverEdge ? 1 : 0.85);
+            ctx.shadowColor = pulseColor;
+            ctx.shadowBlur = hoverEdge ? 16 : 10;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          });
+        });
+      }
+
+      function fireFromNode(index, delay = 0) {
+        const visitedNodes = new Set([index]);
+        const queue = [{ node: index, depth: 0 }];
+
+        while (queue.length) {
+          const current = queue.shift();
+          if (current.depth > 3) continue;
+          const startOffset = delay + current.depth * 0.09;
+          const sourceNode = nodes[current.node];
+          ripples.push({ nodeIndex: current.node, born: elapsed + startOffset, life: 0.7, color: categoryMeta[sourceNode.category].color });
+
+          neighbors[current.node].forEach((next) => {
+            const forward = edges[next.edgeIndex].from === current.node;
+            burstPulses.push({
+              edgeIndex: next.edgeIndex,
+              dirForward: forward,
+              born: elapsed + startOffset,
+              speed: 1.25 + current.depth * 0.2,
+              radius: 3.7,
+              color: categoryMeta[sourceNode.category].color
             });
+
+            if (!visitedNodes.has(next.nodeIndex)) {
+              visitedNodes.add(next.nodeIndex);
+              queue.push({ node: next.nodeIndex, depth: current.depth + 1 });
+            }
+          });
+        }
+      }
+
+      function fireAll() {
+        nodes.forEach((_, i) => fireFromNode(i, (i % 5) * 0.018));
+      }
+
+      function drawBursts() {
+        for (let i = burstPulses.length - 1; i >= 0; i--) {
+          const pulse = burstPulses[i];
+          const t = (elapsed - pulse.born) * pulse.speed;
+          if (t <= 0) continue;
+          if (t >= 1.05) {
+            burstPulses.splice(i, 1);
+            continue;
+          }
+          const edge = edges[pulse.edgeIndex];
+          const pointT = pulse.dirForward ? t : 1 - t;
+          const pos = edgePoint(edge, pointT);
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, pulse.radius, 0, Math.PI * 2);
+          ctx.fillStyle = rgba(pulse.color, 0.95);
+          ctx.shadowColor = pulse.color;
+          ctx.shadowBlur = 20;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      function drawRipples() {
+        for (let i = ripples.length - 1; i >= 0; i--) {
+          const ripple = ripples[i];
+          const t = (elapsed - ripple.born) / ripple.life;
+          if (t <= 0) continue;
+          if (t >= 1) {
+            ripples.splice(i, 1);
+            continue;
+          }
+          const node = nodes[ripple.nodeIndex];
+          const r = node.r + 12 + t * 40;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
+          ctx.strokeStyle = rgba(ripple.color, 0.32 * (1 - t));
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+      }
+
+      function updateHoveredNode() {
+        let bestIndex = -1;
+        let bestDist = Infinity;
+        nodes.forEach((node, i) => {
+          const d = Math.hypot(pointerX - node.x, pointerY - node.y);
+          if (d < node.r + 10 && d < bestDist) {
+            bestDist = d;
+            bestIndex = i;
           }
         });
-        requestAnimationFrame(animate);
+        if (bestIndex !== hoveredIndex) {
+          hoveredIndex = bestIndex;
+          updateHud(hoveredIndex);
+        }
       }
-      animate();
-    }
+
+      function render(ts) {
+        if (!lastTs) lastTs = ts;
+        const dt = Math.min((ts - lastTs) / 1000, 0.05);
+        lastTs = ts;
+        elapsed += dt;
+        syncNodePositions(elapsed);
+        updateHoveredNode();
+
+        ctx.clearRect(0, 0, width, height);
+        drawEdges(dt);
+        drawBursts();
+        drawRipples();
+        drawNodes(elapsed);
+        requestAnimationFrame(render);
+      }
+
+      canvas.addEventListener('mousemove', (event) => {
+        const rect = canvas.getBoundingClientRect();
+        pointerX = event.clientX - rect.left;
+        pointerY = event.clientY - rect.top;
+      });
+
+      canvas.addEventListener('mouseleave', () => {
+        hoveredIndex = -1;
+        updateHud(-1);
+      });
+
+      canvas.addEventListener('click', () => {
+        if (hoveredIndex >= 0) fireFromNode(hoveredIndex);
+      });
+
+      fireAllBtn?.addEventListener('click', fireAll);
+      window.addEventListener('resize', setCanvasSize);
+      setCanvasSize();
+      updateHud(-1);
+      requestAnimationFrame(render);
+    })();
+
+    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PROJECT DIFFUSION HOVER
+    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    (() => {
+      const cards = Array.from(document.querySelectorAll('.pjc'));
+      if (!cards.length) return;
+
+      const states = [];
+      let rafId = 0;
+      let lastTs = 0;
+
+      function ensureMediaLayers(card) {
+        const cover = card.querySelector('.project-card');
+        if (!cover) return null;
+
+        let img = cover.querySelector('.project-img');
+        if (!img) {
+          img = document.createElement('img');
+          img.className = 'project-img';
+          img.alt = `${card.querySelector('.ptt')?.textContent?.trim() || 'Project'} preview`;
+          cover.appendChild(img);
+        }
+
+        let glass = cover.querySelector('.project-glass');
+        if (!glass) {
+          glass = document.createElement('div');
+          glass.className = 'project-glass';
+          cover.appendChild(glass);
+        }
+
+        let canvas = cover.querySelector('.noise-layer');
+        if (!canvas) {
+          canvas = document.createElement('canvas');
+          canvas.className = 'noise-layer';
+          cover.appendChild(canvas);
+        }
+
+        const title = card.querySelector('.ptt')?.textContent?.trim() || 'Project';
+        const code = cover.querySelector('.pe')?.textContent?.trim() || title.slice(0, 3).toUpperCase();
+        const style = getComputedStyle(cover);
+        const c1 = style.getPropertyValue('--c1').trim() || 'rgba(168,85,247,.38)';
+        const c2 = style.getPropertyValue('--c2').trim() || 'rgba(34,211,238,.2)';
+        img.src = buildPreviewImage(title, code, c1, c2);
+
+        return { card, cover, img, canvas, ctx: canvas.getContext('2d'), mini: document.createElement('canvas'), miniCtx: null, progress: 0, target: 0, dpr: 1, w: 0, h: 0 };
+      }
+
+      function buildPreviewImage(title, code, c1, c2) {
+        const w = 960;
+        const h = 540;
+        const cnv = document.createElement('canvas');
+        cnv.width = w;
+        cnv.height = h;
+        const x = cnv.getContext('2d');
+
+        const grad = x.createLinearGradient(0, 0, w, h);
+        grad.addColorStop(0, c1);
+        grad.addColorStop(1, c2);
+        x.fillStyle = grad;
+        x.fillRect(0, 0, w, h);
+
+        x.fillStyle = 'rgba(2,8,22,0.55)';
+        x.fillRect(0, 0, w, h);
+
+        x.strokeStyle = 'rgba(0,240,255,0.16)';
+        x.lineWidth = 1;
+        for (let i = 0; i < 18; i++) {
+          const yy = (h / 18) * i;
+          x.beginPath();
+          x.moveTo(0, yy);
+          x.lineTo(w, yy);
+          x.stroke();
+        }
+        for (let i = 0; i < 22; i++) {
+          const xx = (w / 22) * i;
+          x.beginPath();
+          x.moveTo(xx, 0);
+          x.lineTo(xx, h);
+          x.stroke();
+        }
+
+        x.fillStyle = 'rgba(0,240,255,0.15)';
+        x.fillRect(w * 0.08, h * 0.68, w * 0.2, h * 0.16);
+        x.fillRect(w * 0.33, h * 0.58, w * 0.2, h * 0.26);
+        x.fillRect(w * 0.58, h * 0.46, w * 0.2, h * 0.38);
+
+        x.strokeStyle = 'rgba(0,240,255,0.5)';
+        x.lineWidth = 4;
+        x.beginPath();
+        x.moveTo(w * 0.08, h * 0.37);
+        x.lineTo(w * 0.28, h * 0.42);
+        x.lineTo(w * 0.4, h * 0.34);
+        x.lineTo(w * 0.55, h * 0.48);
+        x.lineTo(w * 0.76, h * 0.28);
+        x.stroke();
+
+        x.fillStyle = 'rgba(0,240,255,0.95)';
+        [0.08, 0.28, 0.4, 0.55, 0.76].forEach((px, i) => {
+          const py = [0.37, 0.42, 0.34, 0.48, 0.28][i];
+          x.beginPath();
+          x.arc(w * px, h * py, 7, 0, Math.PI * 2);
+          x.fill();
+        });
+
+        x.shadowColor = 'rgba(0,240,255,0.65)';
+        x.shadowBlur = 26;
+        x.fillStyle = 'rgba(230,246,255,0.9)';
+        x.font = '700 88px "JetBrains Mono", monospace';
+        x.fillText(code, 64, 140);
+        x.shadowBlur = 0;
+
+        x.fillStyle = 'rgba(230,246,255,0.88)';
+        x.font = '600 36px "JetBrains Mono", monospace';
+        x.fillText(title, 64, 212);
+
+        x.fillStyle = 'rgba(0,0,0,0.24)';
+        x.fillRect(0, h - 70, w, 70);
+        x.fillStyle = 'rgba(0,240,255,0.88)';
+        x.font = '600 24px "JetBrains Mono", monospace';
+        x.fillText('AI Diffusion Preview', 64, h - 26);
+
+        return cnv.toDataURL('image/png');
+      }
+
+      function resizeState(state) {
+        const rect = state.cover.getBoundingClientRect();
+        state.w = Math.max(1, Math.floor(rect.width));
+        state.h = Math.max(1, Math.floor(rect.height));
+        state.dpr = Math.min(window.devicePixelRatio || 1, 2);
+        state.canvas.width = Math.floor(state.w * state.dpr);
+        state.canvas.height = Math.floor(state.h * state.dpr);
+        state.ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
+        state.mini.width = Math.max(8, Math.round(state.w / 2));
+        state.mini.height = Math.max(8, Math.round(state.h / 2));
+        state.miniCtx = state.mini.getContext('2d');
+      }
+
+      function stageValues(p) {
+        if (p <= 0.2) {
+          return { noise: 0.96, block: 0.12, pix: 20, blur: 6.5, img: 0.12, scale: 1, glow: 0, glass: 0.24, distort: 6.5 };
+        }
+        if (p <= 0.5) {
+          const t = (p - 0.2) / 0.3;
+          return {
+            noise: 0.9 - t * 0.45,
+            block: 0.72 - t * 0.24,
+            pix: 20 - t * 11,
+            blur: 6 - t * 2.2,
+            img: 0.24 + t * 0.34,
+            scale: 1 + t * 0.01,
+            glow: t * 0.08,
+            glass: 0.2 - t * 0.06,
+            distort: 5.8 - t * 2
+          };
+        }
+        if (p <= 0.8) {
+          const t = (p - 0.5) / 0.3;
+          return {
+            noise: 0.45 - t * 0.33,
+            block: 0.48 - t * 0.4,
+            pix: 9 - t * 6,
+            blur: 3.8 - t * 3.1,
+            img: 0.58 + t * 0.36,
+            scale: 1.01 + t * 0.01,
+            glow: 0.08 + t * 0.18,
+            glass: 0.14 - t * 0.05,
+            distort: 3.8 - t * 2.9
+          };
+        }
+        const t = (p - 0.8) / 0.2;
+        return {
+          noise: 0.12 - t * 0.12,
+          block: 0.08 - t * 0.08,
+          pix: 3 - t * 2,
+          blur: 0.7 - t * 0.7,
+          img: 0.94 + t * 0.06,
+          scale: 1.02 + t * 0.02,
+          glow: 0.26 + t * 0.42,
+          glass: 0.09 - t * 0.06,
+          distort: 0.9 - t * 0.9
+        };
+      }
+
+      function renderNoise(state, now, noiseAlpha, blockAlpha, pixelSize, distort) {
+        const x = state.ctx;
+        const w = state.w;
+        const h = state.h;
+        x.clearRect(0, 0, w, h);
+
+        if (noiseAlpha < 0.002 && blockAlpha < 0.002) return;
+
+        const grain = pixelSize > 12 ? 4 : (pixelSize > 6 ? 3 : 2);
+        for (let yy = 0; yy < h; yy += grain) {
+          for (let xx = 0; xx < w; xx += grain) {
+            const n = (Math.random() * 255) | 0;
+            x.fillStyle = `rgba(${n},${n},${n},${noiseAlpha * (0.72 + Math.random() * 0.28)})`;
+            x.fillRect(xx, yy, grain, grain);
+          }
+        }
+
+        if (state.img.complete && blockAlpha > 0.004) {
+          const sx = Math.max(8, Math.round(w / Math.max(2, pixelSize)));
+          const sy = Math.max(8, Math.round(h / Math.max(2, pixelSize)));
+          state.mini.width = sx;
+          state.mini.height = sy;
+          state.miniCtx.imageSmoothingEnabled = true;
+          state.miniCtx.clearRect(0, 0, sx, sy);
+          state.miniCtx.drawImage(state.img, 0, 0, sx, sy);
+
+          x.globalAlpha = blockAlpha;
+          x.imageSmoothingEnabled = false;
+          x.drawImage(state.mini, 0, 0, sx, sy, 0, 0, w, h);
+          x.imageSmoothingEnabled = true;
+          x.globalAlpha = 1;
+        }
+
+        if (distort > 0.2) {
+          const lines = 5;
+          for (let i = 0; i < lines; i++) {
+            const y = ((now * 0.11 + i * 33) % h);
+            const offset = Math.sin(now * 0.008 + i * 0.9) * distort;
+            x.fillStyle = `rgba(0,240,255,${0.09 + distort * 0.01})`;
+            x.fillRect(offset, y, w, 1.6);
+          }
+        }
+      }
+
+      function applyCardVars(state, p, values) {
+        state.cover.style.setProperty('--ai-progress', p.toFixed(3));
+        state.cover.style.setProperty('--ai-noise-opacity', values.noise.toFixed(3));
+        state.cover.style.setProperty('--ai-img-opacity', values.img.toFixed(3));
+        state.cover.style.setProperty('--ai-blur', `${Math.max(0, values.blur).toFixed(2)}px`);
+        state.cover.style.setProperty('--ai-scale', values.scale.toFixed(3));
+        state.cover.style.setProperty('--ai-glow', `${Math.max(0, values.glow).toFixed(3)}`);
+        state.cover.style.setProperty('--ai-glass', `${Math.max(0, values.glass).toFixed(3)}`);
+        state.card.classList.toggle('ai-active', p > 0.02);
+        state.card.classList.toggle('ai-final', p > 0.86);
+      }
+
+      function applyIdleVars(state) {
+        state.cover.style.setProperty('--ai-progress', '0');
+        state.cover.style.setProperty('--ai-noise-opacity', '0');
+        state.cover.style.setProperty('--ai-img-opacity', '0');
+        state.cover.style.setProperty('--ai-blur', '0px');
+        state.cover.style.setProperty('--ai-scale', '1');
+        state.cover.style.setProperty('--ai-glow', '0');
+        state.cover.style.setProperty('--ai-glass', '.14');
+        state.card.classList.remove('ai-active', 'ai-final');
+      }
+
+      function tick(ts) {
+        if (!lastTs) lastTs = ts;
+        const dt = Math.min((ts - lastTs) / 1000, 0.05);
+        lastTs = ts;
+        let active = false;
+
+        states.forEach((state) => {
+          const duration = state.target > state.progress ? 1 : 0.34;
+          if (state.target !== state.progress) {
+            const dir = state.target > state.progress ? 1 : -1;
+            const step = (dt / duration) * dir;
+            state.progress = Math.max(0, Math.min(1, state.progress + step));
+            if ((dir > 0 && state.progress >= state.target) || (dir < 0 && state.progress <= state.target)) {
+              state.progress = state.target;
+            }
+          }
+
+          const p = state.progress;
+          if (state.target === 0 && p <= 0.0001) {
+            applyIdleVars(state);
+            state.ctx.clearRect(0, 0, state.w, state.h);
+            return;
+          }
+          const values = stageValues(p);
+          applyCardVars(state, p, values);
+          renderNoise(state, ts, values.noise, values.block, values.pix, values.distort);
+
+          if (state.target > 0 || p > 0.001) active = true;
+        });
+
+        if (active) {
+          rafId = requestAnimationFrame(tick);
+        } else {
+          rafId = 0;
+          lastTs = 0;
+        }
+      }
+
+      function run() {
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      }
+
+      cards.forEach((card) => {
+        const state = ensureMediaLayers(card);
+        if (!state) return;
+        resizeState(state);
+        applyIdleVars(state);
+        states.push(state);
+
+        card.addEventListener('mouseenter', () => {
+          state.target = 1;
+          run();
+        });
+        card.addEventListener('mouseleave', () => {
+          state.target = 0;
+          run();
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        states.forEach(resizeState);
+        run();
+      });
+    })();
 
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
        SCROLL REVEAL
