@@ -438,7 +438,8 @@
       transition: all .28s;
       position: relative;
       overflow: hidden;
-      letter-spacing: .05em
+      letter-spacing: .05em;
+      white-space: nowrap
     }
 
     .bp {
@@ -476,6 +477,15 @@
       border-color: var(--p);
       box-shadow: 0 0 32px rgba(192, 132, 252, .28);
       transform: translateY(-2px)
+    }
+
+    .resume-btn .icon {
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+
+    .resume-btn:hover .icon {
+      transform: translateY(3px);
     }
 
     /* â”€â”€ HERO â”€â”€ */
@@ -585,9 +595,10 @@
 
     .hbs {
       display: flex;
-      justify-content: flex-start;
-      gap: 14px;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: nowrap;
       animation: fu .6s .4s ease both
     }
 
@@ -2028,15 +2039,39 @@
     .cw {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 36px
+      gap: 36px;
+      position: relative;
+      z-index: 1
+    }
+
+    .radar-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.08;
+      z-index: 0
+    }
+
+    .scan-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10
     }
 
     .ci {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, .05)
+      gap: 18px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+      position: relative
     }
 
     .ci:last-child {
@@ -2053,25 +2088,87 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.05rem;
-      transition: transform .3s, box-shadow .3s
+      font-size: 1rem;
+      transition: all .4s cubic-bezier(.175, .885, .32, 1.275);
+      position: relative;
+      z-index: 2
+    }
+
+    .ripple-origin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: -1
+    }
+
+    .ripple {
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(34, 211, 238, 0.4);
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(1)
+    }
+
+    .ci:hover .ripple {
+      animation: ripple 1.2s infinite ease-out
+    }
+
+    .ci:hover .ripple:nth-child(2) {
+      animation-delay: 0.2s
+    }
+
+    .ci:hover .ripple:nth-child(3) {
+      animation-delay: 0.4s
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(1);
+        opacity: 0.4
+      }
+
+      100% {
+        transform: scale(3);
+        opacity: 0
+      }
     }
 
     .ci:hover .cii {
-      transform: scale(1.12);
-      box-shadow: 0 0 20px rgba(192, 132, 252, .35)
+      transform: scale(1.1);
+      border-color: rgba(34, 211, 238, 0.6);
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+      background: rgba(34, 211, 238, 0.1);
+      animation: iconPulse 1.2s infinite ease-in-out
+    }
+
+    @keyframes iconPulse {
+
+      0%,
+      100% {
+        transform: scale(1.1)
+      }
+
+      50% {
+        transform: scale(1.18)
+      }
     }
 
     .cil {
-      font-size: .65rem;
+      font-size: .62rem;
       color: var(--txt3);
-      letter-spacing: .1em;
-      margin-bottom: 2px
+      letter-spacing: .15em;
+      margin-bottom: 3px
     }
 
     .civ {
-      font-size: .85rem;
-      font-weight: 700
+      font-size: .88rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace
     }
 
     .civ a {
@@ -2084,8 +2181,74 @@
       color: var(--cy)
     }
 
+    .signal-meter {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      color: var(--txt3)
+    }
+
+    .signal-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px
+    }
+
+    .signal-bar {
+      width: 4px;
+      background: rgba(255, 255, 255, .08);
+      border-radius: 1px;
+      transition: height .3s, background .3s, box-shadow .3s
+    }
+
+    .signal-bar:nth-child(1) {
+      height: 4px
+    }
+
+    .signal-bar:nth-child(2) {
+      height: 7px
+    }
+
+    .signal-bar:nth-child(3) {
+      height: 10px
+    }
+
+    .signal-bar:nth-child(4) {
+      height: 13px
+    }
+
+    .signal-bar:nth-child(5) {
+      height: 16px
+    }
+
+    .signal-bar.active {
+      background: var(--cy);
+      box-shadow: 0 0 10px var(--cy)
+    }
+
+    .signal-bars.full .signal-bar {
+      animation: barPulse .8s infinite alternate
+    }
+
+    @keyframes barPulse {
+      from {
+        opacity: .5;
+        filter: brightness(1)
+      }
+
+      to {
+        opacity: 1;
+        filter: brightness(1.4)
+      }
+    }
+
     .fg {
-      margin-bottom: 15px
+      margin-bottom: 18px;
+      position: relative
     }
 
     .fg label {
@@ -2099,28 +2262,121 @@
     .fg input,
     .fg textarea {
       width: 100%;
-      background: rgba(255, 255, 255, .03);
-      border: 1px solid rgba(192, 132, 252, .14);
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid rgba(192, 132, 252, .12);
       border-radius: 12px;
-      padding: 11px 15px;
+      padding: 12px 16px;
       color: var(--txt);
-      font-size: .83rem;
+      font-size: .85rem;
       outline: none;
       font-family: var(--ff);
-      transition: border-color .25s, box-shadow .25s, background .25s;
-      cursor: none
+      transition: all .3s;
+      cursor: none;
+      position: relative;
+      z-index: 2
     }
 
     .fg textarea {
       resize: vertical;
-      min-height: 105px
+      min-height: 110px
+    }
+
+    .input-trace-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible
+    }
+
+    .input-trace-rect {
+      fill: none;
+      stroke: var(--cy);
+      stroke-width: 2;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      transition: stroke-dashoffset .45s ease;
+      rx: 12
+    }
+
+    .fg input:focus+.input-trace-svg .input-trace-rect,
+    .fg textarea:focus+.input-trace-svg .input-trace-rect {
+      stroke-dashoffset: 0
     }
 
     .fg input:focus,
     .fg textarea:focus {
-      border-color: rgba(192, 132, 252, .5);
-      background: rgba(192, 132, 252, .04);
-      box-shadow: 0 0 28px rgba(192, 132, 252, .14)
+      background: rgba(34, 211, 238, .03);
+      box-shadow: 0 0 24px rgba(34, 211, 238, .08)
+    }
+
+    .btn-transmission {
+      position: relative;
+      overflow: hidden;
+      transition: background .4s, transform .3s
+    }
+
+    .btn-transmission:hover {
+      background: linear-gradient(135deg, var(--p), var(--cy)) !important
+    }
+
+    .data-packet {
+      position: absolute;
+      width: 6px;
+      height: 2px;
+      background: #fff;
+      border-radius: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 0 8px #fff
+    }
+
+    .btn-transmission:hover .data-packet {
+      animation: packetFlow 1.2s infinite linear
+    }
+
+    @keyframes packetFlow {
+      0% {
+        left: -10%;
+        opacity: 0
+      }
+
+      20% {
+        opacity: 1
+      }
+
+      80% {
+        opacity: 1
+      }
+
+      100% {
+        left: 110%;
+        opacity: 0
+      }
+    }
+
+    .arc-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2000
+    }
+
+    .panel-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .8s, transform .8s
+    }
+
+    .panel-reveal.v {
+      opacity: 1;
+      transform: translateY(0)
     }
 
     /* â”€â”€ ASSISTANT â”€â”€ */
@@ -2367,7 +2623,8 @@
       }
 
       .hbs {
-        justify-content: flex-start
+        justify-content: center;
+        flex-wrap: wrap
       }
 
       .hloc {
@@ -2763,7 +3020,15 @@
               </svg>
               GitHub Profile
             </a>
-            <a href="#resume" class="btn bo">Resume</a>
+            <a href="Resume O_c.pdf" target="_blank" class="btn bo resume-btn">
+              <span class="icon">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M.5 9.9v3.6c0 .6.4 1 1 1h13c.6 0 1-.4 1-1V9.9h-1.5v3.1h-12V9.9H.5z" />
+                  <path d="M7.5 1v8.2L4.8 6.5l-1 1 4.2 4.3 4.2-4.3-1-1-2.7 2.7V1h-1z" />
+                </svg>
+              </span>
+              Resume
+            </a>
           </div>
         </div>
         <div class="hv">
@@ -3331,64 +3596,149 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact">
+  <section id="contact" style="position:relative">
+    <canvas id="contact-scan-canvas" class="scan-canvas"></canvas>
     <div class="W">
       <h2 class="sh rv"><span>Let's</span> Connect</h2>
       <div class="sdv rv"></div>
       <p class="sub rv">Have a project, internship, or collab? I'd love to hear from you.</p>
-      <div class="cw rv">
-        <div class="gl" style="padding:34px;border-radius:20px">
+      <div class="cw contact-reveal-wrap">
+        <!-- LEFT PANEL -->
+        <div class="gl panel-reveal panel-left" style="padding:34px; border-radius:20px; position:relative; overflow:hidden;">
+          <canvas id="radar-canvas" class="radar-canvas"></canvas>
           <div class="sm"></div>
+          
           <div class="ci">
-            <div class="cii">EM</div>
+            <div class="cii">
+              <div class="ripple-origin">
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+              </div>
+              EM
+            </div>
             <div>
               <div class="cil">EMAIL</div>
-              <div class="civ"><a href="mailto:nitya.20.mathur@gmail.com">nitya.20.mathur@gmail.com</a></div>
+              <div class="civ decode-text" data-text="nitya.20.mathur@gmail.com"><a href="mailto:nitya.20.mathur@gmail.com">nitya.20.mathur@gmail.com</a></div>
             </div>
           </div>
+
           <div class="ci">
-            <div class="cii">PH</div>
+            <div class="cii">
+              <div class="ripple-origin">
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+              </div>
+              PH
+            </div>
             <div>
               <div class="cil">PHONE</div>
-              <div class="civ">+91 8619145433</div>
+              <div class="civ decode-text" data-text="+91 8619145433">+91 8619145433</div>
             </div>
           </div>
+
           <div class="ci">
-            <div class="cii">LO</div>
+            <div class="cii">
+              <div class="ripple-origin">
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+              </div>
+              LO
+            </div>
             <div>
               <div class="cil">LOCATION</div>
-              <div class="civ">Jodhpur, Rajasthan, India</div>
+              <div class="civ decode-text" data-text="Jodhpur, Rajasthan, India">Jodhpur, Rajasthan, India</div>
             </div>
           </div>
+
           <div class="ci">
-            <div class="cii">IN</div>
+            <div class="cii">
+              <div class="ripple-origin">
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+              </div>
+              IN
+            </div>
             <div>
               <div class="cil">LINKEDIN</div>
-              <div class="civ"><a href="https://www.linkedin.com/in/nitya-mathur-330a03343/"
+              <div class="civ decode-text" data-text="nitya-mathur-330a03343"><a href="https://www.linkedin.com/in/nitya-mathur-330a03343/"
                   target="_blank">nitya-mathur-330a03343</a></div>
             </div>
           </div>
+
           <div class="ci">
-            <div class="cii">GH</div>
+            <div class="cii">
+              <div class="ripple-origin">
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+              </div>
+              GH
+            </div>
             <div>
               <div class="cil">GITHUB</div>
-              <div class="civ"><a href="https://github.com/Nityaa-20" target="_blank">Nityaa-20</a></div>
+              <div class="civ decode-text" data-text="Nityaa-20"><a href="https://github.com/Nityaa-20" target="_blank">Nityaa-20</a></div>
             </div>
           </div>
+
           <div class="ci">
-            <div class="cii">LC</div>
+            <div class="cii">
+              <div class="ripple-origin">
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+                <div class="ripple"></div>
+              </div>
+              LC
+            </div>
             <div>
               <div class="cil">LEETCODE</div>
-              <div class="civ"><a href="https://leetcode.com/u/nityamathur/" target="_blank">nityamathur</a></div>
+              <div class="civ decode-text" data-text="nityamathur"><a href="https://leetcode.com/u/nityamathur/" target="_blank">nityamathur</a></div>
             </div>
           </div>
         </div>
-        <div class="gl" style="padding:34px;border-radius:20px">
+
+        <!-- RIGHT PANEL -->
+        <div class="gl panel-reveal panel-right" style="padding:34px; border-radius:20px; transition-delay:0.2s">
           <div class="sm"></div>
-          <div class="fg"><label>YOUR NAME</label><input type="text" placeholder="Your Name"></div>
-          <div class="fg"><label>EMAIL</label><input type="email" placeholder="you@email.com"></div>
-          <div class="fg"><label>MESSAGE</label><textarea placeholder="Tell me about your idea..."></textarea></div>
-          <button class="btn bp" style="width:100%;justify-content:center" onclick="fSend(this)">Send Message</button>
+          
+          <div class="signal-meter">
+            <span style="letter-spacing:0.1em">SIGNAL STRENGTH</span>
+            <div class="signal-bars" id="signal-bars">
+              <div class="signal-bar"></div>
+              <div class="signal-bar"></div>
+              <div class="signal-bar"></div>
+              <div class="signal-bar"></div>
+              <div class="signal-bar"></div>
+            </div>
+          </div>
+
+          <div class="fg">
+            <label>YOUR NAME</label>
+            <input type="text" placeholder="Your Name" id="sig-name">
+            <svg class="input-trace-svg"><rect class="input-trace-rect" width="100%" height="100%"></rect></svg>
+          </div>
+          
+          <div class="fg">
+            <label>EMAIL</label>
+            <input type="email" placeholder="you@email.com" id="sig-email">
+            <svg class="input-trace-svg"><rect class="input-trace-rect" width="100%" height="100%"></rect></svg>
+          </div>
+          
+          <div class="fg">
+            <label>MESSAGE</label>
+            <textarea placeholder="Tell me about your idea..." id="sig-msg"></textarea>
+            <svg class="input-trace-svg"><rect class="input-trace-rect" width="100%" height="100%"></rect></svg>
+          </div>
+          
+          <button class="btn bp btn-transmission" style="width:100%; justify-content:center" onclick="fTransmit(this)">
+            <span class="btx">Send Message</span>
+            <div class="data-packet" style="animation-delay:0s"></div>
+            <div class="data-packet" style="animation-delay:0.3s"></div>
+            <div class="data-packet" style="animation-delay:0.6s"></div>
+          </button>
         </div>
       </div>
     </div>
@@ -4535,10 +4885,163 @@
     /* NAV hamburger */
     document.getElementById('hbtn').addEventListener('click', () => document.getElementById('nul').classList.toggle('open'));
 
-    function fSend(btn) {
-      btn.textContent = 'Sent!'; btn.style.background = 'linear-gradient(135deg,#1fcc87,#06b6d4)';
-      setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = '' }, 3000);
+    function fTransmit(btn) {
+      const btx = btn.querySelector('.btx');
+      btx.textContent = 'Transmitting...';
+      btn.style.boxShadow = 'inset 0 0 20px #fff, 0 0 30px var(--cy)';
+
+      const arcCv = document.createElement('canvas');
+      arcCv.className = 'arc-canvas';
+      document.body.appendChild(arcCv);
+      const aCtx = arcCv.getContext('2d');
+      let p = 0;
+      const rect = btn.getBoundingClientRect();
+      const sx = rect.left + rect.width / 2;
+      const sy = rect.top;
+
+      function animArc() {
+        const w = arcCv.width = window.innerWidth;
+        const h = arcCv.height = window.innerHeight;
+        aCtx.clearRect(0, 0, w, h);
+        aCtx.strokeStyle = 'rgba(34, 211, 238, 0.8)';
+        aCtx.lineWidth = 3;
+        aCtx.lineCap = 'round';
+        aCtx.shadowBlur = 12;
+        aCtx.shadowColor = '#22d3ee';
+        aCtx.beginPath();
+        aCtx.moveTo(sx, sy);
+        const cp1x = sx + (Math.sin(p * 5) * 40);
+        const cp1y = sy - (p * 400);
+        const ex = sx;
+        const ey = sy - (p * h * 1.2);
+        aCtx.quadraticCurveTo(cp1x, cp1y, ex, ey);
+        aCtx.stroke();
+        p += 0.045;
+        if (p < 1.1) requestAnimationFrame(animArc);
+        else {
+          document.body.removeChild(arcCv);
+          btx.textContent = 'Signal Sent âœ“';
+          btn.style.boxShadow = '';
+          setTimeout(() => { btx.textContent = 'Send Message' }, 3000);
+        }
+      }
+      animArc();
     }
+
+    /* SIGNAL UI LOGIC */
+    (function () {
+      const cSec = document.getElementById('contact');
+      const panels = cSec.querySelectorAll('.panel-reveal');
+      const decodeTxts = cSec.querySelectorAll('.decode-text');
+
+      const signalObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            panels.forEach(p => p.classList.add('v'));
+            runContactScan();
+            decodeTxts.forEach((el, i) => {
+              setTimeout(() => startTextDecode(el), i * 120);
+            });
+            signalObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+      signalObserver.observe(cSec);
+
+      function startTextDecode(el) {
+        const original = el.getAttribute('data-text');
+        const link = el.querySelector('a');
+        const target = link || el;
+        let iters = 0;
+        const chars = "!@#$%^&*()_+{}:<>?[]";
+        const interval = setInterval(() => {
+          target.textContent = original.split('').map((char, index) => {
+            if (index < iters) return original[index];
+            return chars[Math.floor(Math.random() * chars.length)];
+          }).join('');
+          if (iters >= original.length) clearInterval(interval);
+          iters += original.length / 12;
+        }, 45);
+      }
+
+      // Radar
+      const rCv = document.getElementById('radar-canvas');
+      const rCtx = rCv.getContext('2d');
+      let rAng = 0;
+      function drawRadar() {
+        if (!rCv.offsetWidth) { requestAnimationFrame(drawRadar); return; }
+        const w = rCv.width = rCv.offsetWidth;
+        const h = rCv.height = rCv.offsetHeight;
+        rCtx.clearRect(0, 0, w, h);
+        const cx = w / 2, cy = h / 2;
+        const r = Math.sqrt(cx * cx + cy * cy);
+        rCtx.strokeStyle = 'rgba(34, 211, 238, 0.4)';
+        rCtx.lineWidth = 1.5;
+        rCtx.beginPath();
+        rCtx.moveTo(cx, cy);
+        rCtx.lineTo(cx + Math.cos(rAng) * r, cy + Math.sin(rAng) * r);
+        rCtx.stroke();
+        rAng += 0.015;
+        requestAnimationFrame(drawRadar);
+      }
+      drawRadar();
+
+      // Scanline
+      function runContactScan() {
+        const sCv = document.getElementById('contact-scan-canvas');
+        const sCtx = sCv.getContext('2d');
+        let sY = 0;
+        function animScan() {
+          const w = sCv.width = sCv.offsetWidth;
+          const h = sCv.height = sCv.offsetHeight;
+          sCtx.clearRect(0, 0, w, h);
+          sCtx.strokeStyle = 'rgba(34, 211, 238, 0.04)';
+          for (let x = 0; x < w; x += 35) { sCtx.beginPath(); sCtx.moveTo(x, 0); sCtx.lineTo(x, h); sCtx.stroke(); }
+          for (let y = 0; y < h; y += 35) { sCtx.beginPath(); sCtx.moveTo(0, y); sCtx.lineTo(w, y); sCtx.stroke(); }
+          sCtx.strokeStyle = 'rgba(34, 211, 238, 0.5)';
+          sCtx.lineWidth = 2;
+          sCtx.beginPath(); sCtx.moveTo(0, sY); sCtx.lineTo(w, sY); sCtx.stroke();
+          sY += h / 50;
+          if (sY < h) requestAnimationFrame(animScan);
+          else {
+            let op = 1;
+            const f = setInterval(() => {
+              sCtx.clearRect(0, 0, w, h); sCtx.globalAlpha = op;
+              sCtx.strokeStyle = 'rgba(34, 211, 238, 0.04)';
+              for (let x = 0; x < w; x += 35) { sCtx.beginPath(); sCtx.moveTo(x, 0); sCtx.lineTo(x, h); sCtx.stroke(); }
+              for (let y = 0; y < h; y += 35) { sCtx.beginPath(); sCtx.moveTo(0, y); sCtx.lineTo(w, y); sCtx.stroke(); }
+              op -= 0.1; if (op <= 0) { clearInterval(f); sCtx.clearRect(0, 0, w, h); }
+            }, 60);
+          }
+        }
+        animScan();
+      }
+
+      // Form logic
+      const ni = document.getElementById('sig-name'), ei = document.getElementById('sig-email'), mi = document.getElementById('sig-msg');
+      const bs = document.querySelectorAll('.signal-bar'), bc = document.getElementById('signal-bars');
+      function upSig() {
+        let s = 0;
+        if (ni.value.trim()) s++;
+        if (ei.value.trim()) s++;
+        if (ei.value.includes('@') && ei.value.includes('.')) s++;
+        if (mi.value.trim()) s++;
+        if (mi.value.trim().length > 20) s++;
+        bs.forEach((b, i) => { if (i < s) b.classList.add('active'); else b.classList.remove('active'); });
+        if (s === 5) bc.classList.add('full'); else bc.classList.remove('full');
+      }
+      [ni, ei, mi].forEach(i => i.addEventListener('input', upSig));
+
+      // Typewriter
+      const phs = ["Tell me about your idea...", "Propose a collaboration...", "Ask about my availability..."];
+      let pi = 0, ci = 0, del = false;
+      function tyPH() {
+        const cur = phs[pi];
+        if (del) { mi.placeholder = cur.substring(0, ci--); if (ci < 0) { del = false; pi = (pi + 1) % phs.length; setTimeout(tyPH, 500); } else setTimeout(tyPH, 40); }
+        else { mi.placeholder = cur.substring(0, ci++); if (ci > cur.length) { del = true; setTimeout(tyPH, 2000); } else setTimeout(tyPH, 80); }
+      }
+      tyPH();
+    })();
   </script>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
