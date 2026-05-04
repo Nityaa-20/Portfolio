@@ -1696,11 +1696,19 @@
       border-color: rgba(192, 132, 252, .55)
     }
 
-    /* â”€â”€ CERTS â”€â”€ */
     .cg {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 18px
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      justify-content: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .cg {
+        grid-template-columns: 1fr;
+      }
     }
 
     .cc {
@@ -2518,11 +2526,12 @@
 
     .nsg-zone-tags {
       position: absolute;
-      inset: 14px 16px auto 16px;
+      top: 20px;
+      left: 20px;
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
       pointer-events: none;
       z-index: 3
     }
@@ -2559,22 +2568,26 @@
     }
 
     .nsg-controls {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center
+      position: absolute;
+      top: -55px;
+      right: 0;
+      z-index: 20;
+      pointer-events: auto
     }
 
     .nsg-fire {
       border: 1px solid rgba(0, 240, 255, .4);
       background: linear-gradient(135deg, rgba(0, 240, 255, .16), rgba(168, 85, 247, .16));
       color: #d1faff;
-      padding: 10px 16px;
+      padding: 10px 18px;
       border-radius: 12px;
       font-weight: 700;
       letter-spacing: .12em;
       font-size: .68rem;
       cursor: pointer;
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      pointer-events: auto;
+      z-index: 20
     }
 
     .nsg-fire:hover {
@@ -2584,6 +2597,7 @@
     }
 
     .nsg-hud {
+      margin-top: 1.8rem;
       border: 1px solid rgba(168, 85, 247, .28);
       border-radius: 16px;
       background: rgba(2, 6, 20, .68);
@@ -3203,27 +3217,15 @@
         </div>
         <div class="cc gl rv">
           <div class="sm"></div>
-          <div class="cn">AICTE AWS Generative AI</div>
-          <div class="cb2">AWS Academy</div>
-          <div class="cd">September 2025</div>
-        </div>
-        <div class="cc gl rv">
-          <div class="sm"></div>
           <div class="cn">Accenture Software Engineering Simulation</div>
           <div class="cb2">Forage</div>
           <div class="cd">July 2025</div>
         </div>
         <div class="cc gl rv">
           <div class="sm"></div>
-          <div class="cn">Python (5-Star)</div>
-          <div class="cb2">HackerRank</div>
-          <div class="cd">October 2024</div>
-        </div>
-        <div class="cc gl rv">
-          <div class="sm"></div>
-          <div class="cn">Java</div>
-          <div class="cb2">HackerRank</div>
-          <div class="cd">October 2024</div>
+          <div class="cn">AICTE AWS Generative AI</div>
+          <div class="cb2">AWS Academy</div>
+          <div class="cd">September 2025</div>
         </div>
       </div>
     </div>
@@ -3796,20 +3798,20 @@
       }
 
       function syncNodePositions(timeValue) {
-        const padX = Math.max(36, width * 0.04);
-        const padY = Math.max(30, height * 0.06);
+        const padX = Math.max(48, width * 0.06);
+        const padY = Math.max(40, height * 0.08);
         const spanX = width - padX * 2;
         const spanY = height - padY * 2;
         const minScore = 65;
         const maxScore = 92;
         nodes.forEach((node, i) => {
           const ratio = (node.score - minScore) / (maxScore - minScore);
-          const baseR = 18 + ratio * 16;
+          const baseR = 22 + ratio * 20;
           const fx = Math.sin(timeValue * 0.72 + node.phase) * 8;
           const fy = Math.cos(timeValue * 0.63 + node.phase * 1.14) * 8;
           node.x = padX + node.nx * spanX + fx;
           node.y = padY + node.ny * spanY + fy;
-          node.r = hoveredIndex === i ? baseR * 1.07 : baseR;
+          node.r = hoveredIndex === i ? baseR * 1.08 : baseR;
         });
       }
 
@@ -3858,11 +3860,27 @@
           ctx.fillStyle = hover ? '#ffffff' : 'rgba(238,240,255,0.9)';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.font = `700 ${Math.max(10, Math.round(node.r * 0.33))}px "JetBrains Mono", monospace`;
-          ctx.fillText(`${node.score}%`, node.x, node.y - 1);
           const nameText = node.label.length > 12 ? node.short : node.label;
-          ctx.font = `600 ${Math.max(8, Math.round(node.r * 0.2))}px "JetBrains Mono", monospace`;
-          ctx.fillText(nameText, node.x, node.y + Math.max(11, Math.round(node.r * 0.42)));
+          const words = nameText.split(' ');
+
+          if (words.length > 1 && nameText.length > 8) {
+            // Multi-line Label (Large font, adaptive)
+            const fs = Math.max(9, Math.round(node.r * 0.34));
+            ctx.font = `800 ${fs}px "JetBrains Mono", monospace`;
+            ctx.fillText(words[0], node.x, node.y - (fs * 0.6));
+            ctx.fillText(words[1], node.x, node.y + (fs * 0.3));
+            // Score (Bottom, Small)
+            ctx.font = `700 ${Math.max(8, Math.round(node.r * 0.2))}px "JetBrains Mono", monospace`;
+            ctx.fillText(`${node.score}%`, node.x, node.y + Math.max(14, Math.round(node.r * 0.45)));
+          } else {
+            // Single-line Label (Large font, adaptive)
+            const fs = nameText.length > 7 ? Math.max(10, Math.round(node.r * 0.35)) : Math.max(11, Math.round(node.r * 0.4));
+            ctx.font = `800 ${fs}px "JetBrains Mono", monospace`;
+            ctx.fillText(nameText, node.x, node.y - 4);
+            // Score (Bottom, Small)
+            ctx.font = `700 ${Math.max(8, Math.round(node.r * 0.22))}px "JetBrains Mono", monospace`;
+            ctx.fillText(`${node.score}%`, node.x, node.y + Math.max(12, Math.round(node.r * 0.4)));
+          }
         });
       }
 
