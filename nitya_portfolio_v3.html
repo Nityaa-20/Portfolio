@@ -2647,6 +2647,30 @@
       background: rgba(192, 132, 252, .32);
       border-radius: 2px
     }
+
+    .projects-stack {
+      position: relative;
+    }
+
+    .pjg {
+      display: block;
+      /* override grid safely */
+    }
+
+    .pjc {
+      position: sticky;
+      top: 120px;
+      margin-bottom: 120px;
+      transform: scale(0.96);
+      opacity: 0.4;
+      transition: all 0.4s ease;
+    }
+
+    .pjc.active {
+      transform: scale(1);
+      opacity: 1;
+      z-index: 10;
+    }
   </style>
 </head>
 
@@ -2691,12 +2715,19 @@
             <div class="hcd"></div>AVAILABLE FOR OPPORTUNITIES
           </div>
           <h1 class="hn">Hi, I'm<br><span class="g">Nitya Mathur</span></h1>
-          <div class="tr">I build <span class="ty" id="typed"></span><span class="tc">|</span></div>
+          <div class="tr"><span class="ty" id="typed"></span><span class="tc">|</span></div>
           <p class="hd">CSE (AI & ML) student at SRM IST | CGPA 9.41 | Transforming raw data into intelligent insights,
             predictive models, and beautiful dashboards.</p>
           <div class="hbs">
-            <a href="#projects" class="btn bp">View My Work</a>
-            <a href="#contact" class="btn bo">Get In Touch</a>
+            <a href="#projects" class="btn bp">View Projects</a>
+            <a href="https://github.com/" target="_blank" class="btn bo">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              GitHub Profile
+            </a>
+            <a href="#resume" class="btn bo">Resume</a>
           </div>
           <div class="hloc">Jodhpur, Rajasthan &nbsp;|&nbsp; SRM IST-Ghaziabad | 2027</div>
         </div>
@@ -3018,65 +3049,73 @@
     <div class="W">
       <h2 class="sh rv"><span>Featured</span> Projects</h2>
       <div class="sdv rv"></div>
-      <div class="pjg">
-        <div class="pjc rv">
-          <div class="pt project-card" style="--c1:rgba(168,85,247,.38);--c2:rgba(244,114,182,.22)"><span class="pe">IPL</span></div>
-          <div class="pb">
-            <div class="tgs"><span class="tg k">Power BI</span><span class="tg">DAX</span><span
-                class="tg c">Excel</span></div>
-            <div class="ptt">IPL Analysis Dashboard</div>
-            <p class="pds">Interactive Power BI dashboard analysing IPL data 2008-2025. Dynamic filters for team
-              performance, top scorers, wicket leaders, venue impact, and toss influence with custom DAX measures.</p>
-            <div class="pls"><a href="https://github.com/Nityaa-20/IPL-Analysis-" target="_blank" class="pl">
-                GitHub</a></div>
+      <div class="projects-stack">
+        <div class="pjg">
+          <div class="pjc rv">
+            <div class="pt project-card" style="--c1:rgba(168,85,247,.38);--c2:rgba(244,114,182,.22)"><span
+                class="pe">IPL</span></div>
+            <div class="pb">
+              <div class="tgs"><span class="tg k">Power BI</span><span class="tg">DAX</span><span
+                  class="tg c">Excel</span></div>
+              <div class="ptt">IPL Analysis Dashboard</div>
+              <p class="pds">Interactive Power BI dashboard analysing IPL data 2008-2025. Dynamic filters for team
+                performance, top scorers, wicket leaders, venue impact, and toss influence with custom DAX measures.</p>
+              <div class="pls"><a href="https://github.com/Nityaa-20/IPL-Analysis-" target="_blank" class="pl">
+                  GitHub</a></div>
+            </div>
           </div>
-        </div>
-        <div class="pjc rv">
-          <div class="pt project-card" style="--c1:rgba(34,211,238,.28);--c2:rgba(129,140,248,.2)"><span class="pe">CBA</span></div>
-          <div class="pb">
-            <div class="tgs"><span class="tg c">Python</span><span class="tg b">PostgreSQL</span><span
-                class="tg k">Power BI</span></div>
-            <div class="ptt">Customer Behaviour Analysis</div>
-            <p class="pds">End-to-end BI dashboard for sales, revenue & subscription trends. PostgreSQL + Python
-              pipeline for data extraction and cleaning with actionable demographic and purchasing insights.</p>
-            <div class="pls"><a href="https://github.com/Nityaa-20/Customer-Data-Analysis-Project" target="_blank"
-                class="pl">GitHub</a></div>
+          <div class="pjc rv">
+            <div class="pt project-card" style="--c1:rgba(34,211,238,.28);--c2:rgba(129,140,248,.2)"><span
+                class="pe">CBA</span></div>
+            <div class="pb">
+              <div class="tgs"><span class="tg c">Python</span><span class="tg b">PostgreSQL</span><span
+                  class="tg k">Power BI</span></div>
+              <div class="ptt">Customer Behaviour Analysis</div>
+              <p class="pds">End-to-end BI dashboard for sales, revenue & subscription trends. PostgreSQL + Python
+                pipeline for data extraction and cleaning with actionable demographic and purchasing insights.</p>
+              <div class="pls"><a href="https://github.com/Nityaa-20/Customer-Data-Analysis-Project" target="_blank"
+                  class="pl">GitHub</a></div>
+            </div>
           </div>
-        </div>
-        <div class="pjc rv">
-          <div class="pt project-card" style="--c1:rgba(244,114,182,.32);--c2:rgba(168,85,247,.22)"><span class="pe">T2D</span></div>
-          <div class="pb">
-            <div class="tgs"><span class="tg c">Python</span><span class="tg">Scikit-Learn</span><span
-                class="tg k">SVM</span></div>
-            <div class="ptt">Type-2 Diabetes Detection</div>
-            <p class="pds">ML model using Support Vector Machine on clinical health data for Type 2 Diabetes prediction.
-              Built for early diagnosis support in healthcare analytics using NumPy, Pandas & Matplotlib.</p>
-            <div class="pls"><a href="https://github.com/Nityaa-20/Type-2-Diabetes-Detection-Model" target="_blank"
-                class="pl">GitHub</a></div>
+          <div class="pjc rv">
+            <div class="pt project-card" style="--c1:rgba(244,114,182,.32);--c2:rgba(168,85,247,.22)"><span
+                class="pe">T2D</span></div>
+            <div class="pb">
+              <div class="tgs"><span class="tg c">Python</span><span class="tg">Scikit-Learn</span><span
+                  class="tg k">SVM</span></div>
+              <div class="ptt">Type-2 Diabetes Detection</div>
+              <p class="pds">ML model using Support Vector Machine on clinical health data for Type 2 Diabetes
+                prediction.
+                Built for early diagnosis support in healthcare analytics using NumPy, Pandas & Matplotlib.</p>
+              <div class="pls"><a href="https://github.com/Nityaa-20/Type-2-Diabetes-Detection-Model" target="_blank"
+                  class="pl">GitHub</a></div>
+            </div>
           </div>
-        </div>
-        <div class="pjc rv">
-          <div class="pt project-card" style="--c1:rgba(129,140,248,.32);--c2:rgba(34,211,238,.2)"><span class="pe">SRA</span></div>
-          <div class="pb">
-            <div class="tgs"><span class="tg b">Streamlit</span><span class="tg c">Python</span><span
-                class="tg k">NLP</span></div>
-            <div class="ptt">Smart Resume Analyzer</div>
-            <p class="pds">Auto-extracts resume details, generates skill word-cloud visualizations, calculates ATS
-              compatibility score vs job descriptions, stores results with actionable improvement suggestions.</p>
-            <div class="pls"><a href="https://github.com/Nityaa-20/Smart-Resume-Analyser" target="_blank" class="pl">
-                GitHub</a></div>
+          <div class="pjc rv">
+            <div class="pt project-card" style="--c1:rgba(129,140,248,.32);--c2:rgba(34,211,238,.2)"><span
+                class="pe">SRA</span></div>
+            <div class="pb">
+              <div class="tgs"><span class="tg b">Streamlit</span><span class="tg c">Python</span><span
+                  class="tg k">NLP</span></div>
+              <div class="ptt">Smart Resume Analyzer</div>
+              <p class="pds">Auto-extracts resume details, generates skill word-cloud visualizations, calculates ATS
+                compatibility score vs job descriptions, stores results with actionable improvement suggestions.</p>
+              <div class="pls"><a href="https://github.com/Nityaa-20/Smart-Resume-Analyser" target="_blank" class="pl">
+                  GitHub</a></div>
+            </div>
           </div>
-        </div>
-        <div class="pjc rv">
-          <div class="pt project-card" style="--c1:rgba(34,211,238,.28);--c2:rgba(168,85,247,.2)"><span class="pe">ET</span></div>
-          <div class="pb">
-            <div class="tgs"><span class="tg c">Flask</span><span class="tg">JavaScript</span><span
-                class="tg b">PostgreSQL</span></div>
-            <div class="ptt">Expense Tracker</div>
-            <p class="pds">Full-stack finance tracker categorising daily expenses (necessary vs unnecessary). Visual
-              graphs reveal spending patterns with HTML/CSS/JS, Flask, and PostgreSQL backend.</p>
-            <div class="pls"><a href="https://github.com/Nityaa-20/Expense-Tracker" target="_blank" class="pl">
-                GitHub</a></div>
+          <div class="pjc rv">
+            <div class="pt project-card" style="--c1:rgba(34,211,238,.28);--c2:rgba(168,85,247,.2)"><span
+                class="pe">ET</span></div>
+            <div class="pb">
+              <div class="tgs"><span class="tg c">Flask</span><span class="tg">JavaScript</span><span
+                  class="tg b">PostgreSQL</span></div>
+              <div class="ptt">Expense Tracker</div>
+              <p class="pds">Full-stack finance tracker categorising daily expenses (necessary vs unnecessary). Visual
+                graphs reveal spending patterns with HTML/CSS/JS, Flask, and PostgreSQL backend.</p>
+              <div class="pls"><a href="https://github.com/Nityaa-20/Expense-Tracker" target="_blank" class="pl">
+                  GitHub</a></div>
+            </div>
           </div>
         </div>
       </div>
@@ -3523,7 +3562,7 @@
     /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
        TYPING
     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-    const phrases = ['AI & ML Models', 'Data Dashboards', 'Predictive Analytics', 'Intelligent Systems', 'Beautiful Insights'];
+    const phrases = ['Building Intelligent Models', 'Solving Real-World Problems', 'Turning Data into Insights', 'Designing Smart Dashboards'];
     let pi = 0, ci = 0, del = false;
     const tel = document.getElementById('typed');
     function type() {
@@ -4723,6 +4762,18 @@
 
     const assistantRoot = ReactDOM.createRoot(document.getElementById('assistant-root'));
     assistantRoot.render(<PortfolioAssistant />);
+
+    const projectCards = document.querySelectorAll(".pjc");
+    const stackObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          projectCards.forEach(card => card.classList.remove("active"));
+          entry.target.classList.add("active");
+        }
+      });
+    }, { threshold: 0.6 });
+    projectCards.forEach(card => stackObserver.observe(card));
+
   </script>
 </body>
 
