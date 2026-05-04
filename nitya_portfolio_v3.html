@@ -3200,307 +3200,380 @@
         </div>
     </section>
 
-    <!-- PROJECTS — Editorial Case Study -->
+    <!-- PROJECTS — Scroll-Jacking Layout -->
     <section id="projects">
-        <div class="W">
-            <h2 class="sh rv"><span>Featured</span> Projects</h2>
-            <div class="sdv rv"></div>
-
-            <style>
-                .cs-scroll-wrap {
-                    position: relative;
-                    margin-bottom: 0
-                }
-
-                .cs-scroll {
-                    display: flex;
-                    gap: 24px;
-                    overflow-x: auto;
-                    overflow-y: hidden;
-                    scroll-snap-type: x mandatory;
-                    -webkit-overflow-scrolling: touch;
-                    padding-bottom: 16px;
-                }
-
-                .cs-scroll::-webkit-scrollbar {
-                    height: 2px
-                }
-
-                .cs-scroll::-webkit-scrollbar-track {
-                    background: transparent
-                }
-
-                .cs-scroll::-webkit-scrollbar-thumb {
-                    background: rgba(192, 132, 252, .28);
-                    border-radius: 1px
-                }
-
-                .cs-card {
-                    flex: 0 0 360px;
-                    min-height: 340px;
-                    scroll-snap-align: start;
-                    position: relative;
-                    padding: 32px 28px 28px;
-                    border: 1px solid rgba(255, 255, 255, .07);
-                    border-radius: 14px;
-                    background: rgba(255, 255, 255, .032);
-                    backdrop-filter: blur(24px);
-                    -webkit-backdrop-filter: blur(24px);
-                    transition: border-color .3s ease
-                }
-
-                .cs-card:hover {
-                    border-color: rgba(255, 255, 255, .14)
-                }
-
-                .cs-num {
-                    position: absolute;
-                    top: 16px;
-                    left: 22px;
-                    font-size: 5rem;
-                    font-weight: 900;
-                    line-height: 1;
-                    color: rgba(255, 255, 255, .07);
-                    pointer-events: none;
-                    user-select: none
-                }
-
-                .cs-type {
-                    font-size: .65rem;
-                    letter-spacing: .2em;
-                    text-transform: uppercase;
-                    color: rgba(237, 233, 254, .45);
-                    margin-bottom: 8px;
-                    margin-top: 8px
-                }
-
-                .cs-title {
-                    font-size: 1.35rem;
-                    font-weight: 700;
-                    color: #f1f0ff;
-                    line-height: 1.35;
-                    margin-bottom: 10px
-                }
-
-                .cs-impact {
-                    font-size: .82rem;
-                    line-height: 1.7;
-                    color: rgba(237, 233, 254, .52);
-                    margin-bottom: 18px
-                }
-
-                .cs-tools {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 6px;
-                    margin-bottom: 20px
-                }
-
-                .cs-tool {
-                    font-family: 'JetBrains Mono', Consolas, monospace;
-                    font-size: .68rem;
-                    padding: 4px 10px;
-                    border-radius: 4px;
-                    border: 1px solid rgba(255, 255, 255, .1);
-                    background: rgba(255, 255, 255, .03);
-                    color: rgba(237, 233, 254, .6)
-                }
-
-                .cs-gh {
-                    font-size: .8rem;
-                    color: #c084fc;
-                    text-decoration: none;
-                    transition: opacity .2s
-                }
-
-                .cs-gh:hover {
-                    text-decoration: underline;
-                    text-underline-offset: 3px;
-                    opacity: .85
-                }
-
-                .cs-expand {
-                    display: inline-block;
-                    font-size: .75rem;
-                    color: rgba(237, 233, 254, .4);
-                    cursor: pointer;
-                    border: none;
-                    background: none;
-                    padding: 0;
-                    margin-top: 6px;
-                    font-family: var(--ff);
-                    transition: color .2s
-                }
-
-                .cs-expand:hover {
-                    color: rgba(237, 233, 254, .7)
-                }
-
-                .cs-hint {
-                    position: absolute;
-                    right: 12px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    font-size: 1.4rem;
-                    color: rgba(237, 233, 254, .18);
-                    pointer-events: none;
-                    transition: opacity .5s;
-                    z-index: 3
-                }
-
-                .cs-detail-panel {
-                    max-height: 0;
-                    overflow: hidden;
-                    transition: max-height .35s ease, opacity .3s ease, padding .35s ease;
-                    opacity: 0;
-                    border: 1px solid rgba(255, 255, 255, .07);
-                    border-radius: 14px;
-                    background: rgba(255, 255, 255, .025);
-                    backdrop-filter: blur(18px);
-                    -webkit-backdrop-filter: blur(18px);
-                    padding: 0 28px;
-                    margin-top: 0
-                }
-
-                .cs-detail-panel.open {
-                    max-height: 400px;
-                    opacity: 1;
-                    padding: 28px;
-                    margin-top: 22px
-                }
-
-                .cs-detail-panel .cs-type {
-                    margin-top: 0
-                }
-
-                .cs-detail-panel .cs-title {
-                    font-size: 1.15rem;
-                    margin-bottom: 8px
-                }
-
-                .cs-detail-panel .cs-impact {
-                    margin-bottom: 14px
-                }
-
-                .cs-detail-panel .cs-tools {
-                    margin-bottom: 16px
-                }
-
-                @media(max-width:768px) {
-                    .cs-scroll {
-                        flex-direction: column;
-                        overflow-x: visible;
-                        scroll-snap-type: none;
-                        gap: 18px
-                    }
-
-                    .cs-card {
-                        flex: none;
-                        width: 100%;
-                        min-height: auto
-                    }
-
-                    .cs-hint {
-                        display: none
-                    }
-
-                    .cs-num {
-                        font-size: 3.5rem
-                    }
-                }
-            </style>
-
-            <!-- Horizontal Scroll Container -->
-            <div class="cs-scroll-wrap rv">
-                <div class="cs-scroll" id="cs-scroll">
-                    <!-- Card 01 -->
-                    <div class="cs-card" data-idx="0">
-                        <div class="cs-num">01</div>
-                        <div class="cs-type">Data Analytics</div>
-                        <div class="cs-title">IPL Analysis Dashboard</div>
-                        <p class="cs-impact">Analysed 17 years of IPL data with dynamic filters for team, venue, and
-                            toss performance trends.</p>
-                        <div class="cs-tools">
-                            <span class="cs-tool">Power BI</span>
-                            <span class="cs-tool">DAX</span>
-                            <span class="cs-tool">Excel</span>
-                        </div>
-                        <a href="https://github.com/Nityaa-20/IPL-Analysis-" target="_blank" class="cs-gh">View on
-                            GitHub →</a><br>
-                        <button class="cs-expand" data-idx="0">View Case Study ↓</button>
+        <div class="pj-outer" id="pj-outer">
+            <div class="pj-sticky">
+                <div class="W">
+                    <div class="pj-header">
+                        <h2 class="sh rv"><span>Featured</span> Projects</h2>
+                        <div class="sdv rv"></div>
                     </div>
-                    <!-- Card 02 -->
-                    <div class="cs-card" data-idx="1">
-                        <div class="cs-num">02</div>
-                        <div class="cs-type">Business Intelligence</div>
-                        <div class="cs-title">Customer Behaviour Analysis</div>
-                        <p class="cs-impact">Built end-to-end BI pipeline revealing demographic and purchasing patterns
-                            across 10k+ records.</p>
-                        <div class="cs-tools">
-                            <span class="cs-tool">Python</span>
-                            <span class="cs-tool">PostgreSQL</span>
-                            <span class="cs-tool">Power BI</span>
+
+                    <div class="pj-track-wrap">
+                        <div class="pj-track" id="pj-track">
+                            <!-- Card 01 -->
+                            <div class="pj-card">
+                                <div class="pj-num">01</div>
+                                <div class="pj-type">Data Analytics</div>
+                                <h3 class="pj-title">IPL Analysis Dashboard</h3>
+                                <div class="pj-divider"></div>
+                                <p class="pj-impact">Analysed 17 years of IPL data with dynamic filters for team, venue,
+                                    and toss performance trends.</p>
+                                <div class="pj-tools">
+                                    <span class="pj-tool">Power BI</span>
+                                    <span class="pj-tool">DAX</span>
+                                    <span class="pj-tool">Excel</span>
+                                </div>
+                                <a href="https://github.com/Nityaa-20/IPL-Analysis-" target="_blank"
+                                    class="pj-link">GitHub →</a>
+                            </div>
+                            <!-- Card 02 -->
+                            <div class="pj-card">
+                                <div class="pj-num">02</div>
+                                <div class="pj-type">Business Intelligence</div>
+                                <h3 class="pj-title">Customer Behaviour Analysis</h3>
+                                <div class="pj-divider"></div>
+                                <p class="pj-impact">Built end-to-end BI pipeline revealing demographic and purchasing
+                                    patterns across 10k+ records.</p>
+                                <div class="pj-tools">
+                                    <span class="pj-tool">Python</span>
+                                    <span class="pj-tool">PostgreSQL</span>
+                                    <span class="pj-tool">Power BI</span>
+                                </div>
+                                <a href="https://github.com/Nityaa-20/Customer-Data-Analysis-Project" target="_blank"
+                                    class="pj-link">GitHub →</a>
+                            </div>
+                            <!-- Card 03 -->
+                            <div class="pj-card">
+                                <div class="pj-num">03</div>
+                                <div class="pj-type">Machine Learning</div>
+                                <h3 class="pj-title">Type-2 Diabetes Detection</h3>
+                                <div class="pj-divider"></div>
+                                <p class="pj-impact">Trained SVM model on clinical data for early-stage Type 2 Diabetes
+                                    prediction in healthcare analytics.</p>
+                                <div class="pj-tools">
+                                    <span class="pj-tool">Python</span>
+                                    <span class="pj-tool">Scikit-Learn</span>
+                                    <span class="pj-tool">SVM</span>
+                                </div>
+                                <a href="https://github.com/Nityaa-20/Type-2-Diabetes-Detection-Model" target="_blank"
+                                    class="pj-link">GitHub →</a>
+                            </div>
+                            <!-- Card 04 -->
+                            <div class="pj-card">
+                                <div class="pj-num">04</div>
+                                <div class="pj-type">NLP Application</div>
+                                <h3 class="pj-title">Smart Resume Analyzer</h3>
+                                <div class="pj-divider"></div>
+                                <p class="pj-impact">Auto-scores ATS compatibility, generates skill word-clouds, and
+                                    stores improvement suggestions per resume.</p>
+                                <div class="pj-tools">
+                                    <span class="pj-tool">Streamlit</span>
+                                    <span class="pj-tool">Python</span>
+                                    <span class="pj-tool">NLP</span>
+                                </div>
+                                <a href="https://github.com/Nityaa-20/Smart-Resume-Analyser" target="_blank"
+                                    class="pj-link">GitHub →</a>
+                            </div>
+                            <!-- Card 05 -->
+                            <div class="pj-card">
+                                <div class="pj-num">05</div>
+                                <div class="pj-type">Full-Stack App</div>
+                                <h3 class="pj-title">Expense Tracker</h3>
+                                <div class="pj-divider"></div>
+                                <p class="pj-impact">Categorises daily spend as necessary vs unnecessary with visual
+                                    graphs revealing monthly patterns.</p>
+                                <div class="pj-tools">
+                                    <span class="pj-tool">Flask</span>
+                                    <span class="pj-tool">JavaScript</span>
+                                    <span class="pj-tool">PostgreSQL</span>
+                                </div>
+                                <a href="https://github.com/Nityaa-20/Expense-Tracker" target="_blank"
+                                    class="pj-link">GitHub →</a>
+                            </div>
+                            <!-- Right-end spacer -->
+                            <div style="flex:0 0 45vw;min-width:45vw"></div>
                         </div>
-                        <a href="https://github.com/Nityaa-20/Customer-Data-Analysis-Project" target="_blank"
-                            class="cs-gh">View on GitHub →</a><br>
-                        <button class="cs-expand" data-idx="1">View Case Study ↓</button>
                     </div>
-                    <!-- Card 03 -->
-                    <div class="cs-card" data-idx="2">
-                        <div class="cs-num">03</div>
-                        <div class="cs-type">Machine Learning</div>
-                        <div class="cs-title">Type-2 Diabetes Detection</div>
-                        <p class="cs-impact">Trained SVM model on clinical data for early-stage Type 2 Diabetes
-                            prediction in healthcare analytics.</p>
-                        <div class="cs-tools">
-                            <span class="cs-tool">Python</span>
-                            <span class="cs-tool">Scikit-Learn</span>
-                            <span class="cs-tool">SVM</span>
-                        </div>
-                        <a href="https://github.com/Nityaa-20/Type-2-Diabetes-Detection-Model" target="_blank"
-                            class="cs-gh">View on GitHub →</a><br>
-                        <button class="cs-expand" data-idx="2">View Case Study ↓</button>
-                    </div>
-                    <!-- Card 04 -->
-                    <div class="cs-card" data-idx="3">
-                        <div class="cs-num">04</div>
-                        <div class="cs-type">NLP Application</div>
-                        <div class="cs-title">Smart Resume Analyzer</div>
-                        <p class="cs-impact">Auto-scores ATS compatibility, generates skill word-clouds, and stores
-                            improvement suggestions per resume.</p>
-                        <div class="cs-tools">
-                            <span class="cs-tool">Streamlit</span>
-                            <span class="cs-tool">Python</span>
-                            <span class="cs-tool">NLP</span>
-                        </div>
-                        <a href="https://github.com/Nityaa-20/Smart-Resume-Analyser" target="_blank" class="cs-gh">View
-                            on GitHub →</a><br>
-                        <button class="cs-expand" data-idx="3">View Case Study ↓</button>
-                    </div>
-                    <!-- Card 05 -->
-                    <div class="cs-card" data-idx="4">
-                        <div class="cs-num">05</div>
-                        <div class="cs-type">Full-Stack App</div>
-                        <div class="cs-title">Expense Tracker</div>
-                        <p class="cs-impact">Categorises daily spend as necessary vs unnecessary with visual graphs
-                            revealing monthly patterns.</p>
-                        <div class="cs-tools">
-                            <span class="cs-tool">Flask</span>
-                            <span class="cs-tool">JavaScript</span>
-                            <span class="cs-tool">PostgreSQL</span>
-                        </div>
-                        <a href="https://github.com/Nityaa-20/Expense-Tracker" target="_blank" class="cs-gh">View on
-                            GitHub →</a><br>
-                        <button class="cs-expand" data-idx="4">View Case Study ↓</button>
+
+                    <div class="pj-hint" id="pj-hint">scroll to explore →</div>
+                    <div class="pj-progress-bg">
+                        <div class="pj-progress-fill" id="pj-progress"></div>
                     </div>
                 </div>
-                <!-- Scroll hint arrow -->
-                <div class="cs-hint" id="cs-hint">→</div>
             </div>
-
-            <!-- Expandable Detail Panel -->
-            <div class="cs-detail-panel" id="cs-detail"></div>
         </div>
+
+        <style>
+            #projects {
+                background: #02020e;
+                overflow: visible;
+                position: relative;
+            }
+
+            .pj-outer {
+                height: calc(100vh + 2500px);
+                position: relative;
+            }
+
+            .pj-sticky {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+            }
+
+            .pj-header {
+                position: absolute;
+                top: 5vh;
+                left: 0;
+                right: 0;
+                z-index: 10;
+            }
+
+            .pj-track-wrap {
+                width: 100%;
+                overflow: hidden;
+                padding-top: 15vh;
+            }
+
+            .pj-track {
+                display: flex;
+                gap: 60px;
+                padding: 0 10vw 0 10vw;
+                will-change: transform;
+            }
+
+            .pj-card {
+                flex: 0 0 400px;
+                height: 64vh;
+                border-radius: 16px;
+                background: rgba(255, 255, 255, 0.032);
+                border: 1px solid rgba(255, 255, 255, 0.07);
+                padding: 44px 40px;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                transition: border-color 0.3s ease, background 0.3s ease;
+            }
+
+            .pj-card:hover {
+                border-color: rgba(255, 255, 255, 0.14);
+                background: rgba(255, 255, 255, 0.048);
+            }
+
+            .pj-num {
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                font-size: 6rem;
+                font-weight: 900;
+                opacity: 0.05;
+                font-family: 'JetBrains Mono', monospace;
+                pointer-events: none;
+            }
+
+            .pj-type {
+                font-size: 0.62rem;
+                text-transform: uppercase;
+                letter-spacing: 0.22em;
+                color: rgba(237, 233, 254, 0.4);
+                margin-bottom: 12px;
+            }
+
+            .pj-title {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #f1f0ff;
+                margin-bottom: 16px;
+            }
+
+            .pj-divider {
+                height: 1px;
+                background: rgba(255, 255, 255, 0.07);
+                margin-bottom: 20px;
+            }
+
+            .pj-impact {
+                font-size: 0.85rem;
+                line-height: 1.8;
+                color: rgba(237, 233, 254, 0.6);
+                margin-bottom: auto;
+            }
+
+            .pj-tools {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 24px;
+                margin-bottom: 24px;
+            }
+
+            .pj-tool {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.66rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 4px 10px;
+                border-radius: 4px;
+                background: rgba(255, 255, 255, 0.03);
+                color: rgba(237, 233, 254, 0.55);
+            }
+
+            .pj-link {
+                font-size: 0.78rem;
+                color: #c084fc;
+                text-decoration: none;
+                display: inline-block;
+                width: fit-content;
+                border-bottom: 1px solid transparent;
+                transition: 0.2s;
+            }
+
+            .pj-link:hover {
+                border-bottom: 1px solid #c084fc;
+            }
+
+            .pj-progress-bg {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: rgba(255, 255, 255, 0.06);
+            }
+
+            .pj-progress-fill {
+                height: 100%;
+                background: #c084fc;
+                width: 0%;
+                will-change: width;
+            }
+
+            .pj-hint {
+                position: absolute;
+                bottom: 40px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 0.72rem;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: rgba(237, 233, 254, 0.35);
+                transition: opacity 0.5s;
+            }
+
+            @media(max-width: 768px) {
+                .pj-outer {
+                    height: auto !important;
+                }
+
+                .pj-sticky {
+                    position: relative;
+                    height: auto;
+                    overflow: visible;
+                    padding: 60px 0;
+                }
+
+                .pj-header {
+                    position: relative;
+                    top: 0;
+                    margin-bottom: 40px;
+                }
+
+                .pj-track-wrap {
+                    padding-top: 0;
+                }
+
+                .pj-track {
+                    flex-direction: column;
+                    padding: 0 5vw;
+                    gap: 20px;
+                    transform: none !important;
+                }
+
+                .pj-card {
+                    width: 100%;
+                    flex: none;
+                    height: auto;
+                    padding: 32px 28px;
+                }
+
+                .pj-progress-bg,
+                .pj-hint {
+                    display: none;
+                }
+
+                .pj-num {
+                    font-size: 4rem;
+                    top: 10px;
+                    right: 20px;
+                }
+            }
+        </style>
+
+        <script>
+            (function () {
+                const outer = document.getElementById('pj-outer');
+                const track = document.getElementById('pj-track');
+                const progress = document.getElementById('pj-progress');
+                const hint = document.getElementById('pj-hint');
+                if (!outer || !track) return;
+
+                let targetX = 0;
+                let currentX = 0;
+                let isMobile = window.innerWidth < 768;
+
+                const setOuterHeight = () => {
+                    if (isMobile) {
+                        outer.style.height = 'auto';
+                        return;
+                    }
+                    const actualMaxTrack = track.scrollWidth - window.innerWidth;
+                    const requiredOuterHeight = window.innerHeight + actualMaxTrack + 800;
+                    outer.style.height = requiredOuterHeight + 'px';
+                };
+
+                window.addEventListener('resize', () => {
+                    isMobile = window.innerWidth < 768;
+                    setOuterHeight();
+                    if (isMobile) {
+                        track.style.transform = 'none';
+                    }
+                });
+
+                // Initial calculations
+                setTimeout(setOuterHeight, 100);
+                setTimeout(setOuterHeight, 600);
+                window.addEventListener('load', setOuterHeight);
+
+                function update() {
+                    if (isMobile) return requestAnimationFrame(update);
+
+                    const rect = outer.getBoundingClientRect();
+                    const maxTrack = track.scrollWidth - window.innerWidth;
+
+                    const totalScrollable = rect.height - window.innerHeight;
+                    if (totalScrollable <= 0) return requestAnimationFrame(update);
+
+                    let p = -rect.top / totalScrollable;
+                    p = Math.max(0, Math.min(1, p));
+
+                    const safeMax = track.scrollWidth - window.innerWidth - (window.innerWidth * 0.1);
+                    targetX = -p * Math.max(0, safeMax);
+
+                    currentX += (targetX - currentX) * 0.1;
+                    track.style.transform = `translateX(${currentX}px)`;
+
+                    progress.style.width = (p * 100) + '%';
+                    if (p > 0.01 && hint) hint.style.opacity = '0';
+
+                    requestAnimationFrame(update);
+                }
+                requestAnimationFrame(update);
+            })();
+        </script>
     </section>
 
     <!-- CERTS -->
@@ -5181,111 +5254,7 @@
         const assistantRoot = ReactDOM.createRoot(document.getElementById('assistant-root'));
         assistantRoot.render(<PortfolioAssistant />);
 
-        /* ═══════════════════════════════════════════════════
-           PROJECTS — Case Study Expand Logic
-        ═══════════════════════════════════════════════════ */
-        (() => {
-            const scrollEl = document.getElementById('cs-scroll');
-            const hint = document.getElementById('cs-hint');
-            const panel = document.getElementById('cs-detail');
-            if (!scrollEl || !panel) return;
 
-            const projects = [
-                {
-                    type: 'Data Analytics', title: 'IPL Analysis Dashboard',
-                    tools: ['Power BI', 'DAX', 'Excel'],
-                    desc: 'Interactive Power BI dashboard analysing IPL data 2008-2025. Dynamic filters for team performance, top scorers, wicket leaders, venue impact, and toss influence with custom DAX measures.',
-                    github: 'https://github.com/Nityaa-20/IPL-Analysis-'
-                },
-                {
-                    type: 'Business Intelligence', title: 'Customer Behaviour Analysis',
-                    tools: ['Python', 'PostgreSQL', 'Power BI'],
-                    desc: 'End-to-end BI dashboard for sales, revenue & subscription trends. PostgreSQL + Python pipeline for data extraction and cleaning with actionable demographic and purchasing insights.',
-                    github: 'https://github.com/Nityaa-20/Customer-Data-Analysis-Project'
-                },
-                {
-                    type: 'Machine Learning', title: 'Type-2 Diabetes Detection',
-                    tools: ['Python', 'Scikit-Learn', 'SVM'],
-                    desc: 'ML model using Support Vector Machine on clinical health data for Type 2 Diabetes prediction. Built for early diagnosis support in healthcare analytics using NumPy, Pandas & Matplotlib.',
-                    github: 'https://github.com/Nityaa-20/Type-2-Diabetes-Detection-Model'
-                },
-                {
-                    type: 'NLP Application', title: 'Smart Resume Analyzer',
-                    tools: ['Streamlit', 'Python', 'NLP'],
-                    desc: 'Auto-extracts resume details, generates skill word-cloud visualizations, calculates ATS compatibility score vs job descriptions, stores results with actionable improvement suggestions.',
-                    github: 'https://github.com/Nityaa-20/Smart-Resume-Analyser'
-                },
-                {
-                    type: 'Full-Stack App', title: 'Expense Tracker',
-                    tools: ['Flask', 'JavaScript', 'PostgreSQL'],
-                    desc: 'Full-stack finance tracker categorising daily expenses (necessary vs unnecessary). Visual graphs reveal spending patterns with HTML/CSS/JS, Flask, and PostgreSQL backend.',
-                    github: 'https://github.com/Nityaa-20/Expense-Tracker'
-                }
-            ];
-
-            let openIdx = -1;
-
-            // Scroll hint — fade out after first scroll
-            let hintVisible = true;
-            scrollEl.addEventListener('scroll', () => {
-                if (hintVisible && hint) {
-                    hint.style.opacity = '0';
-                    hintVisible = false;
-                }
-            }, { passive: true, once: true });
-
-            // Translate vertical scroll to horizontal scroll
-            scrollEl.addEventListener('wheel', (evt) => {
-                if (evt.deltaY === 0) return;
-
-                const maxScrollLeft = scrollEl.scrollWidth - scrollEl.clientWidth;
-                const isAtStart = scrollEl.scrollLeft <= 0;
-                const isAtEnd = scrollEl.scrollLeft >= maxScrollLeft - 1; // 1px margin for rounding
-
-                // Allow default vertical scroll if at horizontal boundaries
-                if ((evt.deltaY < 0 && isAtStart) || (evt.deltaY > 0 && isAtEnd)) {
-                    return;
-                }
-
-                evt.preventDefault();
-                scrollEl.scrollLeft += evt.deltaY;
-            }, { passive: false });
-
-            // Expand buttons
-            document.querySelectorAll('.cs-expand').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const idx = parseInt(btn.dataset.idx, 10);
-                    if (openIdx === idx) {
-                        // Close
-                        panel.classList.remove('open');
-                        openIdx = -1;
-                        btn.textContent = 'View Case Study \u2193';
-                        return;
-                    }
-                    // Close previous button text
-                    document.querySelectorAll('.cs-expand').forEach(b => {
-                        b.textContent = 'View Case Study \u2193';
-                    });
-                    // Open
-                    const p = projects[idx];
-                    panel.innerHTML = `
-                        <div class="cs-type">${p.type}</div>
-                        <div class="cs-title">${p.title}</div>
-                        <p class="cs-impact">${p.desc}</p>
-                        <div class="cs-tools">${p.tools.map(t => `<span class="cs-tool">${t}</span>`).join('')}</div>
-                        <a href="${p.github}" target="_blank" class="cs-gh">View on GitHub \u2192</a>
-                    `;
-                    panel.classList.add('open');
-                    openIdx = idx;
-                    btn.textContent = 'Close Case Study \u2191';
-                    setTimeout(() => {
-                        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }, 100);
-                });
-            });
-        })();
-
-        }) ();
 
     </script>
 </body>
