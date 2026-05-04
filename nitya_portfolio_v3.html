@@ -535,7 +535,6 @@
       font-size: clamp(2.8rem, 6.5vw, 5.2rem);
       font-weight: 900;
       line-height: 1.04;
-      margin-bottom: 14px;
       letter-spacing: -.05em;
       animation: fu .6s .1s ease both
     }
@@ -551,9 +550,17 @@
     .tr {
       font-size: clamp(1rem, 2.4vw, 1.4rem);
       color: var(--txt2);
-      margin-bottom: 26px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
       min-height: 2.2em;
       animation: fu .6s .2s ease both
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
     }
 
     .ty {
@@ -569,10 +576,10 @@
 
     .hd {
       color: var(--txt2);
-      line-height: 1.82;
-      font-size: .9rem;
+      line-height: 1.55;
+      font-size: clamp(0.95rem, 1.1vw, 1.1rem);
       max-width: 480px;
-      margin-bottom: 34px;
+      margin-bottom: 2rem;
       animation: fu .6s .3s ease both
     }
 
@@ -2714,10 +2721,12 @@
           <div class="hchip">
             <div class="hcd"></div>AVAILABLE FOR OPPORTUNITIES
           </div>
-          <h1 class="hn">Hi, I'm<br><span class="g">Nitya Mathur</span></h1>
-          <div class="tr"><span class="ty" id="typed"></span><span class="tc">|</span></div>
-          <p class="hd">CSE (AI & ML) student at SRM IST | CGPA 9.41 | Transforming raw data into intelligent insights,
-            predictive models, and beautiful dashboards.</p>
+          <div class="hero-content">
+            <h1 class="hn">Hi, I'm<br><span class="g">Nitya Mathur</span></h1>
+            <div class="tr"><span class="ty" id="typed"></span><span class="tc">|</span></div>
+            <p class="hd">Believes the best solutions live at the intersection of data, creativity, and purpose.<br>
+              Driven by the idea that the best technology feels invisible — and inevitable.</p>
+          </div>
           <div class="hbs">
             <a href="#projects" class="btn bp">View Projects</a>
             <a href="https://github.com/" target="_blank" class="btn bo">
@@ -2729,7 +2738,6 @@
             </a>
             <a href="#resume" class="btn bo">Resume</a>
           </div>
-          <div class="hloc">Jodhpur, Rajasthan &nbsp;|&nbsp; SRM IST-Ghaziabad | 2027</div>
         </div>
         <div class="hv">
           <div class="hvw">
