@@ -2678,6 +2678,13 @@
       opacity: 1;
       z-index: 10;
     }
+
+    .highlight {
+      background: linear-gradient(90deg, #ec4899, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
   </style>
 </head>
 
@@ -2795,11 +2802,10 @@
                       </div>
                     </div>
                     <div class="profile-copy">
-                      <p>Hey! I&apos;m Nitya Mathur - a B.Tech CSE (AI &amp; ML) student at SRM IST-Ghaziabad, driven by
-                        a love for turning complex data into meaningful stories. I build ML models, BI dashboards, and
-                        full-stack apps that solve real problems.</p>
-                      <p>From detecting Type 2 Diabetes with SVM to building interactive IPL dashboards and smart resume
-                        analyzers - I thrive at the intersection of AI, data analytics, and clean UI design.</p>
+                      <p>Hey! I'm <span class="highlight">Nitya Mathur</span>, a B.Tech.-Computer Science and Engineering with specialization in Artificial Intelligence and Machine Learning student at <span class="highlight">SRM Institute of Science and Technology</span>, with a strong interest in building intelligent and data-driven solutions.</p>
+                      <p>I enjoy working on projects that transform <span class="highlight">complex data into meaningful insights</span> — from machine learning models and predictive systems to interactive dashboards and full-stack applications. My work includes <span class="highlight">Type 2 Diabetes prediction</span> using Ensemble Learning, IPL data analytics dashboards, and a student portal analysis.</p>
+                      <p>I’m particularly drawn to the <span class="highlight">intersection of AI, data analytics, and intuitive design</span>, where technology not only solves problems but also delivers clear and impactful user experiences.</p>
+                      <p>I also focus on strengthening my problem-solving and analytical thinking through continuous learning and hands-on projects. My goal is to build solutions that are not only technically sound but also <span class="highlight">practical, user-focused, and impactful.</span></p>
                     </div>
                   </div>
                 </div>
@@ -3567,9 +3573,9 @@
       draw();
     })();
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* 
        TYPING
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    */
     const phrases = ['Building Intelligent Models', 'Solving Real-World Problems', 'Turning Data into Insights', 'Designing Smart Dashboards'];
     let pi = 0, ci = 0, del = false;
     const tel = document.getElementById('typed');
@@ -3580,9 +3586,9 @@
     }
     type();
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* 
        SKILLS
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    */
     (() => {
       const tabNetwork = document.getElementById('tab-network');
       const tabGrouped = document.getElementById('tab-grouped');
