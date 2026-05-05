@@ -2719,6 +2719,22 @@
             .f-container { padding-top: 60px; }
         }
 
+        /* â”€â”€ NEURAL BACKGROUND SCROLL ANIMATION â”€â”€ */
+        @keyframes pulse {
+            0%   { transform: scale(1); opacity: 0.6; }
+            50%  { transform: scale(1.4); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.6; }
+        }
+
+        .neural-node, .neural-line {
+            transition: all 0.3s ease;
+        }
+
+        body.scrolling .neural-node {
+            opacity: 1;
+            animation: pulse 0.8s infinite;
+        }
+
         /* â”€â”€ REVEAL â”€â”€ */
         .rv {
             opacity: 0;
@@ -3301,8 +3317,7 @@
                                                 dashboards and full-stack applications. My work includes <span
                                                     class="highlight">Type 2 Diabetes
                                                     prediction</span> using Ensemble Learning, IPL data analytics
-                                                dashboards, and a student portal
-                                                analysis.</p>
+                                                dashboards, and a student portal.</p>
                                             <p>I’m particularly drawn to the <span class="highlight">intersection of AI,
                                                     data analytics, and
                                                     intuitive design</span>, where technology not only solves problems
@@ -4543,25 +4558,84 @@
             const c = document.getElementById('bgc'), x = c.getContext('2d');
             let W, H, pts = [];
             const cols = ['rgba(192,132,252,', 'rgba(244,114,182,', 'rgba(34,211,238,', 'rgba(129,140,248,'];
+            let isScrolling = false, scrollTimeout;
+
+            window.addEventListener("scroll", () => {
+                isScrolling = true;
+                document.body.classList.add("scrolling");
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    isScrolling = false;
+                    document.body.classList.remove("scrolling");
+                }, 150);
+            });
+
             function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight }
             resize(); window.addEventListener('resize', resize);
+            
             for (let i = 0; i < 90; i++) pts.push({
                 x: Math.random() * 2000, y: Math.random() * 1200,
                 vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22,
-                r: Math.random() * 1.5 + .4, c: cols[~~(Math.random() * 4)], a: Math.random() * .45 + .15
+                r: Math.random() * 1.5 + .4, 
+                c: cols[~~(Math.random() * 4)], 
+                a: Math.random() * .45 + .15,
+                phase: Math.random() * Math.PI * 2
             });
+
             function draw() {
+                const now = Date.now();
+                const pulse = Math.sin(now * 0.006) * 0.5 + 0.5;
                 x.clearRect(0, 0, W, H);
+                
                 pts.forEach(p => {
                     p.x += p.vx; p.y += p.vy;
                     if (p.x < 0) p.x = W; if (p.x > W) p.x = 0; if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-                    x.beginPath(); x.arc(p.x, p.y, p.r, 0, Math.PI * 2); x.fillStyle = p.c + p.a + ')'; x.fill();
+                    
+                    let radius = p.r;
+                    let opacity = p.a;
+                    
+                    if (isScrolling) {
+                        const individualPulse = Math.sin(now * 0.008 + p.phase) * 0.5 + 0.5;
+                        radius *= (1.1 + individualPulse * 0.4);
+                        opacity = Math.min(0.8, opacity * 1.5 + individualPulse * 0.3);
+                        x.shadowBlur = 10 * individualPulse;
+                        x.shadowColor = '#22d3ee';
+                    } else {
+                        opacity *= 0.5;
+                        x.shadowBlur = 0;
+                    }
+                    
+                    x.beginPath(); x.arc(p.x, p.y, radius, 0, Math.PI * 2); 
+                    x.fillStyle = p.c + opacity + ')'; 
+                    x.fill();
                 });
+                
+                x.shadowBlur = 0; // Reset shadow for lines
+                
                 for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
                     const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, d = Math.sqrt(dx * dx + dy * dy);
                     if (d < 120) {
+                        let lineOpacity = .08 * (1 - d / 120);
+                        if (isScrolling) {
+                            lineOpacity *= 2.5;
+                            x.strokeStyle = `rgba(34,211,238,${lineOpacity})`;
+                            x.lineWidth = 0.6;
+                        } else {
+                            lineOpacity *= 0.4;
+                            x.strokeStyle = `rgba(192,132,252,${lineOpacity})`;
+                            x.lineWidth = 0.3;
+                        }
                         x.beginPath(); x.moveTo(pts[i].x, pts[i].y); x.lineTo(pts[j].x, pts[j].y);
-                        x.strokeStyle = `rgba(192,132,252,${.08 * (1 - d / 120)})`; x.lineWidth = .4; x.stroke()
+                        x.stroke();
+
+                        // Energy flow effect
+                        if (isScrolling && Math.random() > 0.98) {
+                            const t = (now * 0.002) % 1;
+                            const ex = pts[i].x + (pts[j].x - pts[i].x) * t;
+                            const ey = pts[i].y + (pts[j].y - pts[i].y) * t;
+                            x.beginPath(); x.arc(ex, ey, 1, 0, Math.PI * 2);
+                            x.fillStyle = '#22d3ee'; x.fill();
+                        }
                     }
                 }
                 requestAnimationFrame(draw);
