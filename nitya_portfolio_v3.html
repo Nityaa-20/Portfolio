@@ -2546,8 +2546,17 @@
         }
 
         @keyframes f-twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
         }
 
         .f-orb {
@@ -2560,9 +2569,19 @@
         }
 
         @keyframes f-float {
-            0%, 100% { transform: translate(0, 0); }
-            33% { transform: translate(30px, -50px); }
-            66% { transform: translate(-20px, 40px); }
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            33% {
+                transform: translate(30px, -50px);
+            }
+
+            66% {
+                transform: translate(-20px, 40px);
+            }
         }
 
         /* Content Structure */
@@ -2648,17 +2667,41 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .f-sc.in:hover { box-shadow: 0 10px 30px rgba(10, 102, 194, 0.3); border-color: #0A66C2; }
-        .f-sc.in:hover i { color: #0A66C2; }
-        
-        .f-sc.gh:hover { box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3); border-color: #a855f7; }
-        .f-sc.gh:hover i { color: #a855f7; }
-        
-        .f-sc.ig:hover { box-shadow: 0 10px 30px rgba(244, 114, 182, 0.3); border-color: #f472b6; }
-        .f-sc.ig:hover i { color: #f472b6; }
-        
-        .f-sc.em:hover { box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3); border-color: #22d3ee; }
-        .f-sc.em:hover i { color: #22d3ee; }
+        .f-sc.in:hover {
+            box-shadow: 0 10px 30px rgba(10, 102, 194, 0.3);
+            border-color: #0A66C2;
+        }
+
+        .f-sc.in:hover i {
+            color: #0A66C2;
+        }
+
+        .f-sc.gh:hover {
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+            border-color: #a855f7;
+        }
+
+        .f-sc.gh:hover i {
+            color: #a855f7;
+        }
+
+        .f-sc.ig:hover {
+            box-shadow: 0 10px 30px rgba(244, 114, 182, 0.3);
+            border-color: #f472b6;
+        }
+
+        .f-sc.ig:hover i {
+            color: #f472b6;
+        }
+
+        .f-sc.em:hover {
+            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
+            border-color: #22d3ee;
+        }
+
+        .f-sc.em:hover i {
+            color: #22d3ee;
+        }
 
         /* Bottom Credit */
         .f-bottom {
@@ -2712,8 +2755,15 @@
         }
 
         @keyframes f-pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(2.5); opacity: 0; }
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
         }
 
         .f-bar {
@@ -2733,18 +2783,36 @@
         }
 
         @media (max-width: 768px) {
-            .f-bottom { justify-content: center; text-align: center; }
-            .f-container { padding-top: 60px; }
+            .f-bottom {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .f-container {
+                padding-top: 60px;
+            }
         }
 
         /* â”€â”€ NEURAL BACKGROUND SCROLL ANIMATION â”€â”€ */
         @keyframes pulse {
-            0%   { transform: scale(1); opacity: 0.6; }
-            50%  { transform: scale(1.4); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.6; }
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: scale(1.4);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
         }
 
-        .neural-node, .neural-line {
+        .neural-node,
+        .neural-line {
             transition: all 0.3s ease;
         }
 
@@ -3244,11 +3312,13 @@
                     </div>
                     <div class="hbs">
                         <a href="#projects" class="btn bp">View Projects</a>
-                        <a href="https://github.com/Nityaa-20" target="_blank" rel="noopener noreferrer" class="btn bo github-btn">
+                        <a href="https://github.com/Nityaa-20" target="_blank" rel="noopener noreferrer"
+                            class="btn bo github-btn">
                             <i class="fab fa-github"></i>
                             GitHub Profile
                         </a>
-                        <a href="https://resume-o-c.tiiny.site" target="_blank" class="btn bo resume-btn" title="View Resume ↗">
+                        <a href="https://resume-o-c.tiiny.site" target="_blank" class="btn bo resume-btn"
+                            title="View Resume ↗">
                             <span class="icon">
                                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                     <path d="M.5 9.9v3.6c0 .6.4 1 1 1h13c.6 0 1-.4 1-1V9.9h-1.5v3.1h-12V9.9H.5z" />
@@ -3803,7 +3873,7 @@
                 background: rgba(255, 255, 255, 0.06);
                 transform: translateY(-6px);
                 box-shadow: 0 0 25px rgba(34, 211, 238, 0.4),
-                            0 0 60px rgba(34, 211, 238, 0.2);
+                    0 0 60px rgba(34, 211, 238, 0.2);
             }
 
             .pj-card:hover .pj-tool {
@@ -4055,14 +4125,16 @@
                     <div class="cn">TensorFlow 2.0: Deep Learning & AI</div>
                     <div class="cb2">Udemy</div>
                     <div class="cd">September 2024</div>
-                    <a href="https://www.udemy.com/certificate/UC-a59c0176-3d28-425c-a045-5d3f53154252/" target="_blank" class="btn bo cert-btn">View Certificate</a>
+                    <a href="https://www.udemy.com/certificate/UC-a59c0176-3d28-425c-a045-5d3f53154252/" target="_blank"
+                        class="btn bo cert-btn">View Certificate</a>
                 </div>
                 <div class="cc gl rv">
                     <div class="sm"></div>
                     <div class="cn">Accenture Software Engineering Simulation</div>
                     <div class="cb2">Forage</div>
                     <div class="cd">July 2025</div>
-                    <a href="https://www.theforage.com/completion-certificates/xhih9yFWsf6AYfngd/HNpZwZcuYwona2d8Y_xhih9yFWsf6AYfngd_4LorNuQ7nNhbf4Dqo_1751527736696_completion_certificate.pdf" target="_blank" class="btn bo cert-btn">View Certificate</a>
+                    <a href="https://www.theforage.com/completion-certificates/xhih9yFWsf6AYfngd/HNpZwZcuYwona2d8Y_xhih9yFWsf6AYfngd_4LorNuQ7nNhbf4Dqo_1751527736696_completion_certificate.pdf"
+                        target="_blank" class="btn bo cert-btn">View Certificate</a>
                 </div>
                 <div class="cc gl rv">
                     <div class="sm"></div>
@@ -4191,48 +4263,51 @@
                     style="padding:34px; border-radius:20px; transition-delay:0.2s">
                     <div class="sm"></div>
 
-                    <div class="signal-meter">
-                        <span style="letter-spacing:0.1em">SIGNAL STRENGTH</span>
-                        <div class="signal-bars" id="signal-bars">
-                            <div class="signal-bar"></div>
-                            <div class="signal-bar"></div>
-                            <div class="signal-bar"></div>
-                            <div class="signal-bar"></div>
-                            <div class="signal-bar"></div>
+                    <form id="contact-form">
+                        <div class="signal-meter">
+                            <span style="letter-spacing:0.1em">SIGNAL STRENGTH</span>
+                            <div class="signal-bars" id="signal-bars">
+                                <div class="signal-bar"></div>
+                                <div class="signal-bar"></div>
+                                <div class="signal-bar"></div>
+                                <div class="signal-bar"></div>
+                                <div class="signal-bar"></div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="fg">
-                        <label>YOUR NAME</label>
-                        <input type="text" placeholder="Your Name" id="sig-name">
-                        <svg class="input-trace-svg">
-                            <rect class="input-trace-rect" width="100%" height="100%"></rect>
-                        </svg>
-                    </div>
+                        <div class="fg">
+                            <label>YOUR NAME</label>
+                            <input type="text" placeholder="Your Name" id="sig-name" name="user_name" required>
+                            <svg class="input-trace-svg">
+                                <rect class="input-trace-rect" width="100%" height="100%"></rect>
+                            </svg>
+                        </div>
 
-                    <div class="fg">
-                        <label>EMAIL</label>
-                        <input type="email" placeholder="you@email.com" id="sig-email">
-                        <svg class="input-trace-svg">
-                            <rect class="input-trace-rect" width="100%" height="100%"></rect>
-                        </svg>
-                    </div>
+                        <div class="fg">
+                            <label>EMAIL</label>
+                            <input type="email" placeholder="you@email.com" id="sig-email" name="user_email" required>
+                            <svg class="input-trace-svg">
+                                <rect class="input-trace-rect" width="100%" height="100%"></rect>
+                            </svg>
+                        </div>
 
-                    <div class="fg">
-                        <label>MESSAGE</label>
-                        <textarea placeholder="Tell me about your idea..." id="sig-msg"></textarea>
-                        <svg class="input-trace-svg">
-                            <rect class="input-trace-rect" width="100%" height="100%"></rect>
-                        </svg>
-                    </div>
+                        <div class="fg">
+                            <label>MESSAGE</label>
+                            <textarea placeholder="Tell me about your idea..." id="sig-msg" name="message"
+                                required></textarea>
+                            <svg class="input-trace-svg">
+                                <rect class="input-trace-rect" width="100%" height="100%"></rect>
+                            </svg>
+                        </div>
 
-                    <button class="btn bp btn-transmission" style="width:100%; justify-content:center"
-                        onclick="fTransmit(this)">
-                        <span class="btx">Send Message</span>
-                        <div class="data-packet" style="animation-delay:0s"></div>
-                        <div class="data-packet" style="animation-delay:0.3s"></div>
-                        <div class="data-packet" style="animation-delay:0.6s"></div>
-                    </button>
+                        <button type="submit" class="btn bp btn-transmission"
+                            style="width:100%; justify-content:center">
+                            <span class="btx">Send Message</span>
+                            <div class="data-packet" style="animation-delay:0s"></div>
+                            <div class="data-packet" style="animation-delay:0.3s"></div>
+                            <div class="data-packet" style="animation-delay:0.6s"></div>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -4248,23 +4323,31 @@
             <div class="f-star" style="top: 85%; left: 10%; --d: 6s;"></div>
             <div class="f-star" style="top: 20%; left: 60%; --d: 4.5s;"></div>
         </div>
-        <div class="f-orb" style="width: 300px; height: 300px; background: var(--f-purple); top: -100px; left: -50px;"></div>
-        <div class="f-orb" style="width: 250px; height: 250px; background: var(--f-cyan); bottom: -50px; right: -50px; animation-delay: -5s;"></div>
-        <div class="f-orb" style="width: 200px; height: 200px; background: var(--f-pink); top: 40%; left: 60%; animation-delay: -10s;"></div>
+        <div class="f-orb" style="width: 300px; height: 300px; background: var(--f-purple); top: -100px; left: -50px;">
+        </div>
+        <div class="f-orb"
+            style="width: 250px; height: 250px; background: var(--f-cyan); bottom: -50px; right: -50px; animation-delay: -5s;">
+        </div>
+        <div class="f-orb"
+            style="width: 200px; height: 200px; background: var(--f-pink); top: 40%; left: 60%; animation-delay: -10s;">
+        </div>
 
         <div class="f-content">
             <div class="f-name-block">
                 <h2 class="f-name">Nitya.</h2>
-                <p class="f-desc">AI/ML Engineer crafting data-driven intelligence with Python, Scikit-learn & real-world impact.</p>
+                <p class="f-desc">AI/ML Engineer crafting data-driven intelligence with Python, Scikit-learn &
+                    real-world impact.</p>
             </div>
 
             <div class="f-divider"></div>
 
             <span class="f-label">// connect with me</span>
             <div class="f-socs">
-                <a href="https://www.linkedin.com/in/nitya-mathur-330a03343/" target="_blank" class="f-sc in"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.linkedin.com/in/nitya-mathur-330a03343/" target="_blank" class="f-sc in"><i
+                        class="fab fa-linkedin-in"></i></a>
                 <a href="https://github.com/Nityaa-20" target="_blank" class="f-sc gh"><i class="fab fa-github"></i></a>
-                <a href="https://www.instagram.com/_nityamathur_/" target="_blank" class="f-sc ig"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/_nityamathur_/" target="_blank" class="f-sc ig"><i
+                        class="fab fa-instagram"></i></a>
                 <a href="mailto:nitya.20.mathur@gmail.com" class="f-sc em"><i class="fas fa-envelope"></i></a>
             </div>
 
@@ -4590,12 +4673,12 @@
 
             function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight }
             resize(); window.addEventListener('resize', resize);
-            
+
             for (let i = 0; i < 90; i++) pts.push({
                 x: Math.random() * 2000, y: Math.random() * 1200,
                 vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22,
-                r: Math.random() * 1.5 + .4, 
-                c: cols[~~(Math.random() * 4)], 
+                r: Math.random() * 1.5 + .4,
+                c: cols[~~(Math.random() * 4)],
                 a: Math.random() * .45 + .15,
                 phase: Math.random() * Math.PI * 2
             });
@@ -4604,14 +4687,14 @@
                 const now = Date.now();
                 const pulse = Math.sin(now * 0.006) * 0.5 + 0.5;
                 x.clearRect(0, 0, W, H);
-                
+
                 pts.forEach(p => {
                     p.x += p.vx; p.y += p.vy;
                     if (p.x < 0) p.x = W; if (p.x > W) p.x = 0; if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-                    
+
                     let radius = p.r;
                     let opacity = p.a;
-                    
+
                     if (isScrolling) {
                         const individualPulse = Math.sin(now * 0.008 + p.phase) * 0.5 + 0.5;
                         radius *= (1.1 + individualPulse * 0.4);
@@ -4622,14 +4705,14 @@
                         opacity *= 0.5;
                         x.shadowBlur = 0;
                     }
-                    
-                    x.beginPath(); x.arc(p.x, p.y, radius, 0, Math.PI * 2); 
-                    x.fillStyle = p.c + opacity + ')'; 
+
+                    x.beginPath(); x.arc(p.x, p.y, radius, 0, Math.PI * 2);
+                    x.fillStyle = p.c + opacity + ')';
                     x.fill();
                 });
-                
+
                 x.shadowBlur = 0; // Reset shadow for lines
-                
+
                 for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
                     const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, d = Math.sqrt(dx * dx + dy * dy);
                     if (d < 120) {
@@ -6053,6 +6136,28 @@
         }, { threshold: 0.6 });
         projectCards.forEach(card => stackObserver.observe(card));
 
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("ROMAN69Nmp7F1oxQY");
+        })();
+
+        document.getElementById("contact-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const btn = this.querySelector('.btn-transmission');
+            if (typeof fTransmit === 'function') fTransmit(btn);
+
+            emailjs.sendForm("service_7zgwb18", "template_tg95mqh", this)
+                .then(function () {
+                    alert("Message sent successfully!");
+                    document.getElementById("contact-form").reset();
+                }, function (error) {
+                    alert("Failed to send message.");
+                    console.log("EmailJS Error:", error);
+                });
+        });
     </script>
 </body>
 
