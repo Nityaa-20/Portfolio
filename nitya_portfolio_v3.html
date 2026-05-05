@@ -2450,6 +2450,12 @@
             animation: assistantFloat 4.8s ease-in-out infinite
         }
 
+        #chatInput {
+            position: relative;
+            z-index: 999;
+            pointer-events: auto;
+        }
+
         .assistant-pulse {
             animation: assistantPulse 2.8s ease-in-out infinite
         }
@@ -3570,13 +3576,22 @@
                 flex-direction: column;
                 position: relative;
                 backdrop-filter: blur(20px);
-                transition: border-color 0.3s, background 0.3s, transform 0.3s;
+                transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
             }
 
             .pj-card:hover {
-                border-color: rgba(192, 132, 252, 0.3);
+                border-color: rgba(34, 211, 238, 0.4);
                 background: rgba(255, 255, 255, 0.06);
-                transform: translateY(-5px);
+                transform: translateY(-6px);
+                box-shadow: 0 0 25px rgba(34, 211, 238, 0.4),
+                            0 0 60px rgba(34, 211, 238, 0.2);
+            }
+
+            .pj-card:hover .pj-tool {
+                border-color: #22d3ee;
+                color: #22d3ee;
+                background: rgba(34, 211, 238, 0.15);
+                box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
             }
 
             .pj-num {
@@ -3601,6 +3616,25 @@
                 line-height: 1.2;
                 margin-bottom: 20px;
                 color: #fff;
+                position: relative;
+                display: inline-block;
+            }
+
+            .pj-title::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: #22d3ee;
+                box-shadow: 0 0 10px #22d3ee;
+                transition: width 0.3s ease;
+                opacity: 0.8;
+            }
+
+            .pj-card:hover .pj-title::after {
+                width: 100%;
             }
 
             .pj-divider {
@@ -3631,9 +3665,10 @@
                 font-weight: 700;
                 padding: 4px 12px;
                 border-radius: 50px;
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                color: var(--txt2);
+                background: rgba(34, 211, 238, 0.05);
+                border: 1px solid rgba(34, 211, 238, 0.2);
+                color: rgba(34, 211, 238, 0.8);
+                transition: all 0.3s ease;
             }
 
             .pj-link {
@@ -5156,7 +5191,7 @@
                 if (p < 1.1) requestAnimationFrame(animArc);
                 else {
                     document.body.removeChild(arcCv);
-                    btx.textContent = 'Signal Sent âœ“';
+                    btx.textContent = 'Signal Sent';
                     btn.style.boxShadow = '';
                     setTimeout(() => { btx.textContent = 'Send Message' }, 3000);
                 }
@@ -5441,8 +5476,16 @@
             return (
                 <form onSubmit={onSubmit} className="mt-3 flex items-center gap-3">
                     <input
+                        id="chatInput"
                         value={value}
                         onChange={onChange}
+                        onKeyDown={(e) => {
+                            console.log("typing: " + e.key);
+                            if (e.key === 'Enter') {
+                                onSubmit(e);
+                            }
+                        }}
+                        autoComplete="off"
                         disabled={disabled}
                         placeholder="Ask about projects, skills, or contact"
                         className={[
