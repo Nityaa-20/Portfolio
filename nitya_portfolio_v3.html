@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nitya Mathur | AI & Data Portfolio</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;700&family=Fira+Code:wght@400;500&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script>
         window.tailwind = {
             config: {
@@ -39,6 +40,12 @@
             --cy2: #06b6d4;
             --bl: #818cf8;
             --bg: #02020e;
+            --f-bg: #0a0b14;
+            --f-cyan: #22d3ee;
+            --f-purple: #c084fc;
+            --f-pink: #f472b6;
+            --f-green: #4ade80;
+            --f-text: rgba(255, 255, 255, 0.8);
             --glass: rgba(255, 255, 255, .032);
             --glass2: rgba(255, 255, 255, .065);
             --border: rgba(192, 132, 252, .13);
@@ -47,6 +54,8 @@
             --txt2: rgba(237, 233, 254, .52);
             --txt3: rgba(237, 233, 254, .27);
             --ff: 'Segoe UI', system-ui, sans-serif;
+            --ff-space: 'Space Grotesk', sans-serif;
+            --ff-fira: 'Fira Code', monospace;
         }
 
         *,
@@ -2482,51 +2491,232 @@
             border-radius: 999px
         }
 
-        /* â”€â”€ FOOTER â”€â”€ */
-        footer {
-            text-align: center;
-            padding: 44px 24px;
-            border-top: 1px solid rgba(192, 132, 252, .1);
-            color: var(--txt3);
-            font-size: .78rem;
+        /* â”€â”€ ENHANCED FUTURISTIC FOOTER â”€â”€ */
+        .f-container {
             position: relative;
-            z-index: 2
+            background: var(--f-bg);
+            padding: 100px 24px 40px;
+            overflow: hidden;
+            border-top: 1px solid rgba(192, 132, 252, 0.15);
+            font-family: var(--ff-space);
+            color: var(--f-text);
         }
 
-        footer span {
-            background: linear-gradient(135deg, var(--p), var(--pk));
+        /* BG Effects */
+        .f-grid {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(192, 132, 252, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .f-stars {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .f-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: f-twinkle var(--d) ease-in-out infinite;
+        }
+
+        @keyframes f-twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .f-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            animation: f-float 20s infinite ease-in-out;
+        }
+
+        @keyframes f-float {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -50px); }
+            66% { transform: translate(-20px, 40px); }
+        }
+
+        /* Content Structure */
+        .f-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        .f-name-block {
+            margin-bottom: 40px;
+        }
+
+        .f-name {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--f-pink), var(--bl), var(--f-cyan));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.04em;
         }
 
-        .socs {
+        .f-desc {
+            max-width: 500px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 30px;
+        }
+
+
+
+        .f-divider {
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(90deg, rgba(192, 132, 252, 0.3), transparent);
+            margin: 40px 0;
+        }
+
+        .f-label {
+            font-family: var(--ff-fira);
+            font-size: 0.75rem;
+            color: rgba(192, 132, 252, 0.6);
+            text-transform: lowercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        /* Socials */
+        .f-socs {
             display: flex;
-            gap: 13px;
-            justify-content: center;
-            margin-bottom: 22px
+            gap: 16px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
         }
 
-        .sc {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: var(--glass);
-            border: 1px solid var(--border);
+        .f-sc {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: .95rem;
-            transition: all .35s cubic-bezier(.34, 1.56, .64, 1);
-            color: var(--txt2);
-            cursor: none
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(10px);
+            cursor: none;
         }
 
-        .sc:hover {
-            background: rgba(192, 132, 252, .12);
-            border-color: var(--border2);
-            box-shadow: 0 0 24px rgba(192, 132, 252, .32);
-            transform: translateY(-5px) scale(1.1)
+        .f-sc i {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            transition: 0.3s ease;
+        }
+
+        .f-sc:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .f-sc.in:hover { box-shadow: 0 10px 30px rgba(10, 102, 194, 0.3); border-color: #0A66C2; }
+        .f-sc.in:hover i { color: #0A66C2; }
+        
+        .f-sc.gh:hover { box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3); border-color: #a855f7; }
+        .f-sc.gh:hover i { color: #a855f7; }
+        
+        .f-sc.ig:hover { box-shadow: 0 10px 30px rgba(244, 114, 182, 0.3); border-color: #f472b6; }
+        .f-sc.ig:hover i { color: #f472b6; }
+        
+        .f-sc.em:hover { box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3); border-color: #22d3ee; }
+        .f-sc.em:hover i { color: #22d3ee; }
+
+        /* Bottom Credit */
+        .f-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .f-credit {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .f-credit span {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Status Badge */
+        .f-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(74, 222, 128, 0.08);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--f-green);
+            font-weight: 500;
+        }
+
+        .f-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--f-green);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .f-dot::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: var(--f-green);
+            animation: f-pulse 2s infinite;
+        }
+
+        @keyframes f-pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        .f-bar {
+            margin-top: 40px;
+            font-family: var(--ff-fira);
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .f-bar span {
+            color: var(--f-pink);
+            text-shadow: 0 0 8px var(--f-pink);
+        }
+
+        @media (max-width: 768px) {
+            .f-bottom { justify-content: center; text-align: center; }
+            .f-container { padding-top: 60px; }
         }
 
         /* â”€â”€ REVEAL â”€â”€ */
@@ -4015,14 +4205,51 @@
         </div>
     </section>
 
-    <footer>
-        <div class="socs">
-            <a href="https://www.linkedin.com/in/nitya-mathur-330a03343/" target="_blank" class="sc">IN</a>
-            <a href="https://github.com/Nityaa-20" target="_blank" class="sc">GH</a>
-            <a href="https://leetcode.com/u/nityamathur/" target="_blank" class="sc">LC</a>
-            <a href="mailto:nitya.20.mathur@gmail.com" class="sc">EM</a>
+    <footer class="f-container">
+        <!-- Background Elements -->
+        <div class="f-grid"></div>
+        <div class="f-stars">
+            <div class="f-star" style="top: 10%; left: 15%; --d: 3s;"></div>
+            <div class="f-star" style="top: 30%; left: 80%; --d: 5s;"></div>
+            <div class="f-star" style="top: 70%; left: 40%; --d: 4s;"></div>
+            <div class="f-star" style="top: 85%; left: 10%; --d: 6s;"></div>
+            <div class="f-star" style="top: 20%; left: 60%; --d: 4.5s;"></div>
         </div>
-        <p>Crafted by <span>Nitya Mathur</span> | AI & Data Science Portfolio</p>
+        <div class="f-orb" style="width: 300px; height: 300px; background: var(--f-purple); top: -100px; left: -50px;"></div>
+        <div class="f-orb" style="width: 250px; height: 250px; background: var(--f-cyan); bottom: -50px; right: -50px; animation-delay: -5s;"></div>
+        <div class="f-orb" style="width: 200px; height: 200px; background: var(--f-pink); top: 40%; left: 60%; animation-delay: -10s;"></div>
+
+        <div class="f-content">
+            <div class="f-name-block">
+                <h2 class="f-name">Nitya.</h2>
+                <p class="f-desc">AI/ML Engineer crafting data-driven intelligence with Python, Scikit-learn & real-world impact.</p>
+            </div>
+
+            <div class="f-divider"></div>
+
+            <span class="f-label">// connect with me</span>
+            <div class="f-socs">
+                <a href="https://www.linkedin.com/in/nitya-mathur-330a03343/" target="_blank" class="f-sc in"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Nityaa-20" target="_blank" class="f-sc gh"><i class="fab fa-github"></i></a>
+                <a href="https://www.instagram.com/_nityamathur_/" target="_blank" class="f-sc ig"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:nitya.20.mathur@gmail.com" class="f-sc em"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <div class="f-bottom">
+                <div class="f-credit">
+                    Crafted by <span>Nitya Mathur</span> | AI & Data Science Portfolio
+                </div>
+
+                <div class="f-status">
+                    <div class="f-dot"></div>
+                    Open to Opportunities
+                </div>
+            </div>
+
+            <div class="f-bar">
+                $ © 2026 — made with <span>♥</span> & curiosity
+            </div>
+        </div>
     </footer>
 
     <div id="assistant-root"></div>
